@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://howtocrypt.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Add one <url> block per guide you publish. Example: -->
+  <url>
+    <loc>https://howtocrypt.com/guides/binance-vs-bybit</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!--
+    Copy the block above for each new guide, e.g.:
+    <url>
+      <loc>https://howtocrypt.com/guides/your-next-guide</loc>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+    </url>
+
+    Notes:
+    - <loc> must match the exact live URL (with cleanUrls in vercel.json,
+      that means no ".html" at the end).
+    - Remove the binance-vs-bybit entry above until that page is actually live,
+      or Search Console will flag it as a broken sitemap URL.
+  -->
+
+</urlset>
