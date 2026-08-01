@@ -6,7 +6,11 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
+  <url>
+  <loc>https://howtocrypt.com/guides/how-to-start-trading-crypto</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+  </url>
   <!-- Add one <url> block per guide you publish. Example: -->
   <url>
     <loc>https://howtocrypt.com/guides/binance-vs-bybit</loc>
