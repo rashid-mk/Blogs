@@ -113,11 +113,18 @@
   .pick-fee strong{color:var(--text)}
   .btn-sm{padding:9px 18px;font-size:.85rem;border-radius:6px}
 
-  .more-reviews-wrap{text-align:center;margin-top:36px}
+  .more-reviews-wrap{text-align:center;margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
   .btn-more-reviews{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border:2px solid var(--navy);color:var(--navy);font-weight:700;font-size:1rem;border-radius:10px;background:var(--white);box-shadow:0 4px 14px rgba(30,58,95,.08);transition:all .2s;text-decoration:none}
   .btn-more-reviews:hover{background:var(--navy);color:var(--white);transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,58,95,.18)}
   .btn-more-reviews .arrow{color:var(--orange);font-weight:900;transition:transform .2s}
   .btn-more-reviews:hover .arrow{transform:translateX(4px)}
+  .btn-shuffle{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border:2px solid var(--orange);color:var(--orange);font-weight:700;font-size:1rem;border-radius:10px;background:var(--white);cursor:pointer;transition:all .2s}
+  .btn-shuffle:hover{background:var(--orange);color:var(--white);transform:translateY(-2px)}
+  .pick-card{animation:fadeUp .35s ease both}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .picks-grid .pick-card:nth-child(2){animation-delay:.07s}
+  .picks-grid .pick-card:nth-child(3){animation-delay:.14s}
+  .shuffle-note{font-size:.78rem;color:var(--muted);text-align:center;margin-top:10px}
 
   /* WHY US */
   .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:40px}
@@ -226,98 +233,15 @@
 <!-- TOP PICKS -->
 <section id="top-picks">
   <div class="container">
-    <p class="section-label">Editor's Picks – August 2026</p>
-    <h2 class="section-title">Best Crypto Exchanges Ranked</h2>
-    <p class="section-sub">Our team spent 200+ hours testing these platforms across fees, security, and usability.</p>
-    <div class="picks-grid">
-
-      <!-- Bybit -->
-      <article class="pick-card pick-card-bybit">
-        <div class="pick-badge top">🏆 Best Overall</div>
-        <div class="pick-body">
-          <div class="pick-header">
-            <div class="exchange-icon">
-              <img src="images/bybit.svg" alt="Bybit logo">
-            </div>
-            <div>
-              <div class="pick-name">Bybit</div>
-              <div><span class="stars">★★★★★</span><span class="stars-text">4.8/5</span></div>
-            </div>
-          </div>
-          <p class="pick-tagline">The best all-rounder for derivatives and spot trading with ultra-low fees and deep liquidity.</p>
-          <ul class="pick-highlights">
-            <li>0.1% spot / 0.01% maker futures fees</li>
-            <li>300+ trading pairs including BTC, ETH, SOL</li>
-            <li>Up to 100x leverage on perpetual contracts</li>
-            <li>24/7 live customer support</li>
-          </ul>
-          <div class="pick-footer">
-            <div class="pick-fee">Spot Fee: <strong>0.10%</strong></div>
-            <a class="btn btn-sm" href="reviews/bybit-review.html">Read Review →</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Bitget -->
-      <article class="pick-card pick-card-bitget">
-        <div class="pick-badge">🥈 Best for Copy Trading</div>
-        <div class="pick-body">
-          <div class="pick-header">
-            <div class="exchange-icon">
-              <img src="images/bitget.svg" alt="Bitget logo">
-            </div>
-            <div>
-              <div class="pick-name">Bitget</div>
-              <div><span class="stars">★★★★★</span><span class="stars-text">4.6/5</span></div>
-            </div>
-          </div>
-          <p class="pick-tagline">Copy professional traders automatically — perfect for beginners wanting to learn from the pros.</p>
-          <ul class="pick-highlights">
-            <li>Largest copy trading network (80,000+ traders)</li>
-            <li>Industry-leading $300M protection fund</li>
-            <li>Low 0.1% spot trading fees</li>
-            <li>Earn up to 15% APY on idle assets</li>
-          </ul>
-          <div class="pick-footer">
-            <div class="pick-fee">Spot Fee: <strong>0.10%</strong></div>
-            <a class="btn btn-sm" href="reviews/bitget-review.html">Read Review →</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Binance -->
-      <article class="pick-card pick-card-binance">
-        <div class="pick-badge">🥉 Largest Exchange</div>
-        <div class="pick-body">
-          <div class="pick-header">
-            <div class="exchange-icon">
-              <img src="images/binance.svg" alt="Binance logo">
-            </div>
-            <div>
-              <div class="pick-name">Binance</div>
-              <div><span class="stars">★★★★½</span><span class="stars-text">4.5/5</span></div>
-            </div>
-          </div>
-          <p class="pick-tagline">The world's largest exchange by volume — offers the widest coin selection and deepest liquidity.</p>
-          <ul class="pick-highlights">
-            <li>Lowest fees: 0.1% (0.075% with BNB)</li>
-            <li>350+ cryptocurrencies listed</li>
-            <li>World's highest trading volume</li>
-            <li>Comprehensive earn &amp; DeFi products</li>
-          </ul>
-          <div class="pick-footer">
-            <div class="pick-fee">Spot Fee: <strong>0.10%</strong></div>
-            <a class="btn btn-sm" href="reviews/binance-review.html">Read Review →</a>
-          </div>
-        </div>
-      </article>
-
-    </div>
-
-    <!-- More Reviews Button -->
+    <p class="section-label" id="picks-label">Featured Exchanges – Today's Selection</p>
+    <h2 class="section-title">Crypto Exchanges Worth Considering</h2>
+    <p class="section-sub">Showing 3 of 35 reviewed exchanges. Our picks rotate daily — hit shuffle to see different ones.</p>
+    <div class="picks-grid" id="picks-grid"></div>
+    <p class="shuffle-note" id="shuffle-note"></p>
     <div class="more-reviews-wrap">
+      <button class="btn-shuffle" id="shuffleBtn" onclick="renderPicks(true)">🔀 Shuffle Exchanges</button>
       <a class="btn-more-reviews" href="reviews/index.html">
-        <span>Explore All 35 Exchange Reviews</span>
+        <span>Explore All 35 Reviews</span>
         <span class="arrow">→</span>
       </a>
     </div>
@@ -480,10 +404,135 @@
 </footer>
 
 <script>
+  // ── Nav ──────────────────────────────────────────────────
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
   hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
   document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // ── Exchange Pool (35 exchanges) ─────────────────────────
+  const EXCHANGES = [
+    { name:'Bybit',        slug:'bybit',        logo:'images/bybit.svg',        rating:'4.8',stars:'★★★★★',fee:'0.10%',accentColor:'#f7a600',tagline:'Best all-rounder — low fees, deep futures liquidity, 100x leverage.',highlights:['0.01% maker futures fee (best-in-class)','300+ spot & 200+ perpetual pairs','24/7 live customer support','No KYC for basic spot trading'] },
+    { name:'Bitget',       slug:'bitget',       logo:'images/bitget.svg',       rating:'4.6',stars:'★★★★★',fee:'0.10%',accentColor:'#00c2ff',tagline:'World leader in copy trading — follow 80,000+ pro traders.',highlights:['80,000+ copy traders to follow','$300M protection fund','0.02% futures maker fee','Up to 15% APY on savings'] },
+    { name:'Binance',      slug:'binance',      logo:'images/binance.svg',      rating:'4.5',stars:'★★★★½',fee:'0.10%',accentColor:'#f3ba2f',tagline:'World\'s largest exchange — 350+ coins, deepest liquidity.',highlights:['0.075% spot fee with BNB discount','350+ listed cryptocurrencies','$1B SAFU insurance fund','Best-in-class earn products (up to 20% APY)'] },
+    { name:'OKX',          slug:'okx',          logo:'images/okx.svg',          rating:'4.5',stars:'★★★★½',fee:'0.08%',accentColor:'#111',tagline:'Advanced tools, low fees, and a powerful Web3 wallet.',highlights:['0.08% spot maker fee','300+ trading pairs','Built-in Web3 wallet & DEX aggregator','Copy trading & bot strategies'] },
+    { name:'Kraken',       slug:'kraken',       logo:'images/kraken.svg',       rating:'4.4',stars:'★★★★½',fee:'0.16%',accentColor:'#5741d9',tagline:'Most trusted Western exchange with a 10-year safety record.',highlights:['Zero major hacks since 2011','USD/EUR/GBP fiat on-ramps','Futures & margin available','Regulated in multiple jurisdictions'] },
+    { name:'Coinbase',     slug:'coinbase',     logo:'images/coinbase.svg',     rating:'4.3',stars:'★★★★',  fee:'0.60%',accentColor:'#1652f0',tagline:'The easiest on-ramp for US investors — publicly listed & regulated.',highlights:['Publicly traded on NASDAQ','Best fiat on/off ramp for US users','Simple mobile app for beginners','Coinbase One: zero trading fees'] },
+    { name:'KuCoin',       slug:'kucoin',       logo:'images/kucoin.svg',       rating:'4.2',stars:'★★★★',  fee:'0.10%',accentColor:'#24ae8f',tagline:'700+ altcoins — the exchange for discovering early-stage tokens.',highlights:['700+ coins including micro-caps','Futures, margin & bot trading','Low 0.1% spot fee','P2P fiat trading available'] },
+    { name:'Gate.io',      slug:'gate',         logo:'images/gate.svg',         rating:'4.1',stars:'★★★★',  fee:'0.20%',accentColor:'#e44f00',tagline:'1,700+ listed tokens — the widest coin selection on any CEX.',highlights:['1,700+ cryptocurrencies','Copy & quantitative trading','Spot, futures & options markets','Proof-of-Reserves published'] },
+    { name:'MEXC',         slug:'mexc',         logo:'images/mexc.svg',         rating:'4.0',stars:'★★★★',  fee:'0.00%',accentColor:'#2b66f6',tagline:'Zero maker fees and 1,500+ tokens make MEXC a cost leader.',highlights:['0% spot maker fee','1,500+ trading pairs','Up to 200x futures leverage','No KYC for basic spot access'] },
+    { name:'BingX',        slug:'bingx',        logo:'images/bingx.svg',        rating:'4.0',stars:'★★★★',  fee:'0.10%',accentColor:'#1d6bfc',tagline:'Social trading pioneer with an easy entry for new traders.',highlights:['Grid & copy trading bots','300+ spot pairs','Competitive 0.02% futures fee','Referral bonuses for new users'] },
+    { name:'Bitunix',      slug:'bitunix',      logo:'images/bitunix.svg',      rating:'3.9',stars:'★★★★',  fee:'0.08%',accentColor:'#7b2eff',tagline:'Fast-growing derivatives platform with ultra-low futures fees.',highlights:['0.02% maker futures fee','100+ perpetual pairs','Up to 125x leverage','New user bonuses up to $5,000'] },
+    { name:'Bitstamp',     slug:'bitstamp',     logo:'images/bitstamp.svg',     rating:'4.1',stars:'★★★★',  fee:'0.30%',accentColor:'#e84142',tagline:'Oldest operating exchange — trusted since 2011.',highlights:['Licensed in EU, UK & US','Institutional-grade custody','Fiat support: USD, EUR, GBP','Simple interface for long-term buyers'] },
+    { name:'Crypto.com',   slug:'crypto-com',   logo:'images/crypto-com.svg',   rating:'4.0',stars:'★★★★',  fee:'0.075%',accentColor:'#002d74',tagline:'Full ecosystem: exchange, card, DeFi, and NFT in one app.',highlights:['Visa card with up to 8% cashback','0.075% spot fee (top tier: 0%)','300+ coins supported','CRO staking for fee discounts'] },
+    { name:'Hyperliquid',  slug:'hyperliquid',  logo:'images/hyperliquid.svg',  rating:'4.3',stars:'★★★★½',fee:'0.00%',accentColor:'#00e5b3',tagline:'On-chain perpetuals with CEX-level speed — no KYC required.',highlights:['0% maker fee on perps','Fully on-chain, self-custody','50+ perpetual markets','HYPE token airdrops to traders'] },
+    { name:'dYdX',         slug:'dydx',         logo:'images/dydx.svg',         rating:'4.2',stars:'★★★★',  fee:'0.02%',accentColor:'#6966ff',tagline:'Leading decentralized derivatives protocol — no KYC.',highlights:['0% maker / 0.02% taker fee','No KYC — wallet connection only','35+ perpetual markets','Governed by DYDX token holders'] },
+    { name:'Uniswap',      slug:'uniswap',      logo:'images/uniswap.svg',      rating:'4.2',stars:'★★★★',  fee:'0.30%',accentColor:'#ff007a',tagline:'The world\'s largest decentralized spot exchange.',highlights:['Largest DEX by volume','Any ERC-20 token tradeable','No sign-up, no KYC','Liquidity provider yield available'] },
+    { name:'Luno',         slug:'luno',         logo:'images/luno.svg',         rating:'3.8',stars:'★★★★',  fee:'0.10%',accentColor:'#0d47a1',tagline:'Best exchange for African & Southeast Asian markets.',highlights:['Available in 40+ countries','MYR, ZAR, NGN fiat support','Simple beginner interface','Licensed & regulated locally'] },
+    { name:'Bitvavo',      slug:'bitvavo',      logo:'images/bitvavo.svg',      rating:'4.0',stars:'★★★★',  fee:'0.25%',accentColor:'#1a56db',tagline:'Europe\'s most user-friendly crypto exchange.',highlights:['Regulated in the Netherlands','250+ coins available','Low fees: 0.25% (0% with high volume)','Euro bank transfers supported'] },
+    { name:'Bitso',        slug:'bitso',        logo:'images/bitso.svg',        rating:'3.7',stars:'★★★½',  fee:'0.50%',accentColor:'#00b287',tagline:'The leading crypto exchange in Latin America.',highlights:['MXN, ARS, BRL fiat support','Best for Mexican peso on-ramp','SPEI & bank transfer deposits','100+ cryptocurrencies'] },
+    { name:'Bitbank',      slug:'bitbank',      logo:'images/bitbank.svg',      rating:'3.8',stars:'★★★½',  fee:'0.12%',accentColor:'#1a1a2e',tagline:'Japan\'s most reputable cryptocurrency exchange.',highlights:['Registered with FSA (Japan)','JPY fiat on/off ramp','BTC, ETH, XRP, LTC, BAT & more','Cold storage for 100% of assets'] },
+    { name:'Upbit',        slug:'upbit',        logo:'images/upbit.svg',        rating:'3.9',stars:'★★★★',  fee:'0.05%',accentColor:'#1b64da',tagline:'South Korea\'s largest exchange by volume.',highlights:['Regulated by FSC (South Korea)','KRW fiat trading pairs','300+ listed tokens','Low 0.05% trading fee'] },
+    { name:'Bitkub',       slug:'bitkub',       logo:'images/bitkub.svg',       rating:'3.7',stars:'★★★½',  fee:'0.25%',accentColor:'#17d05c',tagline:'Thailand\'s most popular crypto exchange.',highlights:['THB fiat support','PromptPay instant deposits','SEC Thailand registered','60+ cryptocurrencies'] },
+    { name:'HashKey',      slug:'hashkey',      logo:'images/hashkey.svg',      rating:'3.8',stars:'★★★½',  fee:'0.10%',accentColor:'#0033ad',tagline:'Hong Kong\'s first retail-licensed crypto exchange.',highlights:['Type 1 & Type 7 VASP licensed (HK)','HKD fiat on-ramp','BTC, ETH, AVAX & more','Institutional-grade custody'] },
+    { name:'WhiteBIT',     slug:'whitebit',     logo:'images/whitebit.svg',     rating:'3.9',stars:'★★★★',  fee:'0.10%',accentColor:'#00a3ff',tagline:'Europe-based exchange with strong regulatory compliance.',highlights:['700+ trading pairs','Registered in Estonia','Earn up to 25% APY on savings','No-KYC spot: up to $1,000/day'] },
+    { name:'LBank',        slug:'lbank',        logo:'images/lbank.svg',        rating:'3.7',stars:'★★★½',  fee:'0.10%',accentColor:'#2081e2',tagline:'Good altcoin selection with competitive trading fees.',highlights:['300+ altcoins available','0% maker fee promotions','Futures & leverage available','Launchpad for new token listings'] },
+    { name:'Niza',         slug:'niza',         logo:'images/niza.svg',         rating:'3.5',stars:'★★★½',  fee:'0.10%',accentColor:'#7c3aed',tagline:'European licensed exchange with focus on compliance.',highlights:['EU VASP registered','SEPA bank transfer support','100+ cryptocurrencies','Earn products available'] },
+    { name:'Bullish',      slug:'bullish',      logo:'images/bullish.svg',      rating:'3.9',stars:'★★★★',  fee:'0.00%',accentColor:'#00d68f',tagline:'Institutional-grade exchange backed by Peter Thiel.',highlights:['0% maker fee on spot markets','Automated market maker (AMM)','High liquidity from treasury','NYDFS licensed'] },
+    { name:'Binance US',   slug:'binance-us',   logo:'images/binance-us.svg',   rating:'3.8',stars:'★★★½',  fee:'0.60%',accentColor:'#f3ba2f',tagline:'The US-compliant version of Binance for American traders.',highlights:['FinCEN registered & state licensed','150+ cryptocurrencies','Simple & advanced trading modes','USD deposits via ACH & wire'] },
+    { name:'PancakeSwap',  slug:'pancakeswap',  logo:'images/pancakeswap.svg',  rating:'4.0',stars:'★★★★',  fee:'0.25%',accentColor:'#1fc7d4',tagline:'BNB Chain\'s biggest DEX — fast, cheap, and feature-rich.',highlights:['Largest BSC DEX by volume','0.25% trading fee','No KYC — wallet only','Yield farms & lottery products'] },
+    { name:'Raydium',      slug:'raydium',      logo:'images/raydium.svg',      rating:'4.0',stars:'★★★★',  fee:'0.25%',accentColor:'#9945ff',tagline:'Solana\'s primary DEX powering the memecoin ecosystem.',highlights:['Leading Solana DEX','Ultra-low gas fees (<$0.01)','Permissionless liquidity pools','Launch platform for new Solana tokens'] },
+    { name:'Jupiter',      slug:'jupiter',      logo:'images/jupiter.svg',      rating:'4.1',stars:'★★★★',  fee:'0.00%',accentColor:'#ff8c00',tagline:'Best swap aggregator on Solana — always finds the cheapest route.',highlights:['Aggregates all Solana DEXs','0% protocol fee on swaps','Perps & limit orders available','JUP governance token staking'] },
+    { name:'Orca',         slug:'orca',         logo:'images/orca.svg',         rating:'3.9',stars:'★★★★',  fee:'0.30%',accentColor:'#00d2ff',tagline:'Beginner-friendly Solana DEX with a clean, intuitive UI.',highlights:['Friendliest Solana DEX interface','Concentrated liquidity pools','Low gas (<$0.01 per swap)','ORCA token governance'] },
+    { name:'Curve',        slug:'curve',        logo:'images/curve.svg',        rating:'4.0',stars:'★★★★',  fee:'0.04%',accentColor:'#d62828',tagline:'The top stablecoin and pegged-asset DEX on Ethereum.',highlights:['0.04% trading fee (lowest on-chain)','Stablecoin liquidity leader','CRV token yield for LPs','Multi-chain: Ethereum, Arbitrum, Polygon'] },
+    { name:'Meteora',      slug:'meteora',      logo:'images/meteora.svg',      rating:'3.8',stars:'★★★½',  fee:'0.20%',accentColor:'#512da8',tagline:'Innovative Solana liquidity protocol with dynamic fee pools.',highlights:['Dynamic fee AMM pools','DLMM (concentrated liquidity)','MET token rewards for LPs','Growing ecosystem on Solana'] },
+    { name:'Aerodrome',    slug:'aerodrome',    logo:'images/aerodrome.svg',    rating:'4.0',stars:'★★★★',  fee:'0.05%',accentColor:'#2563eb',tagline:'Base chain\'s primary DEX and liquidity hub.',highlights:['Dominant DEX on Coinbase\'s Base chain','veAERO vote-escrow model','0.05% stable swap fee','Growing ecosystem of Base projects'] }
+  ];
+
+  // ── Badge labels that rotate per position ────────────────
+  const BADGE_SETS = [
+    ['🏆 Best Overall','⭐ Editor\'s Pick','🔥 Popular Choice'],
+    ['💡 Recommended','🥇 Top Rated','🚀 Featured'],
+    ['🌟 Staff Pick','📊 High Rated','✅ Verified Pick'],
+    ['🎯 Best Value','🛡️ Most Trusted','💰 Low Fees'],
+    ['🌍 Global Leader','📈 Top Volume','🔒 Most Secure']
+  ];
+
+  let shuffleCount = 0;
+  let lastIndices = [];
+
+  // Seeded pseudo-random based on day so picks change daily
+  function daySeededRandom(seed) {
+    const today = new Date();
+    const daySeed = today.getFullYear() * 10000 + (today.getMonth()+1) * 100 + today.getDate();
+    let x = Math.sin(daySeed + seed) * 10000;
+    return x - Math.floor(x);
+  }
+
+  function pickThree(forceShuffle) {
+    const pool = [...Array(EXCHANGES.length).keys()];
+    // Remove last shown indices to guarantee different picks on shuffle
+    const available = forceShuffle ? pool.filter(i => !lastIndices.includes(i)) : pool;
+    const picked = [];
+    const useSeed = forceShuffle ? null : 0;
+    // Fisher-Yates on available pool
+    const arr = [...available];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = forceShuffle
+        ? Math.floor(Math.random() * (i + 1))
+        : Math.floor(daySeededRandom(i + shuffleCount * 37) * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    lastIndices = arr.slice(0, 3);
+    return lastIndices.map(i => EXCHANGES[i]);
+  }
+
+  function starsToHtml(s) {
+    // Convert ½ star to partial
+    return s.replace('½','<span style="font-size:.7em;vertical-align:middle">½</span>');
+  }
+
+  function renderPicks(shuffle) {
+    if (shuffle) shuffleCount++;
+    const three = pickThree(shuffle);
+    const badges = BADGE_SETS[shuffleCount % BADGE_SETS.length];
+    const grid = document.getElementById('picks-grid');
+    grid.innerHTML = three.map((ex, i) => {
+      const isFirst = i === 0;
+      return `
+      <article class="pick-card" style="border-top:4px solid ${ex.accentColor}">
+        <div class="pick-badge${isFirst?' top':''}">${badges[i]}</div>
+        <div class="pick-body">
+          <div class="pick-header">
+            <div class="exchange-icon">
+              <img src="${ex.logo}" alt="${ex.name} logo" onerror="this.style.display='none'">
+            </div>
+            <div>
+              <div class="pick-name">${ex.name}</div>
+              <div><span class="stars">${ex.stars}</span><span class="stars-text">${ex.rating}/5</span></div>
+            </div>
+          </div>
+          <p class="pick-tagline">${ex.tagline}</p>
+          <ul class="pick-highlights">
+            ${ex.highlights.map(h=>`<li>${h}</li>`).join('')}
+          </ul>
+          <div class="pick-footer">
+            <div class="pick-fee">Spot Fee: <strong>${ex.fee}</strong></div>
+            <a class="btn btn-sm" href="reviews/${ex.slug}-review.html">Read Review →</a>
+          </div>
+        </div>
+      </article>`;
+    }).join('');
+
+    // Update subtitle note
+    const note = document.getElementById('shuffle-note');
+    note.textContent = shuffle
+      ? `Shuffled ${shuffleCount} time${shuffleCount>1?'s':''}. Showing ${three.map(e=>e.name).join(', ')}.`
+      : `Today's selection refreshes daily. Showing ${three.map(e=>e.name).join(', ')}.`;
+  }
+
+  // Initial render on page load (day-seeded, not shuffled)
+  renderPicks(false);
 </script>
 </body>
 </html>
