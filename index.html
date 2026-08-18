@@ -162,6 +162,9 @@
   .newsletter-form{display:flex;gap:10px;max-width:480px;margin:auto;flex-wrap:wrap;justify-content:center}
   .newsletter-form input{flex:1;min-width:200px;padding:13px 18px;border-radius:7px;border:none;font-size:.95rem}
   .newsletter-form input:focus{outline:2px solid var(--orange)}
+  .newsletter-msg{padding:10px 18px;border-radius:8px;font-size:.92rem;display:inline-block;margin-top:14px;font-weight:600;animation:fadeUp .3s ease}
+  .newsletter-msg.success{background:#d1fae5;color:#065f46;border:1px solid #a7f3d0}
+  .newsletter-msg.error{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
 
   /* FOOTER */
   footer{background:#0f2240;color:rgba(255,255,255,.7);padding:48px 20px 24px}
@@ -352,10 +355,11 @@
   <div class="container">
     <h2>Stay Ahead of the Market</h2>
     <p>Get our latest exchange reviews, fee updates, and crypto market insights — free, every week.</p>
-    <form class="newsletter-form" onsubmit="return false">
-      <input type="email" placeholder="Enter your email address" id="emailInput">
-      <button class="btn" type="submit">Subscribe Free</button>
+    <form class="newsletter-form" id="newsletterForm">
+      <input type="email" placeholder="Enter your email address" id="emailInput" required aria-label="Email Address">
+      <button class="btn" type="submit" id="newsletterBtn">Subscribe Free</button>
     </form>
+    <div id="newsletterMsg" class="newsletter-msg" style="display:none"></div>
   </div>
 </div>
 
@@ -508,9 +512,72 @@
     picksGridEl.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
     picksGridEl.addEventListener('mouseleave', () => {
       clearInterval(autoRotateTimer);
-      autoRotateTimer = setInterval(() => renderPicks(true), 6000);
+      autoRotateTimer = setInterval(() => renderPicks(), 6000);
     });
   }
+
+  // ── Newsletter Form Handler ─────────────────────────────
+  const newsletterForm = document.getElementById('newsletterForm');
+  const emailInput = document.getElementById('emailInput');
+  const newsletterMsg = document.getElementById('newsletterMsg');
+  const newsletterBtn = document.getElementById('newsletterBtn');
+
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      if (!email || !email.includes('@') || !email.includes('.')) {
+        showNewsletterMsg('Please enter a valid email address.', 'error');
+        return;
+      }
+
+      // Check existing subscribers in localStorage
+      let subscribers = [];
+      try {
+        subscribers = JSON.parse(localStorage.getItem('newsletter_subscribers') || '[]');
+      } catch(err) {}
+
+      const exists = subscribers.some(sub => typeof sub === 'string' ? sub === email : sub.email === email);
+      if (exists) {
+        showNewsletterMsg('You are already subscribed to our newsletter!', 'success');
+        emailInput.value = '';
+        return;
+      }
+
+      // Save new subscriber with timestamp
+      const newSub = { email: email, date: new Date().toISOString() };
+      subscribers.push(newSub);
+      localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
+
+      // UI Feedback
+      emailInput.value = '';
+      showNewsletterMsg('🎉 Thank you! You have successfully subscribed to our newsletter.', 'success');
+    });
+  }
+
+  function showNewsletterMsg(msg, type) {
+    if (!newsletterMsg) return;
+    newsletterMsg.textContent = msg;
+    newsletterMsg.className = 'newsletter-msg ' + type;
+    newsletterMsg.style.display = 'inline-block';
+    if (type === 'error') {
+      setTimeout(() => { newsletterMsg.style.display = 'none'; }, 4000);
+    }
+  }
+
+  // Admin export utility (call exportSubscribersCSV() in browser console)
+  window.getNewsletterSubscribers = function() {
+    return JSON.parse(localStorage.getItem('newsletter_subscribers') || '[]');
+  };
+  window.exportSubscribersCSV = function() {
+    const subs = window.getNewsletterSubscribers();
+    if (!subs.length) { console.log('No subscribers collected yet.'); return; }
+    const csv = "data:text/csv;charset=utf-8,Email,Date\n" + subs.map(s => `"${s.email||s}","${s.date||''}"`).join("\n");
+    const link = document.createElement("a");
+    link.href = encodeURI(csv);
+    link.download = "newsletter_subscribers.csv";
+    link.click();
+  };
 </script>
 </body>
 </html>
