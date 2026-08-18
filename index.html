@@ -113,6 +113,12 @@
   .pick-fee strong{color:var(--text)}
   .btn-sm{padding:9px 18px;font-size:.85rem;border-radius:6px}
 
+  .more-reviews-wrap{text-align:center;margin-top:36px}
+  .btn-more-reviews{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border:2px solid var(--navy);color:var(--navy);font-weight:700;font-size:1rem;border-radius:10px;background:var(--white);box-shadow:0 4px 14px rgba(30,58,95,.08);transition:all .2s;text-decoration:none}
+  .btn-more-reviews:hover{background:var(--navy);color:var(--white);transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,58,95,.18)}
+  .btn-more-reviews .arrow{color:var(--orange);font-weight:900;transition:transform .2s}
+  .btn-more-reviews:hover .arrow{transform:translateX(4px)}
+
   /* WHY US */
   .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:40px}
   .why-card{background:var(--light);border-radius:12px;padding:28px 24px;text-align:center}
@@ -185,9 +191,8 @@
     <a class="logo" href="index.html">HowTo<span>Crypt</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="reviews/index.html">Reviews</a></li>
       <li><a href="guides/index.html">Guides</a></li>
-      <li><a href="compare/index.html">Compare</a></li>
+      <li><a href="exchanges.html">Compare</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="#top-picks" class="nav-cta">Start Trading</a></li>
     </ul>
@@ -307,6 +312,14 @@
         </div>
       </article>
 
+    </div>
+
+    <!-- More Reviews Button -->
+    <div class="more-reviews-wrap">
+      <a class="btn-more-reviews" href="reviews/index.html">
+        <span>Explore All 35 Exchange Reviews</span>
+        <span class="arrow">→</span>
+      </a>
     </div>
   </div>
 </section>
