@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Root Pages -->
+  <url><loc>https://www.howtocrypt.com/</loc></url>
+  <url><loc>https://www.howtocrypt.com/about.html</loc></url>
+  <url><loc>https://www.howtocrypt.com/contact.html</loc></url>
+  <url><loc>https://www.howtocrypt.com/affiliate-disclosure.html</loc></url>
+  <url><loc>https://www.howtocrypt.com/privacy-policy.html</loc></url>
+
+  <!-- Reviews -->
+  <url><loc>https://www.howtocrypt.com/reviews/</loc></url>
+  <url><loc>https://www.howtocrypt.com/reviews/bybit-review.html</loc></url>
+  <url><loc>https://www.howtocrypt.com/reviews/bitget-review.html</loc></url>
+  <url><loc>https://www.howtocrypt.com/reviews/binance-review.html</loc></url>
+
+  <!-- Compare -->
+  <url><loc>https://www.howtocrypt.com/compare/</loc></url>
+  <url><loc>https://www.howtocrypt.com/compare/bybit-vs-bitget.html</loc></url>
+  <url><loc>https://www.howtocrypt.com/compare/bybit-vs-binance.html</loc></url>
+
+  <!-- Guides -->
+  <url><loc>https://www.howtocrypt.com/guides/</loc></url>
+  <url><loc>https://www.howtocrypt.com/guides/how-to-sign-up-bybit.html</loc></url>
+  <url><loc>https://www.howtocrypt.com/guides/how-to-complete-kyc.html</loc></url>
+
+  <!-- Questions -->
+  <url><loc>https://www.howtocrypt.com/questions/</loc></url>
+  <url><loc>https://www.howtocrypt.com/questions/trade-futures-without-kyc.html</loc></url>
+
+  <!-- Best -->
+  <url><loc>https://www.howtocrypt.com/best/</loc></url>
+  <url><loc>https://www.howtocrypt.com/best/best-exchange-beginners.html</loc></url>
+
+  <!-- Country -->
+  <url><loc>https://www.howtocrypt.com/country/</loc></url>
+  <url><loc>https://www.howtocrypt.com/country/best-exchange-india.html</loc></url>
+
+</urlset>
