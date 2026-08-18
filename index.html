@@ -491,7 +491,8 @@
     if (shuffle) shuffleCount++;
     const three = pickThree(shuffle);
     const badges = BADGE_SETS[shuffleCount % BADGE_SETS.length];
-    // Render picks into grid
+    const grid = document.getElementById('picks-grid');
+    if (!grid) return;
     grid.innerHTML = three.map((ex, i) => {
       const isFirst = i === 0;
       return `
