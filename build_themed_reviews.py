@@ -1935,7 +1935,6 @@ REVIEW_HTML_TEMPLATE = """<!DOCTYPE html>
     <a class="logo" href="../index.html">HowTo<span>Crypt</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="../index.html">Home</a></li>
-      <li><a href="index.html" class="active">Reviews</a></li>
       <li><a href="../guides/index.html">Guides</a></li>
       <li><a href="../exchanges.html">Compare</a></li>
       <li><a href="../about.html">About</a></li>
@@ -2407,7 +2406,6 @@ def generate_all():
     <a class="logo" href="../index.html">HowTo<span>Crypt</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="../index.html">Home</a></li>
-      <li><a href="index.html" class="active">Reviews</a></li>
       <li><a href="../guides/index.html">Guides</a></li>
       <li><a href="../exchanges.html">Compare</a></li>
       <li><a href="../about.html">About</a></li>
