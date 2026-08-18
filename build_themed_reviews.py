@@ -1936,7 +1936,7 @@ REVIEW_HTML_TEMPLATE = """<!DOCTYPE html>
     <ul class="nav-links" id="navLinks">
       <li><a href="../index.html">Home</a></li>
       <li><a href="../guides/index.html">Guides</a></li>
-      <li><a href="../exchanges.html">Compare</a></li>
+      <li><a href="../compare/index.html">Compare</a></li>
       <li><a href="../about.html">About</a></li>
       <li><a href="#visit" class="nav-cta">Start Trading</a></li>
     </ul>
@@ -2407,7 +2407,7 @@ def generate_all():
     <ul class="nav-links" id="navLinks">
       <li><a href="../index.html">Home</a></li>
       <li><a href="../guides/index.html">Guides</a></li>
-      <li><a href="../exchanges.html">Compare</a></li>
+      <li><a href="../compare/index.html">Compare</a></li>
       <li><a href="../about.html">About</a></li>
       <li><a href="../index.html#top-picks" class="nav-cta">Start Trading</a></li>
     </ul>

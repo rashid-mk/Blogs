@@ -1,0 +1,2078 @@
+#!/usr/bin/env python3
+import json
+import os
+
+COMPARE_HTML_PATH = "/home/rashid/Documents/blog/compare/index.html"
+os.makedirs(os.path.dirname(COMPARE_HTML_PATH), exist_ok=True)
+
+# Database of all 35 exchanges
+exchanges = [
+    # Top 25 CEXs
+    {
+        "slug": "bybit",
+        "name": "Bybit",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.8,
+        "badge": "🏆 #1 Derivatives Pick",
+        "country": "British Virgin Islands (HQ Dubai)",
+        "founded": 2018,
+        "color": "#f7a600",
+        "bg_color": "#121214",
+        "accent": "#ffa000",
+        "coins_count": "650+ Coins",
+        "pairs_count": "1,200+ Pairs",
+        "spot_maker": "0.10%",
+        "spot_taker": "0.10%",
+        "fut_maker": "0.010%",
+        "fut_taker": "0.055%",
+        "token_discount": "VIP tiers down to 0% maker",
+        "deposit_fee": "Free (Crypto & Wire)",
+        "withdrawal_fee": "Dynamic network rate",
+        "max_leverage": "100x Leverage",
+        "order_types": "Market, Limit, TP/SL, Trailing Stop, Iceberg, TWAP",
+        "copy_trading": "✅ Yes (80,000+ Master Traders)",
+        "trading_bots": "✅ Grid, DCA, Martingale, Futures Combo",
+        "por": "✅ 100%+ Merkle-Tree Verified (Monthly)",
+        "protection_fund": "✅ Multi-sig Reserves & Risk Reserve",
+        "cold_storage": "98% in multi-sig cold vaults",
+        "kyc": "Mandatory (Tier 1 for full access)",
+        "licenses": "Dubai VARA, Cyprus CySEC, Kazakhstan AFSA",
+        "fiat_support": "USD, EUR, GBP, AUD, BRL, HKD (50+ via P2P/Card)",
+        "payment_methods": "Bank Transfer, SEPA, Advcash, Credit/Debit Card, P2P",
+        "min_deposit": "$0 ($10 for fiat on-ramp)",
+        "mobile_app": "iOS (4.8★) & Android (4.7★)",
+        "support": "24/7 Multilingual Live Chat & VIP Support",
+        "response_time": "< 2 minutes",
+        "url": "https://www.bybit.com",
+        "review_url": "../reviews/bybit-review.html"
+    },
+    {
+        "slug": "binance",
+        "name": "Binance",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.6,
+        "badge": "🌐 #1 Volume Globally",
+        "country": "Cayman Islands (Global)",
+        "founded": 2017,
+        "color": "#f3ba2f",
+        "bg_color": "#181a20",
+        "accent": "#fcd535",
+        "coins_count": "600+ Coins",
+        "pairs_count": "1,800+ Pairs",
+        "spot_maker": "0.10%",
+        "spot_taker": "0.10%",
+        "fut_maker": "0.020%",
+        "fut_taker": "0.050%",
+        "token_discount": "25% discount with BNB",
+        "deposit_fee": "Free (Crypto / SEPA / ACH)",
+        "withdrawal_fee": "Dynamic network rate",
+        "max_leverage": "125x Leverage",
+        "order_types": "Market, Limit, Stop-Limit, OCO, Trailing Stop, TWAP",
+        "copy_trading": "✅ Yes (Binance Copy Trading)",
+        "trading_bots": "✅ Spot Grid, Futures Grid, Rebalancing, Auto-Invest",
+        "por": "✅ 100%+ Merkle-Tree Verified (Monthly)",
+        "protection_fund": "✅ $1 Billion SAFU Emergency Fund",
+        "cold_storage": "98%+ in segregated cold storage",
+        "kyc": "Mandatory (Government ID required)",
+        "licenses": "France AMF, Italy OAM, Dubai VARA, Japan JFSA, 18+ Jurisdictions",
+        "fiat_support": "EUR, GBP, AUD, BRL, TRY, PLN, CHF (60+ Fiat)",
+        "payment_methods": "Bank Transfer, SEPA, Credit Card, Apple Pay, Google Pay, P2P",
+        "min_deposit": "$10 ($1 on crypto)",
+        "mobile_app": "iOS (4.7★) & Android (4.5★)",
+        "support": "24/7 Live Chat & Comprehensive Help Center",
+        "response_time": "< 3 minutes",
+        "url": "https://www.binance.com",
+        "review_url": "../reviews/binance-review.html"
+    },
+    {
+        "slug": "bitget",
+        "name": "Bitget",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.6,
+        "badge": "👥 #1 Copy Trading Hub",
+        "country": "Seychelles",
+        "founded": 2018,
+        "color": "#00f0ff",
+        "bg_color": "#00202b",
+        "accent": "#00a3ff",
+        "coins_count": "750+ Coins",
+        "pairs_count": "1,100+ Pairs",
+        "spot_maker": "0.10%",
+        "spot_taker": "0.10%",
+        "fut_maker": "0.020%",
+        "fut_taker": "0.060%",
+        "token_discount": "20% discount with BGB",
+        "deposit_fee": "Free",
+        "withdrawal_fee": "Dynamic network rate",
+        "max_leverage": "125x Leverage",
+        "order_types": "Market, Limit, Trigger, Trailing Stop, OCO, TWAP",
+        "copy_trading": "✅ Premier Copy Trading (130k+ Master Traders)",
+        "trading_bots": "✅ AI Grid, Martingale, CTA, Spot Auto-Invest",
+        "por": "✅ 100%+ Merkle-Tree Verified (Monthly)",
+        "protection_fund": "✅ $300M+ Protection Fund (Public Wallet)",
+        "cold_storage": "98% cold storage with multi-sig security",
+        "kyc": "Mandatory",
+        "licenses": "Poland VASP, Lithuania VASP, Italy OAM",
+        "fiat_support": "USD, EUR, GBP, BRL, TRY, TWD, HKD (40+ Fiat)",
+        "payment_methods": "Credit/Debit Card, SEPA, Bank Transfer, Apple Pay, P2P",
+        "min_deposit": "$0 ($10 for fiat)",
+        "mobile_app": "iOS (4.6★) & Android (4.5★)",
+        "support": "24/7 Multilingual Live Chat & Dedicated VIP Managers",
+        "response_time": "< 2 minutes",
+        "url": "https://www.bitget.com",
+        "review_url": "../reviews/bitget-review.html"
+    },
+    {
+        "slug": "coinbase",
+        "name": "Coinbase",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": True,
+        "rating": 4.5,
+        "badge": "🏛️ Best for US & Beginners",
+        "country": "United States (Nasdaq: COIN)",
+        "founded": 2012,
+        "color": "#0052ff",
+        "bg_color": "#001f66",
+        "accent": "#2f72ff",
+        "coins_count": "260+ Coins",
+        "pairs_count": "450+ Pairs",
+        "spot_maker": "0.40% (Advanced)",
+        "spot_taker": "0.60% (Advanced)",
+        "fut_maker": "0.020% (Regulated Perps)",
+        "fut_taker": "0.050% (Regulated Perps)",
+        "token_discount": "Tiered volume discounts (Coinbase One)",
+        "deposit_fee": "Free (ACH / Wire / Crypto)",
+        "withdrawal_fee": "Free ACH ($25 Wire, Crypto network fee)",
+        "max_leverage": "10x (US Regulated Derivatives)",
+        "order_types": "Market, Limit, Stop-Limit, Bracket Orders, TWAP",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Recurring Buys (DCA), API Bots",
+        "por": "✅ Public SEC 10-K Filings & Deloitte Audits",
+        "protection_fund": "✅ FDIC Insured USD ($250k) & Crime Insurance",
+        "cold_storage": "99% in institutional geographic cold vaults",
+        "kyc": "Mandatory (Strict US Federal & State Compliance)",
+        "licenses": "US NY BitLicense, FinCEN MSB, UK FCA, Germany BaFin, Ireland CBI",
+        "fiat_support": "USD, EUR, GBP, CAD, AUD, SGD, JPY",
+        "payment_methods": "ACH, Fedwire, SEPA, Faster Payments, Debit Card, PayPal, Apple Pay",
+        "min_deposit": "$2 ($10 for wire)",
+        "mobile_app": "iOS (4.7★) & Android (4.4★)",
+        "support": "24/7 Phone Support (US) & Live Chat",
+        "response_time": "< 5 minutes",
+        "url": "https://www.coinbase.com",
+        "review_url": "../reviews/coinbase-review.html"
+    },
+    {
+        "slug": "kraken",
+        "name": "Kraken",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": True,
+        "rating": 4.7,
+        "badge": "🛡️ Gold Standard Security",
+        "country": "United States",
+        "founded": 2011,
+        "color": "#5741d9",
+        "bg_color": "#20165e",
+        "accent": "#735be5",
+        "coins_count": "280+ Coins",
+        "pairs_count": "750+ Pairs",
+        "spot_maker": "0.16% (Pro)",
+        "spot_taker": "0.26% (Pro)",
+        "fut_maker": "0.020%",
+        "fut_taker": "0.050%",
+        "token_discount": "VIP 30-day volume tiers down to 0.00%",
+        "deposit_fee": "Free (Fedwire / SEPA / Crypto)",
+        "withdrawal_fee": "Dynamic network rate ($4-$13 fiat wire)",
+        "max_leverage": "50x (Futures) / 5x (Margin)",
+        "order_types": "Market, Limit, Stop Loss, Take Profit, Trailing Stop, Settle Position",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Kraken Pro API & Custom DCA Webhooks",
+        "por": "✅ Semi-annual Cryptographic Merkle-Tree Audits",
+        "protection_fund": "✅ High Reserve Capital (Zero Hacks Since 2011)",
+        "cold_storage": "95%+ in air-gapped armed guard vaults",
+        "kyc": "Mandatory (Tiered Verification)",
+        "licenses": "US FinCEN, Wyoming SPDI Bank, UK FCA, Canada FINTRAC, Australia AUSTRAC",
+        "fiat_support": "USD, EUR, GBP, CAD, CHF, AUD, JPY",
+        "payment_methods": "Fedwire, ACH, SEPA, Faster Payments, Apple Pay, Debit Card",
+        "min_deposit": "$10 ($1 crypto)",
+        "mobile_app": "iOS (4.8★) & Android (4.7★)",
+        "support": "24/7 Expert Live Chat & Phone Support",
+        "response_time": "< 1 minute",
+        "url": "https://www.kraken.com",
+        "review_url": "../reviews/kraken-review.html"
+    },
+    {
+        "slug": "okx",
+        "name": "OKX",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.7,
+        "badge": "⚡ Web3 & Low Futures Fees",
+        "country": "Seychelles",
+        "founded": 2017,
+        "color": "#000000",
+        "bg_color": "#121212",
+        "accent": "#ffffff",
+        "coins_count": "380+ Coins",
+        "pairs_count": "650+ Pairs",
+        "spot_maker": "0.08%",
+        "spot_taker": "0.10%",
+        "fut_maker": "0.020%",
+        "fut_taker": "0.050%",
+        "token_discount": "Discounts with OKB & VIP tiers",
+        "deposit_fee": "Free",
+        "withdrawal_fee": "Dynamic network rate",
+        "max_leverage": "100x Leverage",
+        "order_types": "Market, Limit, Advanced OCO, Trailing Stop, TWAP, Iceberg, Chase",
+        "copy_trading": "✅ Yes (Spot & Futures Copy Trading)",
+        "trading_bots": "✅ Grid, DCA, Arbitrage, Iceberg, Recurring Buy",
+        "por": "✅ 100%+ Clean Merkle-Tree Reserves (Monthly)",
+        "protection_fund": "✅ $700M+ OKX Risk Shield",
+        "cold_storage": "Multi-sig, semi-offline, isolated cold vaults",
+        "kyc": "Mandatory",
+        "licenses": "Dubai VARA, Bahamas DARE, France AMF, Singapore MAS In-Principle",
+        "fiat_support": "EUR, GBP, AUD, BRL, TRY, ARS (30+ via P2P)",
+        "payment_methods": "SEPA, Apple Pay, Credit Card, Bank Transfer, P2P",
+        "min_deposit": "$10",
+        "mobile_app": "iOS (4.8★) & Android (4.6★)",
+        "support": "24/7 Live Chat & Comprehensive Bot Automation Hub",
+        "response_time": "< 2 minutes",
+        "url": "https://www.okx.com",
+        "review_url": "../reviews/okx-review.html"
+    },
+    {
+        "slug": "gate",
+        "name": "Gate.io",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.5,
+        "badge": "💎 #1 Altcoin Catalog",
+        "country": "Panama",
+        "founded": 2013,
+        "color": "#1351d8",
+        "bg_color": "#082466",
+        "accent": "#00e5bc",
+        "coins_count": "2,100+ Coins",
+        "pairs_count": "3,400+ Pairs",
+        "spot_maker": "0.09%",
+        "spot_taker": "0.09%",
+        "fut_maker": "0.015%",
+        "fut_taker": "0.050%",
+        "token_discount": "25% discount with GT token",
+        "deposit_fee": "Free",
+        "withdrawal_fee": "Dynamic network rate",
+        "max_leverage": "100x Leverage",
+        "order_types": "Market, Limit, Stop-Order, Time Condition, TWAP, Iceberg",
+        "copy_trading": "✅ Yes (Strategy Bot Copying)",
+        "trading_bots": "✅ 100,000+ Community Trading Bot Strategies",
+        "por": "✅ 100%+ Merkle-Tree Verified (Armanino certified)",
+        "protection_fund": "✅ $100M Gate SAFU Reserve",
+        "cold_storage": "98% in multi-sig cold storage hardware",
+        "kyc": "Mandatory",
+        "licenses": "Malta VASP, Lithuania VASP, Bahamas, UAE DMCC",
+        "fiat_support": "USD, EUR, GBP, BRL, TRY, JPY (50+ via Banxa/MoonPay)",
+        "payment_methods": "Credit/Debit Card, Bank Transfer, P2P, MoonPay, Banxa",
+        "min_deposit": "$0 ($10 fiat)",
+        "mobile_app": "iOS (4.5★) & Android (4.4★)",
+        "support": "24/7 Live Chat & Support Ticket Desk",
+        "response_time": "< 4 minutes",
+        "url": "https://www.gate.com",
+        "review_url": "../reviews/gate-review.html"
+    },
+    {
+        "slug": "bitstamp",
+        "name": "Bitstamp",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": True,
+        "rating": 4.5,
+        "badge": "🏛️ EU Regulated Institutional",
+        "country": "Luxembourg / UK",
+        "founded": 2011,
+        "color": "#005537",
+        "bg_color": "#002b1c",
+        "accent": "#00a86b",
+        "coins_count": "90+ Coins",
+        "pairs_count": "180+ Pairs",
+        "spot_maker": "0.00% (< $1,000/mo) / 0.30%",
+        "spot_taker": "0.00% (< $1,000/mo) / 0.40%",
+        "fut_maker": "N/A (Spot Focus)",
+        "fut_taker": "N/A (Spot Focus)",
+        "token_discount": "0% fees on first $1k monthly volume",
+        "deposit_fee": "Free (SEPA / ACH)",
+        "withdrawal_fee": "€3.00 SEPA (Dynamic crypto)",
+        "max_leverage": "1x (Spot Only)",
+        "order_types": "Market, Limit, Stop, Trailing Stop, Instant Order",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Bitstamp Pro FIX & HTTP API",
+        "por": "✅ Big Four Audited (KPMG & PwC Annual Reports)",
+        "protection_fund": "✅ Fully Capitalized EU Payment Institution",
+        "cold_storage": "98% in multi-sig institutional custody",
+        "kyc": "Mandatory (Strict EU Anti-Money Laundering)",
+        "licenses": "CSSF Luxembourg, NY BitLicense, UK FCA, Italy OAM, France AMF",
+        "fiat_support": "EUR, USD, GBP, CHF",
+        "payment_methods": "SEPA, Faster Payments, Fedwire, ACH, Credit/Debit Card",
+        "min_deposit": "€10 / $10",
+        "mobile_app": "iOS (4.7★) & Android (4.5★)",
+        "support": "24/7 Dedicated Phone & Email Support",
+        "response_time": "< 5 minutes",
+        "url": "https://www.bitstamp.net",
+        "review_url": "../reviews/bitstamp-review.html"
+    },
+    {
+        "slug": "mexc",
+        "name": "MEXC",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.4,
+        "badge": "💸 0% Spot Maker Fees",
+        "country": "Seychelles",
+        "founded": 2018,
+        "color": "#00b897",
+        "bg_color": "#003d32",
+        "accent": "#00f0c2",
+        "coins_count": "2,400+ Coins",
+        "pairs_count": "3,000+ Pairs",
+        "spot_maker": "0.00%",
+        "spot_taker": "0.10%",
+        "fut_maker": "0.000%",
+        "fut_taker": "0.020%",
+        "token_discount": "50% futures discount with MX token",
+        "deposit_fee": "Free",
+        "withdrawal_fee": "Dynamic network rate",
+        "max_leverage": "200x Leverage",
+        "order_types": "Market, Limit, Trigger Order, Post-Only, IOC",
+        "copy_trading": "✅ Yes (Futures Copy Trading)",
+        "trading_bots": "✅ Spot Grid & Futures Grid Bots",
+        "por": "✅ 100%+ Merkle-Tree Reserves (Monthly)",
+        "protection_fund": "✅ $100M MEXC Investor Protection Fund",
+        "cold_storage": "98% in multi-signature cold wallets",
+        "kyc": "Optional for basic trading (Mandatory for high limits)",
+        "licenses": "Estonia MTR, Australia AUSTRAC, Canada MSB",
+        "fiat_support": "USD, EUR, GBP, AUD, BRL, VND (40+ P2P)",
+        "payment_methods": "Credit/Debit Card, SEPA, Apple Pay, P2P",
+        "min_deposit": "$0 ($10 fiat)",
+        "mobile_app": "iOS (4.4★) & Android (4.3★)",
+        "support": "24/7 Live Chat & Multilingual Ticket Desk",
+        "response_time": "< 3 minutes",
+        "url": "https://www.mexc.com",
+        "review_url": "../reviews/mexc-review.html"
+    },
+    {
+        "slug": "lbank",
+        "name": "LBank",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.3,
+        "badge": "🚀 Early Gem Listings",
+        "country": "British Virgin Islands",
+        "founded": 2015,
+        "color": "#0055ff",
+        "bg_color": "#001f5c",
+        "accent": "#3377ff",
+        "coins_count": "1,200+ Coins",
+        "pairs_count": "1,600+ Pairs",
+        "spot_maker": "0.10%",
+        "spot_taker": "0.10%",
+        "fut_maker": "0.020%",
+        "fut_taker": "0.060%",
+        "token_discount": "VIP volume tiers",
+        "deposit_fee": "Free",
+        "withdrawal_fee": "Dynamic network rate",
+        "max_leverage": "125x Leverage",
+        "order_types": "Market, Limit, Stop-Limit",
+        "copy_trading": "✅ Yes (Grid Bot Copying)",
+        "trading_bots": "✅ Spot Grid & DCA",
+        "por": "✅ 100%+ Merkle-Tree Reserves",
+        "protection_fund": "✅ User Security Reserve",
+        "cold_storage": "95%+ cold storage",
+        "kyc": "Optional for crypto withdrawals under 1 BTC",
+        "licenses": "NFA US, Canada MSB, Italy VASP",
+        "fiat_support": "USD, EUR, GBP, AUD (20+ P2P)",
+        "payment_methods": "Credit Card, MoonPay, Banxa, P2P",
+        "min_deposit": "$5",
+        "mobile_app": "iOS (4.3★) & Android (4.2★)",
+        "support": "24/7 Live Chat & Email",
+        "response_time": "< 5 minutes",
+        "url": "https://www.lbank.com",
+        "review_url": "../reviews/lbank-review.html"
+    },
+    {
+        "slug": "binance-us",
+        "name": "Binance.US",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": True,
+        "rating": 4.3,
+        "badge": "🇺🇸 Low Fee US Platform",
+        "country": "United States",
+        "founded": 2019,
+        "color": "#e5a910",
+        "bg_color": "#1e2026",
+        "accent": "#f3ba2f",
+        "coins_count": "150+ Coins",
+        "pairs_count": "220+ Pairs",
+        "spot_maker": "0.00% (Tier 0 pairs) / 0.10%",
+        "spot_taker": "0.00% (Tier 0 pairs) / 0.20%",
+        "fut_maker": "N/A (Spot Only)",
+        "fut_taker": "N/A (Spot Only)",
+        "token_discount": "25% discount with BNB",
+        "deposit_fee": "Free (Crypto / MoonPay USDT)",
+        "withdrawal_fee": "Dynamic network rate",
+        "max_leverage": "1x (Spot Only)",
+        "order_types": "Market, Limit, Stop-Limit, OCO",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Auto-Invest (DCA)",
+        "por": "✅ Proof of Reserves Audited",
+        "protection_fund": "✅ 1:1 Customer Asset Backing",
+        "cold_storage": "98% in secure US cold vaults",
+        "kyc": "Mandatory (US Government ID / SSN)",
+        "licenses": "US FinCEN MSB, 43+ State Money Transmitter Licenses",
+        "fiat_support": "USD (Via MoonPay / Transak partner integrations)",
+        "payment_methods": "Wire, Debit Card, MoonPay, Apple Pay",
+        "min_deposit": "$10",
+        "mobile_app": "iOS (4.5★) & Android (4.3★)",
+        "support": "24/7 Live Chat & Ticket System",
+        "response_time": "< 5 minutes",
+        "url": "https://www.binance.us",
+        "review_url": "../reviews/binance-us-review.html"
+    },
+    {
+        "slug": "crypto-com",
+        "name": "Crypto.com",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": True,
+        "rating": 4.4,
+        "badge": "💳 Best Card & Ecosystem",
+        "country": "Malta / Singapore",
+        "founded": 2016,
+        "color": "#1199fa",
+        "bg_color": "#061d42",
+        "accent": "#40b4ff",
+        "coins_count": "350+ Coins",
+        "pairs_count": "550+ Pairs",
+        "spot_maker": "0.075%",
+        "spot_taker": "0.075%",
+        "fut_maker": "0.017%",
+        "fut_taker": "0.034%",
+        "token_discount": "Discounts with staked Cronos (CRO)",
+        "deposit_fee": "Free (ACH / SEPA / Crypto)",
+        "withdrawal_fee": "Standard network rates",
+        "max_leverage": "50x (Exchange) / Spot on App",
+        "order_types": "Market, Limit, Stop-Limit, Trailing Stop, TWAP",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ DCA Bot, Grid Bot, TWAP Bot",
+        "por": "✅ 100%+ Clean Merkle-Tree Reserves (Audited by Mazars)",
+        "protection_fund": "✅ $750M Direct Cold Storage Insurance",
+        "cold_storage": "100% of user crypto in Ledger Vault cold storage",
+        "kyc": "Mandatory",
+        "licenses": "Singapore MAS, UK FCA, France AMF, Dubai VARA, US CFTC/FinCEN",
+        "fiat_support": "USD, EUR, GBP, CAD, AUD, SGD, BRL (20+ Fiat)",
+        "payment_methods": "ACH, Wire, SEPA, Faster Payments, Debit Card, Apple Pay",
+        "min_deposit": "$1 ($10 for fiat)",
+        "mobile_app": "iOS (4.7★) & Android (4.5★)",
+        "support": "24/7 In-App Live Chat & VIP Concierge",
+        "response_time": "< 4 minutes",
+        "url": "https://crypto.com",
+        "review_url": "../reviews/crypto-com-review.html"
+    },
+    {
+        "slug": "bitso",
+        "name": "Bitso",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.3,
+        "badge": "🇲🇽 #1 Latin America Hub",
+        "country": "Gibraltar / Mexico",
+        "founded": 2014,
+        "color": "#00a650",
+        "bg_color": "#003b1c",
+        "accent": "#00cc63",
+        "coins_count": "60+ Coins",
+        "pairs_count": "100+ Pairs",
+        "spot_maker": "0.10%",
+        "spot_taker": "0.15%",
+        "fut_maker": "N/A (Spot Focus)",
+        "fut_taker": "N/A (Spot Focus)",
+        "token_discount": "Tiered 30d volume fee discounts",
+        "deposit_fee": "Free (SPEI / PIX / Wire)",
+        "withdrawal_fee": "Free SPEI & PIX (Crypto network rate)",
+        "max_leverage": "1x (Spot Only)",
+        "order_types": "Market, Limit, Stop-Loss",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Bitso Alpha Trading API",
+        "por": "✅ DLT Gibraltar Regulated Audits",
+        "protection_fund": "✅ Regulated Custody & Coincover Insurance",
+        "cold_storage": "98% in institutional cold custody",
+        "kyc": "Mandatory (Local ID for LatAm banking)",
+        "licenses": "Gibraltar FSC DLT License, Mexico CNBV",
+        "fiat_support": "MXN, BRL, ARS, COP, USD",
+        "payment_methods": "SPEI (Mexico), PIX (Brazil), ACH (Colombia), Wire",
+        "min_deposit": "$1 (10 MXN)",
+        "mobile_app": "iOS (4.7★) & Android (4.6★)",
+        "support": "24/7 Live Chat & Dedicated LatAm Desk",
+        "response_time": "< 3 minutes",
+        "url": "https://bitso.com",
+        "review_url": "../reviews/bitso-review.html"
+    },
+    {
+        "slug": "bitunix",
+        "name": "Bitunix",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.3,
+        "badge": "🚀 High-Speed Derivatives",
+        "country": "St. Vincent & Grenadines",
+        "founded": 2021,
+        "color": "#6366f1",
+        "bg_color": "#1e1b4b",
+        "accent": "#818cf8",
+        "coins_count": "300+ Coins",
+        "pairs_count": "450+ Pairs",
+        "spot_maker": "0.08%",
+        "spot_taker": "0.10%",
+        "fut_maker": "0.020%",
+        "fut_taker": "0.060%",
+        "token_discount": "VIP fee tiers",
+        "deposit_fee": "Free",
+        "withdrawal_fee": "Dynamic network rate",
+        "max_leverage": "125x Leverage",
+        "order_types": "Market, Limit, Trigger, TP/SL",
+        "copy_trading": "✅ Yes (Futures Copy Trading)",
+        "trading_bots": "✅ Grid Bots",
+        "por": "✅ 100%+ Merkle-Tree Reserves",
+        "protection_fund": "✅ $50M User Security Fund",
+        "cold_storage": "95%+ cold storage",
+        "kyc": "Optional for basic daily limits",
+        "licenses": "US MSB, Canada MSB",
+        "fiat_support": "USD, EUR, GBP (Via MoonPay / Coinify)",
+        "payment_methods": "Credit Card, Apple Pay, MoonPay, P2P",
+        "min_deposit": "$10",
+        "mobile_app": "iOS (4.4★) & Android (4.3★)",
+        "support": "24/7 Multilingual Live Chat",
+        "response_time": "< 3 minutes",
+        "url": "https://www.bitunix.com",
+        "review_url": "../reviews/bitunix-review.html"
+    },
+    {
+        "slug": "luno",
+        "name": "Luno",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.4,
+        "badge": "🌍 #1 Africa & Emerging Markets",
+        "country": "Singapore / UK (DCG Subsidiary)",
+        "founded": 2013,
+        "color": "#1a3b8b",
+        "bg_color": "#091638",
+        "accent": "#2d5be3",
+        "coins_count": "30+ Coins",
+        "pairs_count": "60+ Pairs",
+        "spot_maker": "0.00% - 0.10%",
+        "spot_taker": "0.10% - 0.25%",
+        "fut_maker": "N/A (Spot Only)",
+        "fut_taker": "N/A (Spot Only)",
+        "token_discount": "VIP tiers based on 30d volume",
+        "deposit_fee": "Free (Bank Transfer / EFT / Instant)",
+        "withdrawal_fee": "Low local fiat bank fees",
+        "max_leverage": "1x (Spot Only)",
+        "order_types": "Instant Buy/Sell, Limit, Stop-Limit (Luno Exchange)",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Recurring Buys (DCA)",
+        "por": "✅ Mazars Monthly Proof of Reserves Audits",
+        "protection_fund": "✅ Backed by Digital Currency Group (DCG)",
+        "cold_storage": "98% in multi-signature deep freeze vaults",
+        "kyc": "Mandatory (Local banking compliance)",
+        "licenses": "UK FCA Registered, South Africa FSCA, Malaysia SC, Singapore MAS",
+        "fiat_support": "ZAR, NGN, MYR, IDR, GBP, EUR, AUD",
+        "payment_methods": "Bank Transfer, Instant EFT, SEPA, Faster Payments, Debit Card",
+        "min_deposit": "$1 (R10 / £1 / €1)",
+        "mobile_app": "iOS (4.8★) & Android (4.7★)",
+        "support": "24/7 Help Center & Priority Ticket Support",
+        "response_time": "< 10 minutes",
+        "url": "https://www.luno.com",
+        "review_url": "../reviews/luno-review.html"
+    },
+    {
+        "slug": "bitkub",
+        "name": "Bitkub",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.3,
+        "badge": "🇹🇭 #1 Thailand Exchange",
+        "country": "Thailand",
+        "founded": 2018,
+        "color": "#00a859",
+        "bg_color": "#003b1f",
+        "accent": "#00cc6c",
+        "coins_count": "90+ Coins",
+        "pairs_count": "110+ Pairs",
+        "spot_maker": "0.25%",
+        "spot_taker": "0.25%",
+        "fut_maker": "N/A (Spot Only)",
+        "fut_taker": "N/A (Spot Only)",
+        "token_discount": "Discounts with KUB token fees",
+        "deposit_fee": "Free (PromptPay QR / Thai Bank)",
+        "withdrawal_fee": "20 THB (Flat Thai Bank Transfer)",
+        "max_leverage": "1x (Spot Only)",
+        "order_types": "Market, Limit, Stop-Limit",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Bitkub Open API",
+        "por": "✅ Thailand SEC Supervised Reserves",
+        "protection_fund": "✅ Regulated Thai Financial Entity",
+        "cold_storage": "95%+ cold storage custody",
+        "kyc": "Mandatory (Thai NDID / National Passport)",
+        "licenses": "Thailand SEC Licensed & Regulated",
+        "fiat_support": "THB (Thai Baht)",
+        "payment_methods": "PromptPay QR Code, Thai Mobile Banking, Wire",
+        "min_deposit": "10 THB (~$0.30)",
+        "mobile_app": "iOS (4.6★) & Android (4.5★)",
+        "support": "24/7 Thai & English Phone and Live Chat Support",
+        "response_time": "< 3 minutes",
+        "url": "https://www.bitkub.com",
+        "review_url": "../reviews/bitkub-review.html"
+    },
+    {
+        "slug": "kucoin",
+        "name": "KuCoin",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.4,
+        "badge": "🤖 Top Automated Bots",
+        "country": "Seychelles",
+        "founded": 2017,
+        "color": "#24ae8f",
+        "bg_color": "#0b4236",
+        "accent": "#2fd4ae",
+        "coins_count": "800+ Coins",
+        "pairs_count": "1,400+ Pairs",
+        "spot_maker": "0.10%",
+        "spot_taker": "0.10%",
+        "fut_maker": "0.020%",
+        "fut_taker": "0.060%",
+        "token_discount": "20% discount with KCS token",
+        "deposit_fee": "Free",
+        "withdrawal_fee": "Dynamic network rate",
+        "max_leverage": "100x Leverage",
+        "order_types": "Market, Limit, Stop-Limit, Stop-Market, OCO, Trailing Stop",
+        "copy_trading": "✅ Yes (Futures Copy Trading)",
+        "trading_bots": "✅ 10M+ Active Free Built-in Trading Bots (Grid, DCA, Martingale)",
+        "por": "✅ 100%+ Merkle-Tree Verified (Monthly)",
+        "protection_fund": "✅ Security Reserve & Emergency Protection",
+        "cold_storage": "98% cold storage with hardware encryption",
+        "kyc": "Mandatory",
+        "licenses": "Seychelles, Poland VASP, India FIU Registered",
+        "fiat_support": "EUR, GBP, AUD, BRL, TRY, INR (45+ via P2P)",
+        "payment_methods": "SEPA, Credit Card, Apple Pay, Google Pay, P2P",
+        "min_deposit": "$5",
+        "mobile_app": "iOS (4.6★) & Android (4.4★)",
+        "support": "24/7 Live Chat & Active Telegram Support",
+        "response_time": "< 3 minutes",
+        "url": "https://www.kucoin.com",
+        "review_url": "../reviews/kucoin-review.html"
+    },
+    {
+        "slug": "bingx",
+        "name": "BingX",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.4,
+        "badge": "📈 Social & Copy Trading",
+        "country": "British Virgin Islands (HQ Singapore)",
+        "founded": 2018,
+        "color": "#0052ff",
+        "bg_color": "#001a5e",
+        "accent": "#3875ff",
+        "coins_count": "700+ Coins",
+        "pairs_count": "900+ Pairs",
+        "spot_maker": "0.10%",
+        "spot_taker": "0.10%",
+        "fut_maker": "0.020%",
+        "fut_taker": "0.050%",
+        "token_discount": "VIP volume tiers",
+        "deposit_fee": "Free",
+        "withdrawal_fee": "Dynamic network rate",
+        "max_leverage": "150x Leverage",
+        "order_types": "Market, Limit, Trigger, Trailing Stop, Guaranteed SL",
+        "copy_trading": "✅ Top-Tier Social Copy Trading (Feed & Trader Stats)",
+        "trading_bots": "✅ Spot Grid, Futures Grid, Infinity Grid",
+        "por": "✅ 100%+ Merkle-Tree Verified (CertiK audited)",
+        "protection_fund": "✅ BingX Shield Fund",
+        "cold_storage": "98% in multi-sig cold storage",
+        "kyc": "Optional for basic trading (Mandatory for fiat)",
+        "licenses": "Lithuania VASP, Australia AUSTRAC, Singapore",
+        "fiat_support": "USD, EUR, GBP, AUD, BRL, TWD (30+ P2P)",
+        "payment_methods": "Credit/Debit Card, Apple Pay, Banxa, P2P",
+        "min_deposit": "$0 ($10 for fiat)",
+        "mobile_app": "iOS (4.7★) & Android (4.5★)",
+        "support": "24/7 Live Chat & 24/7 Multilingual Support",
+        "response_time": "< 2 minutes",
+        "url": "https://bingx.com",
+        "review_url": "../reviews/bingx-review.html"
+    },
+    {
+        "slug": "bitvavo",
+        "name": "Bitvavo",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.4,
+        "badge": "🇳🇱 #1 Netherlands & EU Euro Hub",
+        "country": "Netherlands",
+        "founded": 2018,
+        "color": "#0055ff",
+        "bg_color": "#001b52",
+        "accent": "#3377ff",
+        "coins_count": "300+ Coins",
+        "pairs_count": "320+ EUR Pairs",
+        "spot_maker": "0.05% - 0.15%",
+        "spot_taker": "0.10% - 0.25%",
+        "fut_maker": "N/A (Spot Only)",
+        "fut_taker": "N/A (Spot Only)",
+        "token_discount": "Volume tiers based on 30d EUR volume",
+        "deposit_fee": "Free (iDEAL / SEPA / Bancontact)",
+        "withdrawal_fee": "€0.00 SEPA (Dynamic crypto network)",
+        "max_leverage": "1x (Spot Only)",
+        "order_types": "Market, Limit, Stop-Limit, Recurring Buy",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Bitvavo Trading API (Python/Node)",
+        "por": "✅ DNB Monitored Reserves & Audited Financials",
+        "protection_fund": "✅ €100,000 Bitvavo Account Guarantee Fund",
+        "cold_storage": "98% in insured multi-sig institutional vaults",
+        "kyc": "Mandatory (Strict Dutch DNB Compliance)",
+        "licenses": "Dutch Central Bank (DNB), France AMF, Germany BaFin, Italy OAM",
+        "fiat_support": "EUR (€)",
+        "payment_methods": "iDEAL (Instant), SEPA Instant, Bancontact, Giropay, Card",
+        "min_deposit": "€1",
+        "mobile_app": "iOS (4.8★) & Android (4.7★)",
+        "support": "Live Chat & Dutch/English Email Support",
+        "response_time": "< 4 minutes",
+        "url": "https://bitvavo.com",
+        "review_url": "../reviews/bitvavo-review.html"
+    },
+    {
+        "slug": "hashkey",
+        "name": "HashKey",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.4,
+        "badge": "🇭🇰 Hong Kong Licensed Institutional",
+        "country": "Hong Kong",
+        "founded": 2018,
+        "color": "#00509d",
+        "bg_color": "#001026",
+        "accent": "#0070db",
+        "coins_count": "40+ Regulated Coins",
+        "pairs_count": "60+ Pairs",
+        "spot_maker": "0.00% (Promotional) / 0.10%",
+        "spot_taker": "0.05% - 0.10%",
+        "fut_maker": "N/A (Spot & Institutional)",
+        "fut_taker": "N/A (Spot & Institutional)",
+        "token_discount": "Fee rebates with HSK token",
+        "deposit_fee": "Free (HKD / USD Bank Transfer)",
+        "withdrawal_fee": "Low fiat bank wire rates",
+        "max_leverage": "1x (Spot Only)",
+        "order_types": "Market, Limit, Post-Only, Stop-Limit",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Institutional FIX / REST API",
+        "por": "✅ Ernst & Young Audited (Big 4)",
+        "protection_fund": "✅ Aon Insured ($400M Custody Insurance)",
+        "cold_storage": "98% in tier-1 bank-grade hardware vaults",
+        "kyc": "Mandatory (Hong Kong SFC Licensed Compliance)",
+        "licenses": "Hong Kong SFC Type 1 & 7 Licenses, Bermuda BMA",
+        "fiat_support": "HKD, USD",
+        "payment_methods": "Bank Transfer, FPS (Fast Payment System), Fedwire",
+        "min_deposit": "1,000 HKD / $100 USD",
+        "mobile_app": "iOS (4.6★) & Android (4.4★)",
+        "support": "24/7 Dedicated Client Support & Institutional Desk",
+        "response_time": "< 3 minutes",
+        "url": "https://www.hashkey.com",
+        "review_url": "../reviews/hashkey-review.html"
+    },
+    {
+        "slug": "bullish",
+        "name": "Bullish",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.3,
+        "badge": "🏦 Hybrid AMM/Orderbook Giant",
+        "country": "Gibraltar",
+        "founded": 2021,
+        "color": "#d4af37",
+        "bg_color": "#18181b",
+        "accent": "#f1c40f",
+        "coins_count": "50+ Coins",
+        "pairs_count": "80+ Pairs",
+        "spot_maker": "0.00% (Automated AMM depth)",
+        "spot_taker": "0.040% - 0.080%",
+        "fut_maker": "0.000%",
+        "fut_taker": "0.025%",
+        "token_discount": "Institutional volume tiers",
+        "deposit_fee": "Free (Fedwire / SEPA / Crypto)",
+        "withdrawal_fee": "Free ACH / SEPA (Network fee for crypto)",
+        "max_leverage": "20x Leverage (Perpetuals)",
+        "order_types": "Market, Limit, AMM Orders, Margin, Stop-Limit",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Automated Liquidity Pools & Institutional API",
+        "por": "✅ PwC Audited Cryptographic Proof of Reserves",
+        "protection_fund": "✅ Multi-Billion Balance Sheet Capitalization",
+        "cold_storage": "99% institutional cold custody",
+        "kyc": "Mandatory",
+        "licenses": "Gibraltar FSC DLT License, Germany BaFin Regulated",
+        "fiat_support": "USD, EUR, GBP",
+        "payment_methods": "Fedwire, SEPA, Bank Transfer",
+        "min_deposit": "$50",
+        "mobile_app": "iOS & Android",
+        "support": "24/7 Institutional Concierge & Live Chat",
+        "response_time": "< 3 minutes",
+        "url": "https://bullish.com",
+        "review_url": "../reviews/bullish-review.html"
+    },
+    {
+        "slug": "whitebit",
+        "name": "WhiteBIT",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.3,
+        "badge": "🛡️ European Licensed Leader",
+        "country": "Lithuania / Ukraine",
+        "founded": 2018,
+        "color": "#e0e1dd",
+        "bg_color": "#0d1b2a",
+        "accent": "#ffffff",
+        "coins_count": "270+ Coins",
+        "pairs_count": "350+ Pairs",
+        "spot_maker": "0.10%",
+        "spot_taker": "0.10%",
+        "fut_maker": "0.010%",
+        "fut_taker": "0.035%",
+        "token_discount": "100% maker discount with WBT token holding",
+        "deposit_fee": "Free (SEPA / Crypto)",
+        "withdrawal_fee": "Low fiat rates (Dynamic crypto)",
+        "max_leverage": "100x Leverage",
+        "order_types": "Market, Limit, Stop-Limit, Stop-Market, Conditional",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Smart Staking (Earn) & Trading API",
+        "por": "✅ 100%+ Clean Merkle-Tree Reserves (Hacken AAA security score)",
+        "protection_fund": "✅ €30M+ User Protection Fund",
+        "cold_storage": "96% in multi-signature cold wallets",
+        "kyc": "Mandatory",
+        "licenses": "Lithuania VASP, Spain Bank of Spain, Poland VASP",
+        "fiat_support": "EUR, USD, GBP, PLN, UAH, TRY, BRL (10+ Fiat)",
+        "payment_methods": "SEPA, Visa/Mastercard, Apple Pay, Google Pay, Advcash",
+        "min_deposit": "€10",
+        "mobile_app": "iOS (4.7★) & Android (4.5★)",
+        "support": "24/7 Multilingual Live Chat (9 Languages)",
+        "response_time": "< 2 minutes",
+        "url": "https://whitebit.com",
+        "review_url": "../reviews/whitebit-review.html"
+    },
+    {
+        "slug": "bitbank",
+        "name": "Bitbank",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.3,
+        "badge": "🇯🇵 #1 Japan High-Volume Exchange",
+        "country": "Japan",
+        "founded": 2016,
+        "color": "#c0392b",
+        "bg_color": "#1c1c1c",
+        "accent": "#e74c3c",
+        "coins_count": "40+ Japanese Whitelisted Coins",
+        "pairs_count": "50+ JPY Pairs",
+        "spot_maker": "-0.02% (Maker Rebate / We Pay You!)",
+        "spot_taker": "0.12%",
+        "fut_maker": "N/A (Spot Focus)",
+        "fut_taker": "N/A (Spot Focus)",
+        "token_discount": "Negative maker fees (-0.02%) on orderbook trades",
+        "deposit_fee": "Free (Japanese Bank Transfer)",
+        "withdrawal_fee": "550 - 770 JPY (Flat Bank Wire)",
+        "max_leverage": "1x (Spot Only)",
+        "order_types": "Market, Limit, Stop-Loss",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ REST & WebSocket Streaming API",
+        "por": "✅ Japanese JFSA Regulated Custody Audits",
+        "protection_fund": "✅ 100% Segregated Asset Backing (Zero Hacks Since 2016)",
+        "cold_storage": "100% cold storage with multi-sig security",
+        "kyc": "Mandatory (Japanese Resident / MyNumber Verification)",
+        "licenses": "Japan FSA (Kanto Local Finance Bureau No. 00004), JVCEA Member",
+        "fiat_support": "JPY (Japanese Yen)",
+        "payment_methods": "Japanese Domestic Bank Transfer, Pay-easy",
+        "min_deposit": "1,000 JPY (~$7)",
+        "mobile_app": "iOS (4.6★) & Android (4.5★)",
+        "support": "Live Chat & Japanese In-App Support Desk",
+        "response_time": "< 5 minutes",
+        "url": "https://bitbank.cc",
+        "review_url": "../reviews/bitbank-review.html"
+    },
+    {
+        "slug": "niza",
+        "name": "Niza.io",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.2,
+        "badge": "💳 Banking & Crypto Hybrid",
+        "country": "Lithuania / UK",
+        "founded": 2021,
+        "color": "#7b4fe8",
+        "bg_color": "#200d56",
+        "accent": "#9d77f7",
+        "coins_count": "150+ Coins",
+        "pairs_count": "200+ Pairs",
+        "spot_maker": "0.10%",
+        "spot_taker": "0.10%",
+        "fut_maker": "N/A (Spot & Banking)",
+        "fut_taker": "N/A (Spot & Banking)",
+        "token_discount": "Fee discounts with NIZA token",
+        "deposit_fee": "Free (SEPA / Crypto)",
+        "withdrawal_fee": "SEPA Free (Dynamic crypto)",
+        "max_leverage": "1x (Spot & Staking)",
+        "order_types": "Market, Limit, Quick Swap",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Staking & Yield Vaults",
+        "por": "✅ EU VASP Registered Reserves",
+        "protection_fund": "✅ Segregated Banking Reserves",
+        "cold_storage": "95%+ cold storage custody",
+        "kyc": "Mandatory",
+        "licenses": "Lithuania VASP (FCIS Regulated)",
+        "fiat_support": "EUR, USD, GBP",
+        "payment_methods": "SEPA Instant, Credit Card, Bank Transfer",
+        "min_deposit": "€10",
+        "mobile_app": "iOS (4.4★) & Android (4.3★)",
+        "support": "24/7 Live Chat & Ticket Desk",
+        "response_time": "< 4 minutes",
+        "url": "https://niza.io",
+        "review_url": "../reviews/niza-review.html"
+    },
+    {
+        "slug": "upbit",
+        "name": "Upbit",
+        "type": "Centralized (CEX)",
+        "is_dex": False,
+        "us_allowed": False,
+        "rating": 4.4,
+        "badge": "🇰🇷 #1 South Korea Giant",
+        "country": "South Korea (Dunamu Inc.)",
+        "founded": 2017,
+        "color": "#0033a0",
+        "bg_color": "#001547",
+        "accent": "#0047d6",
+        "coins_count": "200+ Coins",
+        "pairs_count": "300+ KRW Pairs",
+        "spot_maker": "0.05% (KRW Market)",
+        "spot_taker": "0.05% (KRW Market)",
+        "fut_maker": "N/A (Spot Only - KR Regulations)",
+        "fut_taker": "N/A (Spot Only - KR Regulations)",
+        "token_discount": "Ultra-low 0.05% flat fee across all KRW pairs",
+        "deposit_fee": "Free (K-Bank Real-Name Account)",
+        "withdrawal_fee": "1,000 KRW (~$0.75 flat bank withdrawal)",
+        "max_leverage": "1x (Spot Only)",
+        "order_types": "Market, Limit, Stop-Limit, Reservation Order",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Upbit Developer Open API",
+        "por": "✅ Quarterly Audits by Samil PwC (Big 4)",
+        "protection_fund": "✅ 100%+ Liquid Asset Reserves & Dunamu Guarantee",
+        "cold_storage": "95%+ multi-sig cold vaults",
+        "kyc": "Mandatory (Korean K-Bank Real Name Verification)",
+        "licenses": "South Korea FIU (KoFIU) Licensed, Singapore MAS, Thailand SEC",
+        "fiat_support": "KRW (Korean Won), SGD, IDR, THB",
+        "payment_methods": "K-Bank Direct Real-Name Transfer",
+        "min_deposit": "5,000 KRW (~$4)",
+        "mobile_app": "iOS (4.8★) & Android (4.7★)",
+        "support": "24/7 Korean & English Live Chat and KakaoTalk Desk",
+        "response_time": "< 3 minutes",
+        "url": "https://upbit.com",
+        "review_url": "../reviews/upbit-review.html"
+    },
+
+    # Top 10 DEXs
+    {
+        "slug": "uniswap",
+        "name": "Uniswap",
+        "type": "Decentralized (DEX)",
+        "is_dex": True,
+        "us_allowed": True,
+        "rating": 4.8,
+        "badge": "🦄 $2T+ Total Volume",
+        "country": "Decentralized (Ethereum + L2s)",
+        "founded": 2018,
+        "color": "#ff007a",
+        "bg_color": "#4a0023",
+        "accent": "#ff3399",
+        "coins_count": "10,000+ Tokens",
+        "pairs_count": "20,000+ Pools",
+        "spot_maker": "0.05% - 0.30% (LP fee)",
+        "spot_taker": "0.05% - 0.30% (LP fee)",
+        "fut_maker": "N/A (Spot AMM)",
+        "fut_taker": "N/A (Spot AMM)",
+        "token_discount": "0% Protocol fee on standard routing",
+        "deposit_fee": "$0 (Self-custody / No deposit needed)",
+        "withdrawal_fee": "$0 (Direct to your self-custody wallet)",
+        "max_leverage": "1x (Spot Only)",
+        "order_types": "Market Swaps, UniswapX Gasless Swaps, Limit Orders",
+        "copy_trading": "❌ No (On-chain tracking via Debank)",
+        "trading_bots": "✅ DeFi Automation via Gelato / DefiLlama",
+        "por": "✅ 100% On-Chain Verifiable Smart Contracts",
+        "protection_fund": "✅ Non-Custodial (You retain your private keys)",
+        "cold_storage": "100% Self-Custodial (MetaMask, Ledger, Trezor)",
+        "kyc": "Zero KYC (Non-Custodial Web3 Wallet)",
+        "licenses": "Open Source Smart Contracts (GPL-3.0), DAO Governance",
+        "fiat_support": "USD, EUR, GBP (Via integrated MoonPay / Robinhood Connect)",
+        "payment_methods": "Web3 Wallets, MoonPay, Robinhood Connect, Coinbase Pay",
+        "min_deposit": "$0 (Pay only blockchain network gas)",
+        "mobile_app": "Uniswap Wallet (iOS & Android)",
+        "support": "Discord Community & Official Help Center",
+        "response_time": "Community response < 10 mins",
+        "url": "https://uniswap.org",
+        "review_url": "../reviews/uniswap-review.html"
+    },
+    {
+        "slug": "jupiter",
+        "name": "Jupiter",
+        "type": "Decentralized (DEX)",
+        "is_dex": True,
+        "us_allowed": True,
+        "rating": 4.9,
+        "badge": "🪐 #1 Solana Aggregator",
+        "country": "Decentralized (Solana On-Chain)",
+        "founded": 2021,
+        "color": "#00be74",
+        "bg_color": "#072b1d",
+        "accent": "#19e694",
+        "coins_count": "5,000+ Solana Tokens",
+        "pairs_count": "Smart Dynamic Routing",
+        "spot_maker": "0.00% (Zero platform fee)",
+        "spot_taker": "0.00% (Zero platform fee)",
+        "fut_maker": "0.060% (Jupiter Perps)",
+        "fut_taker": "0.060% (Jupiter Perps)",
+        "token_discount": "Zero added fees on swaps",
+        "deposit_fee": "$0 (Self-custody)",
+        "withdrawal_fee": "$0 (Instant wallet settlement)",
+        "max_leverage": "100x Leverage (Jupiter Perps)",
+        "order_types": "Exact-In Swap, Exact-Out Swap, Limit Orders, DCA, Value Average",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Native On-Chain DCA & Value Averaging",
+        "por": "✅ 100% On-Chain Solana Programs (Audited by OtterSec & Kudelski)",
+        "protection_fund": "✅ Non-Custodial / JLP LP Pool Buffer",
+        "cold_storage": "100% Self-Custodial (Phantom, Solflare, Ledger)",
+        "kyc": "Zero KYC (Connect Solana Wallet)",
+        "licenses": "Open Source Smart Contracts, JUP DAO Governance",
+        "fiat_support": "USD, EUR (Via MoonPay / On-ramps)",
+        "payment_methods": "Phantom, Solflare, Backpack, Ledger, MoonPay",
+        "min_deposit": "$0 ($0.0005 SOL network fee)",
+        "mobile_app": "Jupiter Mobile App (iOS & Android)",
+        "support": "24/7 Discord Community & GitHub",
+        "response_time": "Community response < 5 mins",
+        "url": "https://jup.ag",
+        "review_url": "../reviews/jupiter-review.html"
+    },
+    {
+        "slug": "hyperliquid",
+        "name": "Hyperliquid",
+        "type": "Decentralized (DEX)",
+        "is_dex": True,
+        "us_allowed": False,
+        "rating": 4.8,
+        "badge": "⚡ Sub-Second Gasless Perps",
+        "country": "Decentralized (Hyperliquid L1)",
+        "founded": 2023,
+        "color": "#00f0ff",
+        "bg_color": "#041c24",
+        "accent": "#00d0e0",
+        "coins_count": "150+ Perps & Spot",
+        "pairs_count": "150+ Orderbook Pairs",
+        "spot_maker": "0.00% (Zero maker fees)",
+        "spot_taker": "0.040%",
+        "fut_maker": "0.010% (Or negative rebate)",
+        "fut_taker": "0.035%",
+        "token_discount": "VIP tiers based on 30d volume",
+        "deposit_fee": "$0 (Deposit via Arbitrum USDC bridge)",
+        "withdrawal_fee": "$0 (Instant L1 to Arbitrum bridge)",
+        "max_leverage": "50x Leverage",
+        "order_types": "Market, Limit, Stop-Limit, TP/SL, Post-Only, Scale Orders, TWAP",
+        "copy_trading": "✅ Yes (Vault System: Copy Top Vault Managers)",
+        "trading_bots": "✅ High-frequency API, WebSocket Order Routing",
+        "por": "✅ 100% On-Chain Custom Tendermint Consensus L1",
+        "protection_fund": "✅ Hyperliquidity Provider (HLP) Multi-Million Vault",
+        "cold_storage": "100% Self-Custodial (Arbitrum Smart Bridge)",
+        "kyc": "Zero KYC (Connect Web3 Wallet)",
+        "licenses": "Decentralized Custom Layer-1 Blockchain",
+        "fiat_support": "USDC Base Asset (Crypto Bridge)",
+        "payment_methods": "Arbitrum USDC, MetaMask, Rabby, WalletConnect",
+        "min_deposit": "$5 USDC",
+        "mobile_app": "Mobile Responsive Web dApp",
+        "support": "Discord Support & High-Frequency Telegram Desk",
+        "response_time": "< 5 minutes",
+        "url": "https://hyperliquid.xyz",
+        "review_url": "../reviews/hyperliquid-review.html"
+    },
+    {
+        "slug": "pancakeswap",
+        "name": "PancakeSwap",
+        "type": "Decentralized (DEX)",
+        "is_dex": True,
+        "us_allowed": True,
+        "rating": 4.6,
+        "badge": "🥞 #1 BNB Chain AMM",
+        "country": "Decentralized (BNB Chain + Multichain)",
+        "founded": 2020,
+        "color": "#1fc7d4",
+        "bg_color": "#127c85",
+        "accent": "#00e8f7",
+        "coins_count": "4,000+ Tokens",
+        "pairs_count": "8,000+ Pools",
+        "spot_maker": "0.01% - 0.25% (V3 pools)",
+        "spot_taker": "0.01% - 0.25% (V3 pools)",
+        "fut_maker": "0.020% (PancakeSwap Perps)",
+        "fut_taker": "0.070% (PancakeSwap Perps)",
+        "token_discount": "Discounts with staked CAKE (veCAKE)",
+        "deposit_fee": "$0 (Self-custody)",
+        "withdrawal_fee": "$0 (Direct wallet settlement)",
+        "max_leverage": "100x (Perps Powered by ApolloX)",
+        "order_types": "Market Swap, V3 Concentrated Liquidity, Limit Orders",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Telegram Swap Bot & API",
+        "por": "✅ 100% On-Chain Smart Contracts (Audited by CertiK & SlowMist)",
+        "protection_fund": "✅ Non-Custodial Protocol",
+        "cold_storage": "100% Self-Custody (Trust Wallet, MetaMask, Ledger)",
+        "kyc": "Zero KYC (Non-Custodial)",
+        "licenses": "Open Source Smart Contracts, CAKE DAO Governance",
+        "fiat_support": "USD, EUR, GBP, BRL (Via integrated MoonPay / Transak)",
+        "payment_methods": "Web3 Wallets, Trust Wallet, MoonPay, Transak",
+        "min_deposit": "$0 (Pay network gas fees)",
+        "mobile_app": "Trust Wallet / Web3 Browser Integrations",
+        "support": "Discord, Telegram & Comprehensive Doc Hub",
+        "response_time": "< 10 minutes",
+        "url": "https://pancakeswap.finance",
+        "review_url": "../reviews/pancakeswap-review.html"
+    },
+    {
+        "slug": "raydium",
+        "name": "Raydium",
+        "type": "Decentralized (DEX)",
+        "is_dex": True,
+        "us_allowed": True,
+        "rating": 4.6,
+        "badge": "☀️ Solana Liquidity Hub",
+        "country": "Decentralized (Solana On-Chain)",
+        "founded": 2021,
+        "color": "#5c24ff",
+        "bg_color": "#1f0967",
+        "accent": "#00d2ff",
+        "coins_count": "3,000+ Solana Tokens",
+        "pairs_count": "5,000+ CLMM Pools",
+        "spot_maker": "0.01% - 0.25% (CLMM)",
+        "spot_taker": "0.01% - 0.25% (CLMM)",
+        "fut_maker": "N/A (Spot & Concentrated Liquidity)",
+        "fut_taker": "N/A (Spot & Concentrated Liquidity)",
+        "token_discount": "Staking RAY for yield and ecosystem governance",
+        "deposit_fee": "$0 (Self-custody)",
+        "withdrawal_fee": "$0 (Direct wallet settlement)",
+        "max_leverage": "1x (Spot AMM)",
+        "order_types": "Market Swaps, Concentrated Liquidity AMM, OpenBook Integration",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Solana DEX Bots (Trojan, Maestro, BONKbot)",
+        "por": "✅ 100% On-Chain Open Source Solana Programs",
+        "protection_fund": "✅ Non-Custodial Protocol",
+        "cold_storage": "100% Self-Custodial (Phantom, Solflare, Ledger)",
+        "kyc": "Zero KYC (Connect Solana Wallet)",
+        "licenses": "Open Source Smart Contracts, Raydium Community Governance",
+        "fiat_support": "USD (Via MoonPay integrations in wallets)",
+        "payment_methods": "Phantom, Solflare, Backpack, Ledger",
+        "min_deposit": "$0 (~$0.0005 SOL fee)",
+        "mobile_app": "Phantom & Solflare Mobile Apps",
+        "support": "Discord & Telegram Community",
+        "response_time": "< 10 minutes",
+        "url": "https://raydium.io",
+        "review_url": "../reviews/raydium-review.html"
+    },
+    {
+        "slug": "dydx",
+        "name": "dYdX",
+        "type": "Decentralized (DEX)",
+        "is_dex": True,
+        "us_allowed": False,
+        "rating": 4.6,
+        "badge": "📈 Standalone Cosmos Chain",
+        "country": "Decentralized (dYdX Chain / Cosmos)",
+        "founded": 2017,
+        "color": "#6966ff",
+        "bg_color": "#1b194b",
+        "accent": "#8f8cff",
+        "coins_count": "140+ Perpetual Contracts",
+        "pairs_count": "140+ Orderbook Markets",
+        "spot_maker": "N/A (Perpetuals Only)",
+        "spot_taker": "N/A (Perpetuals Only)",
+        "fut_maker": "0.010%",
+        "fut_taker": "0.050%",
+        "token_discount": "Discounts with DYDX staking & 30d volume",
+        "deposit_fee": "$0 (USDC bridge from Ethereum / Noble)",
+        "withdrawal_fee": "$0 (Instant Noble IBC / Ethereum bridge)",
+        "max_leverage": "50x Leverage",
+        "order_types": "Market, Limit, Stop-Limit, Trailing Stop, Post-Only, IOC, FOK",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ High-Speed Institutional Python/TS SDKs & API",
+        "por": "✅ 100% On-Chain Sovereign Proof-of-Stake Cosmos Chain",
+        "protection_fund": "✅ $50M+ dYdX Insurance Fund",
+        "cold_storage": "100% Self-Custodial (Noble Cosmos Staking)",
+        "kyc": "Zero KYC (Connect Web3 / Keplr Wallet)",
+        "licenses": "dYdX DAO Governance, Fully Open Source Cosmos SDK",
+        "fiat_support": "USDC (Native Noble USDC & Cross-chain Bridges)",
+        "payment_methods": "MetaMask, Keplr, Leap Wallet, Ledger",
+        "min_deposit": "$10 USDC",
+        "mobile_app": "dYdX iOS & Android App",
+        "support": "24/7 Discord Support & Institutional Telegram Channel",
+        "response_time": "< 5 minutes",
+        "url": "https://dydx.exchange",
+        "review_url": "../reviews/dydx-review.html"
+    },
+    {
+        "slug": "curve",
+        "name": "Curve Finance",
+        "type": "Decentralized (DEX)",
+        "is_dex": True,
+        "us_allowed": True,
+        "rating": 4.7,
+        "badge": "📉 Stablecoin Deep Liquidity",
+        "country": "Decentralized (Ethereum + 14 Chains)",
+        "founded": 2020,
+        "color": "#007aff",
+        "bg_color": "#002266",
+        "accent": "#ff9500",
+        "coins_count": "200+ Stablecoins & Pegged Assets",
+        "pairs_count": "500+ Stable Pools",
+        "spot_maker": "0.040% (Stable AMM fee)",
+        "spot_taker": "0.040% (Stable AMM fee)",
+        "fut_maker": "N/A (Stablecoin AMM + crvUSD lending)",
+        "fut_taker": "N/A (Stablecoin AMM + crvUSD lending)",
+        "token_discount": "50% protocol trading fees distributed to veCRV holders",
+        "deposit_fee": "$0 (Self-custody)",
+        "withdrawal_fee": "$0 (Direct wallet settlement)",
+        "max_leverage": "1x (crvUSD Soft-liquidation Lending)",
+        "order_types": "StableSwap, CryptoSwap (Curve V2), Cross-Asset Swaps",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ DeFi Arbitrage & Convex Finance Automated Vaults",
+        "por": "✅ 100% On-Chain Vyper Smart Contracts (Trail of Bits & MixBytes audited)",
+        "protection_fund": "✅ Non-Custodial / LLAMMA liquidation engine",
+        "cold_storage": "100% Self-Custodial (Hardware Wallets)",
+        "kyc": "Zero KYC (Web3 Wallet)",
+        "licenses": "Open Source Vyper Contracts, Curve DAO (veCRV)",
+        "fiat_support": "All pegged stablecoins (USDT, USDC, EURC, crvUSD, PYUSD)",
+        "payment_methods": "MetaMask, Rabby, Ledger, Trezor, Coinbase Wallet",
+        "min_deposit": "$0",
+        "mobile_app": "Web3 Mobile Wallet Integrations",
+        "support": "Discord, Telegram & Active Governance Forum",
+        "response_time": "< 10 minutes",
+        "url": "https://curve.fi",
+        "review_url": "../reviews/curve-review.html"
+    },
+    {
+        "slug": "aerodrome",
+        "name": "Aerodrome",
+        "type": "Decentralized (DEX)",
+        "is_dex": True,
+        "us_allowed": True,
+        "rating": 4.7,
+        "badge": "✈️ #1 Base DEX Hub",
+        "country": "Decentralized (Base L2 On-Chain)",
+        "founded": 2023,
+        "color": "#0052ff",
+        "bg_color": "#001f66",
+        "accent": "#00d2ff",
+        "coins_count": "500+ Base Tokens",
+        "pairs_count": "1,200+ ve(3,3) Pools",
+        "spot_maker": "0.05% - 0.30% (Volatile / Stable)",
+        "spot_taker": "0.05% - 0.30% (Volatile / Stable)",
+        "fut_maker": "N/A (Spot ve(3,3) AMM)",
+        "fut_taker": "N/A (Spot ve(3,3) AMM)",
+        "token_discount": "100% fees & bribes voted by veAERO holders",
+        "deposit_fee": "$0 (Self-custody on Base L2)",
+        "withdrawal_fee": "$0 (Direct wallet settlement)",
+        "max_leverage": "1x (Spot AMM)",
+        "order_types": "Slipstream Concentrated Liquidity, Stable AMM Swaps",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Base Ecosystem Trading Bots & Autocompounders",
+        "por": "✅ 100% On-Chain Base Smart Contracts (Audited by OpenZeppelin)",
+        "protection_fund": "✅ Non-Custodial Protocol",
+        "cold_storage": "100% Self-Custodial (Coinbase Smart Wallet, MetaMask)",
+        "kyc": "Zero KYC (Connect Web3 Wallet)",
+        "licenses": "Open Source Smart Contracts, Aerodrome DAO",
+        "fiat_support": "USD (Via Coinbase Smart Wallet / Apple Pay on Base)",
+        "payment_methods": "Coinbase Wallet, MetaMask, Rabby, Apple Pay",
+        "min_deposit": "$0 (< $0.01 Base L2 gas fee)",
+        "mobile_app": "Coinbase Wallet & Zerion Mobile",
+        "support": "Discord Community & Active Telegram",
+        "response_time": "< 10 minutes",
+        "url": "https://aerodrome.finance",
+        "review_url": "../reviews/aerodrome-review.html"
+    },
+    {
+        "slug": "orca",
+        "name": "Orca",
+        "type": "Decentralized (DEX)",
+        "is_dex": True,
+        "us_allowed": True,
+        "rating": 4.6,
+        "badge": "🐋 Most User-Friendly DEX",
+        "country": "Decentralized (Solana On-Chain)",
+        "founded": 2021,
+        "color": "#ffb800",
+        "bg_color": "#e07a00",
+        "accent": "#ffd54f",
+        "coins_count": "1,500+ Solana Tokens",
+        "pairs_count": "2,500+ Whirlpools",
+        "spot_maker": "0.01% - 0.30% (Whirlpools)",
+        "spot_taker": "0.01% - 0.30% (Whirlpools)",
+        "fut_maker": "N/A (Spot Whirlpool AMM)",
+        "fut_taker": "N/A (Spot Whirlpool AMM)",
+        "token_discount": "Climate Impact Fund donation per trade",
+        "deposit_fee": "$0 (Self-custody)",
+        "withdrawal_fee": "$0 (Direct wallet settlement)",
+        "max_leverage": "1x (Spot Only)",
+        "order_types": "Whirlpool Concentrated Liquidity Swaps",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Orca Developer Whirlpool SDK & Python Client",
+        "por": "✅ 100% On-Chain Solana Programs (Audited by Kudelski & Neodyme)",
+        "protection_fund": "✅ Non-Custodial Protocol",
+        "cold_storage": "100% Self-Custodial (Phantom, Solflare, Ledger)",
+        "kyc": "Zero KYC (Connect Solana Wallet)",
+        "licenses": "Open Source Anchor Programs, Orca Governance DAO",
+        "fiat_support": "USD (Via MoonPay / Stripe in Solana wallets)",
+        "payment_methods": "Phantom, Solflare, Backpack, Ledger",
+        "min_deposit": "$0 (~$0.0005 SOL network fee)",
+        "mobile_app": "Phantom & Solflare Mobile Apps",
+        "support": "Discord Support & Developer Docs",
+        "response_time": "< 10 minutes",
+        "url": "https://www.orca.so",
+        "review_url": "../reviews/orca-review.html"
+    },
+    {
+        "slug": "meteora",
+        "name": "Meteora",
+        "type": "Decentralized (DEX)",
+        "is_dex": True,
+        "us_allowed": True,
+        "rating": 4.5,
+        "badge": "☄️ Dynamic DLMM Vaults",
+        "country": "Decentralized (Solana On-Chain)",
+        "founded": 2022,
+        "color": "#ff5d00",
+        "bg_color": "#2d1200",
+        "accent": "#ff8438",
+        "coins_count": "2,000+ Solana Tokens",
+        "pairs_count": "3,000+ DLMM Pools",
+        "spot_maker": "0.05% - 0.50% (Dynamic Fee)",
+        "spot_taker": "0.05% - 0.50% (Dynamic Fee)",
+        "fut_maker": "N/A (Spot DLMM)",
+        "fut_taker": "N/A (Spot DLMM)",
+        "token_discount": "Dynamic fees that scale with volatility",
+        "deposit_fee": "$0 (Self-custody)",
+        "withdrawal_fee": "$0 (Direct wallet settlement)",
+        "max_leverage": "1x (Spot AMM)",
+        "order_types": "Dynamic Liquidity Market Maker (DLMM) Bin Swaps",
+        "copy_trading": "❌ No",
+        "trading_bots": "✅ Kamino & DLMM Auto-rebalancing Vaults",
+        "por": "✅ 100% On-Chain Solana Programs (Audited by OffSec & OtterSec)",
+        "protection_fund": "✅ Non-Custodial Protocol",
+        "cold_storage": "100% Self-Custodial (Hardware Wallets)",
+        "kyc": "Zero KYC (Connect Solana Wallet)",
+        "licenses": "Open Source Anchor Programs, MET DAO",
+        "fiat_support": "USD (Via wallet on-ramps)",
+        "payment_methods": "Phantom, Solflare, Backpack, Ledger",
+        "min_deposit": "$0",
+        "mobile_app": "Solana Mobile Wallet dApps",
+        "support": "Discord Community & Developer Telegram",
+        "response_time": "< 10 minutes",
+        "url": "https://meteora.ag",
+        "review_url": "../reviews/meteora-review.html"
+    }
+]
+
+exchanges_json = json.dumps(exchanges, indent=2)
+
+html_template = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compare Crypto Exchanges (2026) – Fees, Leverage, PoR & Features | HowToCrypt</title>
+<meta name="description" content="Side-by-side crypto exchange comparison tool. Compare any 2 to 4 exchanges across 25+ parameters: spot & futures fees, leverage, Proof of Reserves, copy trading, and licenses.">
+<meta property="og:title" content="Compare Crypto Exchanges (2026) – Interactive Side-by-Side Tool | HowToCrypt">
+<meta property="og:description" content="Select and compare top centralized and decentralized crypto exchanges side-by-side across fees, security, leverage, and features.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://howtocrypt.com/compare/">
+<style>
+  :root {{
+    --navy: #1e3a5f;
+    --orange: #ff6b35;
+    --light: #f4f7fb;
+    --text: #2c3e50;
+    --muted: #6b7c93;
+    --white: #fff;
+    --border: #dde3ed;
+    --green: #22c55e;
+    --red: #ef4444;
+  }}
+  * {{box-sizing:border-box;margin:0;padding:0}}
+  body {{font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);background:var(--light);line-height:1.5}}
+  a {{color:inherit;text-decoration:none}}
+
+  /* NAV */
+  nav {{background:var(--navy);position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,.2)}}
+  .nav-inner {{max-width:1300px;margin:auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px}}
+  .logo {{color:#fff;font-size:1.4rem;font-weight:800}}
+  .logo span {{color:var(--orange)}}
+  .nav-links {{display:flex;gap:28px;list-style:none}}
+  .nav-links a {{color:rgba(255,255,255,.85);font-size:.93rem;font-weight:500;transition:color .2s}}
+  .nav-links a:hover, .nav-links a.active {{color:#fff}}
+  .nav-cta {{background:var(--orange);color:#fff!important;padding:8px 18px;border-radius:6px;font-weight:700!important}}
+  .hamburger {{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}}
+  .hamburger span {{width:24px;height:2px;background:#fff;border-radius:2px;display:block}}
+
+  /* HERO */
+  .compare-hero {{background:linear-gradient(135deg,var(--navy) 0%,#0f2240 100%);color:#fff;padding:48px 20px 36px;text-align:center}}
+  .compare-hero-inner {{max-width:900px;margin:auto}}
+  .compare-hero h1 {{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;margin-bottom:12px}}
+  .compare-hero h1 span {{color:var(--orange)}}
+  .compare-hero p {{color:rgba(255,255,255,.8);font-size:1rem;margin-bottom:24px;max-width:700px;margin-left:auto;margin-right:auto}}
+  
+  /* PRESET BUTTONS */
+  .presets-wrap {{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}}
+  .preset-label {{font-size:.8rem;color:rgba(255,255,255,.65);font-weight:600;margin-right:4px}}
+  .preset-chip {{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:.78rem;padding:6px 14px;border-radius:20px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:4px}}
+  .preset-chip:hover {{background:var(--orange);border-color:var(--orange);transform:translateY(-1px)}}
+
+  /* MAIN WRAPPER */
+  .main-wrap {{max-width:1300px;margin:30px auto 60px;padding:0 20px}}
+
+  /* TOOLBAR CONTROLS */
+  .controls-bar {{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px;box-shadow:0 4px 16px rgba(0,0,0,.03)}}
+  .controls-left {{display:flex;align-items:center;gap:16px;flex-wrap:wrap}}
+  .toggle-diff-wrap {{display:flex;align-items:center;gap:8px;font-size:.88rem;font-weight:600;color:var(--navy);cursor:pointer}}
+  .toggle-switch {{position:relative;width:44px;height:24px;display:inline-block}}
+  .toggle-switch input {{opacity:0;width:0;height:0}}
+  .toggle-slider {{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#cbd5e1;transition:.3s;border-radius:24px}}
+  .toggle-slider:before {{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background-color:white;transition:.3s;border-radius:50%}}
+  input:checked + .toggle-slider {{background-color:var(--orange)}}
+  input:checked + .toggle-slider:before {{transform:translateX(20px)}}
+
+  .category-pills {{display:flex;gap:6px;flex-wrap:wrap}}
+  .cat-pill {{font-size:.78rem;font-weight:600;padding:6px 12px;border-radius:6px;background:var(--light);border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .15s}}
+  .cat-pill:hover, .cat-pill.active {{background:var(--navy);color:#fff;border-color:var(--navy)}}
+
+  .share-btn {{background:none;border:1px solid var(--border);padding:8px 14px;border-radius:8px;font-size:.84rem;font-weight:600;color:var(--navy);cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s}}
+  .share-btn:hover {{border-color:var(--navy);background:var(--light)}}
+
+  /* COMPARISON TABLE CONTAINER */
+  .table-container {{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 6px 24px rgba(30,58,95,.06);position:relative}}
+  .table-scroll {{overflow-x:auto;width:100%}}
+  
+  table.compare-table {{width:100%;border-collapse:collapse;min-width:760px;table-layout:fixed}}
+  
+  /* COLUMN SIZING */
+  .col-param {{width:240px;background:#fbfcfe;border-right:1px solid var(--border)}}
+  .col-exch {{min-width:240px;border-right:1px solid var(--border)}}
+  .col-exch:last-child {{border-right:none}}
+
+  /* HEADER STYLES */
+  thead th {{vertical-align:top;padding:0;background:#fff;position:sticky;top:64px;z-index:30}}
+  
+  .param-header-box {{padding:24px 20px;height:100%;display:flex;flex-direction:column;justify-content:center}}
+  .param-header-title {{font-size:1.1rem;font-weight:800;color:var(--navy);margin-bottom:4px}}
+  .param-header-sub {{font-size:.8rem;color:var(--muted)}}
+
+  .exch-header-card {{padding:20px 16px;position:relative;border-top:4px solid var(--brand, var(--orange));background:#fff;transition:background .2s}}
+  .exch-header-top {{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:12px}}
+  .exch-logo-wrap {{width:48px;height:48px;border-radius:10px;background:#fff;border:1.5px solid var(--border);padding:4px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}}
+  .exch-logo-img {{width:100%;height:100%;object-fit:contain;border-radius:6px}}
+  
+  .exch-selector-btn {{background:var(--light);border:1px solid var(--border);padding:4px 8px;border-radius:6px;font-size:.75rem;font-weight:600;color:var(--navy);cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:4px}}
+  .exch-selector-btn:hover {{background:var(--navy);color:#fff;border-color:var(--navy)}}
+
+  .remove-col-btn {{background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;padding:0 4px;line-height:1;transition:color .2s}}
+  .remove-col-btn:hover {{color:var(--red)}}
+
+  .exch-name-box {{margin-bottom:10px}}
+  .exch-name-title {{font-size:1.15rem;font-weight:900;color:var(--navy);display:flex;align-items:center;gap:6px}}
+  .exch-badge-tag {{font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:12px;background:rgba(255,107,53,.12);color:var(--orange);display:inline-block;margin-top:4px}}
+  
+  .exch-rating-row {{display:flex;align-items:center;gap:6px;margin-bottom:12px}}
+  .exch-stars {{color:#f5a623;font-size:.9rem}}
+  .exch-score-num {{font-weight:800;font-size:.95rem;color:var(--navy)}}
+
+  .exch-cta-row {{display:flex;gap:6px;flex-direction:column}}
+  .btn-tbl-primary {{background:var(--orange);color:#fff;padding:8px 12px;border-radius:6px;font-size:.82rem;font-weight:700;text-align:center;transition:all .15s}}
+  .btn-tbl-primary:hover {{transform:translateY(-1px);box-shadow:0 4px 12px rgba(255,107,53,.35)}}
+  .btn-tbl-outline {{background:none;border:1px solid var(--navy);color:var(--navy);padding:6px 12px;border-radius:6px;font-size:.78rem;font-weight:600;text-align:center;transition:all .15s}}
+  .btn-tbl-outline:hover {{background:var(--navy);color:#fff}}
+
+  /* EMPTY COLUMN / ADD EXCHANGE SLOT */
+  .add-col-card {{padding:36px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:220px;background:var(--light);border:2px dashed var(--border);border-radius:12px;margin:10px;cursor:pointer;transition:all .2s}}
+  .add-col-card:hover {{border-color:var(--navy);background:#fff}}
+  .add-col-icon {{font-size:2rem;margin-bottom:8px;color:var(--navy)}}
+  .add-col-text {{font-size:.9rem;font-weight:700;color:var(--navy)}}
+  .add-col-sub {{font-size:.75rem;color:var(--muted);margin-top:2px}}
+
+  /* SECTION ROW HEADER */
+  .section-row td {{background:#f1f5f9;padding:12px 20px;font-size:.85rem;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}}
+  .section-row .sec-icon {{margin-right:6px;font-size:1rem}}
+
+  /* DATA ROWS */
+  tbody tr {{border-bottom:1px solid var(--border);transition:background .15s}}
+  tbody tr:hover {{background:#f8fafc}}
+  tbody tr.diff-row {{background:#fffdfa}}
+
+  td.param-title-cell {{padding:14px 20px;background:#fbfcfe;font-weight:700;font-size:.88rem;color:var(--navy);border-right:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px}}
+  .param-info-tip {{font-size:.74rem;color:var(--muted);cursor:help;border-radius:50%;width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;background:#e2e8f0}}
+
+  td.val-cell {{padding:14px 18px;font-size:.88rem;color:var(--text);border-right:1px solid var(--border);vertical-align:middle}}
+  td.val-cell:last-child {{border-right:none}}
+  
+  .val-highlight-good {{color:#16a34a;font-weight:700}}
+  .val-highlight-bad {{color:#dc2626;font-weight:600}}
+  .val-badge {{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.76rem;font-weight:700;background:#e2e8f0;color:var(--navy)}}
+  .val-badge-green {{background:#dcfce7;color:#15803d}}
+  .val-badge-red {{background:#fee2e2;color:#b91c1c}}
+
+  /* MODAL SELECTOR */
+  .modal-backdrop {{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,34,64,.6);backdrop-filter:blur(4px);z-index:500;align-items:center;justify-content:center;padding:20px}}
+  .modal-backdrop.open {{display:flex}}
+  .modal-box {{background:#fff;border-radius:16px;width:100%;max-width:540px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 20px 48px rgba(0,0,0,.25);overflow:hidden;animation:modalPop .2s ease-out}}
+  @keyframes modalPop {{from {{transform:scale(0.95);opacity:0}} to {{transform:scale(1);opacity:1}}}}
+  
+  .modal-header {{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}}
+  .modal-title {{font-size:1.1rem;font-weight:800;color:var(--navy)}}
+  .modal-close {{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--muted);line-height:1}}
+  .modal-close:hover {{color:var(--navy)}}
+  
+  .modal-search-wrap {{padding:12px 22px;background:#f8fafc;border-bottom:1px solid var(--border)}}
+  .modal-search {{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:.9rem;outline:none}}
+  .modal-search:focus {{border-color:var(--orange)}}
+  
+  .modal-filter-tabs {{display:flex;gap:6px;margin-top:10px}}
+  .m-tab {{font-size:.76rem;font-weight:600;padding:4px 10px;border-radius:6px;background:#fff;border:1px solid var(--border);cursor:pointer}}
+  .m-tab.active {{background:var(--navy);color:#fff;border-color:var(--navy)}}
+
+  .modal-list {{overflow-y:auto;padding:12px 16px;flex:1}}
+  .modal-item {{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:background .15s;border-bottom:1px solid #f1f5f9}}
+  .modal-item:hover {{background:var(--light)}}
+  .modal-item.selected {{background:#fef3eb;border-color:var(--orange)}}
+  .modal-item-img {{width:36px;height:36px;border-radius:8px;border:1px solid var(--border);padding:3px;background:#fff;flex-shrink:0}}
+  .modal-item-info {{flex:1}}
+  .modal-item-name {{font-weight:700;font-size:.92rem;color:var(--navy);display:flex;align-items:center;gap:6px}}
+  .modal-item-sub {{font-size:.78rem;color:var(--muted)}}
+  .modal-item-badge {{font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:10px;background:#e2e8f0;color:var(--navy)}}
+
+  /* FOOTER */
+  footer {{background:#0f2240;color:rgba(255,255,255,.7);padding:48px 20px 24px;margin-top:80px}}
+  .footer-inner {{max-width:1300px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.1)}}
+  .footer-bottom {{max-width:1300px;margin:20px auto 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.78rem}}
+  .fdisclosure {{max-width:1300px;margin:14px auto 0;font-size:.74rem;color:rgba(255,255,255,.45);line-height:1.5}}
+
+  /* TOAST */
+  .toast {{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:12px 20px;border-radius:8px;font-size:.88rem;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.2);display:none;z-index:900;animation:toastIn .2s}}
+  @keyframes toastIn {{from {{transform:translateY(20px);opacity:0}} to {{transform:translateY(0);opacity:1}}}}
+
+  /* RESPONSIVE */
+  @media(max-width:768px) {{
+    .nav-links {{display:none;position:absolute;top:64px;left:0;right:0;background:var(--navy);flex-direction:column;padding:20px;gap:12px}}
+    .nav-links.open {{display:flex}}
+    .hamburger {{display:flex}}
+    .col-param {{width:160px}}
+    .col-exch {{min-width:200px}}
+  }}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="../index.html">HowTo<span>Crypt</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../guides/index.html">Guides</a></li>
+      <li><a href="index.html" class="active">Compare</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../index.html#top-picks" class="nav-cta">Start Trading</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="compare-hero">
+  <div class="compare-hero-inner">
+    <h1>Compare Crypto Exchanges <span>Side-by-Side</span></h1>
+    <p>Select any 2 to 4 centralized and decentralized platforms to compare trading fees, max leverage, Proof of Reserves, copy trading, and regulatory licenses.</p>
+    
+    <div class="presets-wrap">
+      <span class="preset-label">Popular Matchups:</span>
+      <button class="preset-chip" onclick="setMatchup(['bybit', 'binance'])">⚔️ Bybit vs Binance</button>
+      <button class="preset-chip" onclick="setMatchup(['coinbase', 'kraken'])">⚔️ Coinbase vs Kraken</button>
+      <button class="preset-chip" onclick="setMatchup(['bybit', 'bitget'])">⚔️ Bybit vs Bitget</button>
+      <button class="preset-chip" onclick="setMatchup(['uniswap', 'jupiter'])">⚔️ Uniswap vs Jupiter</button>
+      <button class="preset-chip" onclick="setMatchup(['hyperliquid', 'dydx'])">⚔️ Hyperliquid vs dYdX</button>
+      <button class="preset-chip" onclick="setMatchup(['binance', 'bybit', 'coinbase', 'kraken'])">⚡ Top 4 CEXs</button>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN APP CONTAINER -->
+<main class="main-wrap">
+
+  <!-- CONTROLS TOOLBAR -->
+  <div class="controls-bar">
+    <div class="controls-left">
+      <label class="toggle-diff-wrap" title="Highlight rows where exchange parameters differ">
+        <span class="toggle-switch">
+          <input type="checkbox" id="diffToggle" onchange="toggleDiffMode()">
+          <span class="toggle-slider"></span>
+        </span>
+        <span>Highlight Differences Only</span>
+      </label>
+
+      <div class="category-pills">
+        <button class="cat-pill active" onclick="scrollToSection('sec-overview')">Overview</button>
+        <button class="cat-pill" onclick="scrollToSection('sec-fees')">Fees & Costs</button>
+        <button class="cat-pill" onclick="scrollToSection('sec-trading')">Trading Features</button>
+        <button class="cat-pill" onclick="scrollToSection('sec-security')">Security & Reserves</button>
+        <button class="cat-pill" onclick="scrollToSection('sec-fiat')">Fiat & Banking</button>
+      </div>
+    </div>
+
+    <div>
+      <button class="share-btn" onclick="copyShareUrl()">
+        <span>🔗 Share Comparison</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="table-container">
+    <div class="table-scroll">
+      <table class="compare-table" id="compareTable">
+        <!-- Built Dynamically via JS -->
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<!-- MODAL EXCHANGE PICKER -->
+<div class="modal-backdrop" id="pickerModal" onclick="closeModalOnBackdrop(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modalTitle">Select Exchange to Compare</h3>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-search-wrap">
+      <input type="text" class="modal-search" id="modalSearchInput" placeholder="Search by name (e.g. Bybit, Coinbase, Jupiter)..." oninput="filterModalList()">
+      <div class="modal-filter-tabs">
+        <button class="m-tab active" data-mfilter="all" onclick="setModalFilter('all')">All (35)</button>
+        <button class="m-tab" data-mfilter="cex" onclick="setModalFilter('cex')">Centralized (CEX)</button>
+        <button class="m-tab" data-mfilter="dex" onclick="setModalFilter('dex')">Decentralized (DEX)</button>
+        <button class="m-tab" data-mfilter="us" onclick="setModalFilter('us')">🇺🇸 US Allowed</button>
+      </div>
+    </div>
+    <div class="modal-list" id="modalList">
+      <!-- Populated dynamically by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">Comparison link copied to clipboard!</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a class="logo" href="../index.html">HowTo<span>Crypt</span></a>
+    <span style="font-size:.82rem">Independent, data-driven cryptocurrency exchange comparisons since 2018.</span>
+    <div style="display:flex;gap:20px;font-size:.82rem">
+      <a href="../index.html" style="transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color=''">Home</a>
+      <a href="../exchanges.html" style="transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color=''">Rankings</a>
+      <a href="../about.html" style="transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color=''">About</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 HowToCrypt. All rights reserved.</span>
+    <span>Not financial advice. For informational purposes only.</span>
+  </div>
+  <p class="fdisclosure">⚠️ Affiliate Disclosure: HowToCrypt may receive compensation when you sign up using exchange links. This never impacts editorial integrity or algorithmic ratings. Cryptocurrency investments carry significant capital risk.</p>
+</footer>
+
+<script>
+// All 35 exchanges dataset
+const EXCHANGES_DATA = {exchanges_json};
+
+// Active selected slugs (Default to 3 top choices)
+let activeSlugs = ['bybit', 'binance', 'coinbase'];
+let targetSlotIndex = null;
+let currentModalFilter = 'all';
+
+// Parameter definitions categorized
+const PARAM_SECTIONS = [
+  {{
+    id: 'sec-overview',
+    title: 'Platform Overview & Scores',
+    icon: '📊',
+    params: [
+      {{ key: 'type', label: 'Exchange Type', tip: 'Centralized custodial exchange or on-chain decentralized protocol' }},
+      {{ key: 'rating', label: 'Overall Rating', format: (v) => '★ ' + v + ' / 5.0' }},
+      {{ key: 'badge', label: 'Editorial Award', format: (v) => '<span class="val-badge">' + v + '</span>' }},
+      {{ key: 'country', label: 'HQ / Primary Chain' }},
+      {{ key: 'founded', label: 'Year Launched' }},
+      {{ key: 'us_allowed', label: 'US Residents Permitted', format: (v) => v ? '<span class="val-badge val-badge-green">✅ US Permitted</span>' : '<span class="val-badge val-badge-red">❌ Restricted / Non-US</span>' }},
+      {{ key: 'mobile_app', label: 'Mobile Apps' }}
+    ]
+  }},
+  {{
+    id: 'sec-fees',
+    title: 'Trading Fees & Cost Structure',
+    icon: '💰',
+    params: [
+      {{ key: 'spot_maker', label: 'Spot Maker Fee', highlightGood: (v) => v.includes('0.00%') || v.includes('-0.02%') }},
+      {{ key: 'spot_taker', label: 'Spot Taker Fee' }},
+      {{ key: 'fut_maker', label: 'Futures Maker Fee', highlightGood: (v) => v.includes('0.010%') || v.includes('0.000%') }},
+      {{ key: 'fut_taker', label: 'Futures Taker Fee' }},
+      {{ key: 'token_discount', label: 'Native Token Discount' }},
+      {{ key: 'deposit_fee', label: 'Deposit Fees' }},
+      {{ key: 'withdrawal_fee', label: 'Withdrawal Fees' }}
+    ]
+  }},
+  {{
+    id: 'sec-trading',
+    title: 'Trading Products & Features',
+    icon: '📈',
+    params: [
+      {{ key: 'coins_count', label: 'Cryptocurrencies Listed' }},
+      {{ key: 'pairs_count', label: 'Total Trading Pairs' }},
+      {{ key: 'max_leverage', label: 'Maximum Leverage', format: (v) => '<strong>' + v + '</strong>' }},
+      {{ key: 'order_types', label: 'Order Types Supported' }},
+      {{ key: 'copy_trading', label: 'Copy Trading Support' }},
+      {{ key: 'trading_bots', label: 'Automated Trading Bots' }}
+    ]
+  }},
+  {{
+    id: 'sec-security',
+    title: 'Security, Reserves & Regulation',
+    icon: '🛡️',
+    params: [
+      {{ key: 'por', label: 'Proof of Reserves (PoR)' }},
+      {{ key: 'protection_fund', label: 'Insurance & Reserve Fund' }},
+      {{ key: 'cold_storage', label: 'Cold Storage Vault Ratio' }},
+      {{ key: 'kyc', label: 'KYC Identity Verification' }},
+      {{ key: 'licenses', label: 'Regulatory Licenses / Audits' }}
+    ]
+  }},
+  {{
+    id: 'sec-fiat',
+    title: 'Fiat Banking & Payment Methods',
+    icon: '💳',
+    params: [
+      {{ key: 'fiat_support', label: 'Fiat Currencies Supported' }},
+      {{ key: 'payment_methods', label: 'Supported Payment Rails' }},
+      {{ key: 'min_deposit', label: 'Minimum Deposit' }}
+    ]
+  }},
+  {{
+    id: 'sec-support',
+    title: 'Customer Support & SLA',
+    icon: '🎧',
+    params: [
+      {{ key: 'support', label: 'Support Channels' }},
+      {{ key: 'response_time', label: 'Average Response Time' }}
+    ]
+  }}
+];
+
+// Initialize on page load
+function init() {{
+  parseUrlParams();
+  renderComparisonTable();
+}}
+
+// Parse query param: ?compare=bybit,binance,coinbase
+function parseUrlParams() {{
+  const params = new URLSearchParams(window.location.search);
+  const compParam = params.get('compare') || params.get('exchanges');
+  if (compParam) {{
+    const slugs = compParam.split(',').map(s => s.trim().toLowerCase()).filter(s => EXCHANGES_DATA.some(e => e.slug === s));
+    if (slugs.length >= 2) {{
+      activeSlugs = slugs.slice(0, 4);
+    }}
+  }}
+}}
+
+// Update URL without full reload
+function updateUrl() {{
+  const newUrl = window.location.pathname + '?compare=' + activeSlugs.join(',');
+  window.history.replaceState({{}}, '', newUrl);
+}}
+
+// Render the entire comparison table
+function renderComparisonTable() {{
+  updateUrl();
+  const table = document.getElementById('compareTable');
+  const selectedExchs = activeSlugs.map(s => EXCHANGES_DATA.find(e => e.slug === s)).filter(Boolean);
+  const diffOnly = document.getElementById('diffToggle').checked;
+
+  let colWidthPercent = Math.floor(75 / (selectedExchs.length + (selectedExchs.length < 4 ? 1 : 0)));
+
+  // THEAD
+  let theadHtml = '<thead><tr>';
+  theadHtml += `<th class="col-param"><div class="param-header-box"><div class="param-header-title">Comparison Matrix</div><div class="param-header-sub">Comparing ${{selectedExchs.length}} Platforms</div></div></th>`;
+
+  selectedExchs.forEach((ex, idx) => {{
+    theadHtml += `<th class="col-exch" style="--brand:${{ex.color}}">
+      <div class="exch-header-card">
+        <div class="exch-header-top">
+          <div class="exch-logo-wrap">
+            <img class="exch-logo-img" src="../images/${{ex.slug}}.svg" alt="${{ex.name}} logo">
+          </div>
+          <div style="display:flex;gap:4px;align-items:center">
+            <button class="exch-selector-btn" onclick="openPickerModal(${{idx}})" title="Change exchange">⇄ Change</button>
+            ${{selectedExchs.length > 2 ? `<button class="remove-col-btn" onclick="removeExchange(${{idx}})" title="Remove column">&times;</button>` : ''}}
+          </div>
+        </div>
+        <div class="exch-name-box">
+          <div class="exch-name-title">${{ex.name}}</div>
+          <span class="exch-badge-tag">${{ex.badge}}</span>
+        </div>
+        <div class="exch-rating-row">
+          <span class="exch-stars">★★★★★</span>
+          <span class="exch-score-num">${{ex.rating}} / 5</span>
+        </div>
+        <div class="exch-cta-row">
+          <a class="btn-tbl-primary" href="${{ex.url}}" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+          <a class="btn-tbl-outline" href="${{ex.review_url}}">Full Review →</a>
+        </div>
+      </div>
+    </th>`;
+  }});
+
+  // Add "+" column if less than 4
+  if (selectedExchs.length < 4) {{
+    theadHtml += `<th class="col-exch">
+      <div class="add-col-card" onclick="openPickerModal(${{selectedExchs.length}})">
+        <div class="add-col-icon">＋</div>
+        <div class="add-col-text">Add Exchange</div>
+        <div class="add-col-sub">Compare up to 4</div>
+      </div>
+    </th>`;
+  }}
+
+  theadHtml += '</tr></thead>';
+
+  // TBODY
+  let tbodyHtml = '<tbody>';
+
+  PARAM_SECTIONS.forEach(section => {{
+    // Section Title Row
+    const totalCols = selectedExchs.length + (selectedExchs.length < 4 ? 1 : 0) + 1;
+    let sectionRowsHtml = '';
+
+    section.params.forEach(p => {{
+      const vals = selectedExchs.map(e => e[p.key]);
+      const isDiff = new Set(vals.map(v => String(v).trim().toLowerCase())).size > 1;
+
+      if (diffOnly && !isDiff) {{
+        return; // Skip identical rows if diffOnly is toggled
+      }}
+
+      sectionRowsHtml += `<tr class="${{isDiff ? 'diff-row' : ''}}">`;
+      sectionRowsHtml += `<td class="param-title-cell">
+        <span>${{p.label}}</span>
+        ${{p.tip ? `<span class="param-info-tip" title="${{p.tip}}">?</span>` : ''}}
+      </td>`;
+
+      selectedExchs.forEach(ex => {{
+        let rawVal = ex[p.key];
+        let formattedVal = p.format ? p.format(rawVal, ex) : String(rawVal);
+        let highlightClass = p.highlightGood && p.highlightGood(String(rawVal)) ? 'val-highlight-good' : '';
+
+        sectionRowsHtml += `<td class="val-cell ${{highlightClass}}">${{formattedVal}}</td>`;
+      }});
+
+      if (selectedExchs.length < 4) {{
+        sectionRowsHtml += `<td class="val-cell" style="background:#fbfcfe"></td>`;
+      }}
+
+      sectionRowsHtml += '</tr>';
+    }});
+
+    if (sectionRowsHtml) {{
+      tbodyHtml += `<tr class="section-row" id="${{section.id}}">
+        <td colspan="${{totalCols}}"><span class="sec-icon">${{section.icon}}</span> ${{section.title}}</td>
+      </tr>`;
+      tbodyHtml += sectionRowsHtml;
+    }}
+  }});
+
+  tbodyHtml += '</tbody>';
+
+  table.innerHTML = theadHtml + tbodyHtml;
+}}
+
+// Preset Matchup Click
+function setMatchup(slugs) {{
+  activeSlugs = slugs.slice(0, 4);
+  renderComparisonTable();
+  window.scrollTo({{top: 360, behavior: 'smooth'}});
+}}
+
+// Remove column
+function removeExchange(index) {{
+  if (activeSlugs.length > 2) {{
+    activeSlugs.splice(index, 1);
+    renderComparisonTable();
+  }}
+}}
+
+// Modal Picker Handling
+function openPickerModal(slotIndex) {{
+  targetSlotIndex = slotIndex;
+  document.getElementById('modalSearchInput').value = '';
+  document.getElementById('pickerModal').classList.add('open');
+  renderModalList();
+  setTimeout(() => document.getElementById('modalSearchInput').focus(), 50);
+}}
+
+function closeModal() {{
+  document.getElementById('pickerModal').classList.remove('open');
+  targetSlotIndex = null;
+}}
+
+function closeModalOnBackdrop(e) {{
+  if (e.target.id === 'pickerModal') closeModal();
+}}
+
+function setModalFilter(filter) {{
+  currentModalFilter = filter;
+  document.querySelectorAll('.m-tab').forEach(b => b.classList.toggle('active', b.dataset.mfilter === filter));
+  renderModalList();
+}}
+
+function filterModalList() {{
+  renderModalList();
+}}
+
+function renderModalList() {{
+  const query = (document.getElementById('modalSearchInput').value || '').toLowerCase().trim();
+  const listEl = document.getElementById('modalList');
+  
+  let filtered = EXCHANGES_DATA.filter(item => {{
+    if (currentModalFilter === 'cex' && item.is_dex) return false;
+    if (currentModalFilter === 'dex' && !item.is_dex) return false;
+    if (currentModalFilter === 'us' && !item.us_allowed) return false;
+    if (query && !item.name.toLowerCase().includes(query) && !item.category.toLowerCase().includes(query)) return false;
+    return true;
+  }});
+
+  if (filtered.length === 0) {{
+    listEl.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted)">No matching exchanges found.</div>`;
+    return;
+  }}
+
+  let html = '';
+  filtered.forEach(ex => {{
+    const isAlreadySelected = activeSlugs.includes(ex.slug);
+    html += `<div class="modal-item ${{isAlreadySelected ? 'selected' : ''}}" onclick="selectExchange('${{ex.slug}}')">
+      <img class="modal-item-img" src="../images/${{ex.slug}}.svg" alt="${{ex.name}}">
+      <div class="modal-item-info">
+        <div class="modal-item-name">${{ex.name}} ${{isAlreadySelected ? '<span style="color:var(--orange);font-size:.75rem">● (Active)</span>' : ''}}</div>
+        <div class="modal-item-sub">${{ex.type}} · ${{ex.country}}</div>
+      </div>
+      <span class="modal-item-badge">★ ${{ex.rating}}</span>
+    </div>`;
+  }});
+
+  listEl.innerHTML = html;
+}}
+
+function selectExchange(slug) {{
+  if (targetSlotIndex !== null) {{
+    if (targetSlotIndex < activeSlugs.length) {{
+      activeSlugs[targetSlotIndex] = slug;
+    }} else if (activeSlugs.length < 4) {{
+      activeSlugs.push(slug);
+    }}
+    // Remove duplicates while keeping order
+    activeSlugs = [...new Set(activeSlugs)];
+    if (activeSlugs.length < 2) {{
+      // Keep minimum 2
+      const fallback = EXCHANGES_DATA.find(e => !activeSlugs.includes(e.slug));
+      if (fallback) activeSlugs.push(fallback.slug);
+    }}
+    renderComparisonTable();
+    closeModal();
+  }}
+}}
+
+// Diff mode toggle
+function toggleDiffMode() {{
+  renderComparisonTable();
+}}
+
+// Category scroll jump
+function scrollToSection(secId) {{
+  const el = document.getElementById(secId);
+  if (el) {{
+    const yOffset = -80;
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({{top: y, behavior: 'smooth'}});
+  }}
+}}
+
+// Copy Share URL
+function copyShareUrl() {{
+  navigator.clipboard.writeText(window.location.href).then(() => {{
+    const toast = document.getElementById('toast');
+    toast.style.display = 'block';
+    setTimeout(() => toast.style.display = 'none', 2500);
+  }}).catch(() => {{
+    prompt("Copy this comparison link:", window.location.href);
+  }});
+}}
+
+// Mobile Hamburger
+document.getElementById('hamburger').addEventListener('click', () => {{
+  document.getElementById('navLinks').classList.toggle('open');
+}});
+
+// Initialize app
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
+"""
+
+with open(COMPARE_HTML_PATH, "w", encoding="utf-8") as f:
+    f.write(html_template.strip())
+
+print(f"Successfully generated comparison engine at: {COMPARE_HTML_PATH}")
