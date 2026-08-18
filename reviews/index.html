@@ -1,12 +1,1826 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HowToCrypt</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Primary SEO -->
+<title>All Crypto Exchange Reviews 2026: Ranked & Tested | HowToCrypt</title>
+<meta name="description" content="Explore custom-themed, unbiased reviews of the top 35 cryptocurrency exchanges and decentralized protocols in 2026. Compare fees, security ratings, and features.">
+<link rel="canonical" href="https://www.howtocrypt.com/reviews/">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.howtocrypt.com/reviews/">
+<meta property="og:title" content="All Crypto Exchange Reviews 2026 | HowToCrypt">
+<meta property="og:description" content="Explore unbiased reviews of the top 35 crypto exchanges and DEXs. Compare fees, security, and ratings.">
+<meta property="og:site_name" content="HowToCrypt">
+
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --navy:#1e3a5f;
+    --orange:#ff6b35;
+    --light:#f4f7fb;
+    --text:#2c3e50;
+    --muted:#6b7c93;
+    --white:#fff;
+    --border:#dde3ed;
+    --green:#22c55e;
+  }
+  body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);background:var(--white);line-height:1.6}
+  a{color:inherit;text-decoration:none}
+
+  nav{background:var(--navy);position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+  .nav-inner{max-width:1200px;margin:auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{color:#fff;font-size:1.4rem;font-weight:800}
+  .logo span{color:var(--orange)}
+  .nav-links{display:flex;gap:28px;list-style:none}
+  .nav-links a{color:rgba(255,255,255,.85);font-size:.93rem;font-weight:500;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active{color:#fff}
+  .nav-cta{background:var(--orange);color:#fff!important;padding:8px 18px;border-radius:6px;font-weight:700!important}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+  .hamburger span{width:24px;height:2px;background:#fff;border-radius:2px;display:block}
+
+  .hub-hero{background:linear-gradient(135deg,var(--navy) 0%,#2a5298 100%);color:#fff;padding:64px 20px;text-align:center}
+  .hub-hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:900;margin-bottom:12px}
+  .hub-hero h1 span{color:var(--orange)}
+  .hub-hero p{font-size:1.1rem;color:rgba(255,255,255,.85);max-width:640px;margin:0 auto 24px}
+  .hero-stats{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .hero-stat-badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:6px 16px;border-radius:20px;font-size:.84rem;font-weight:600}
+
+  .container{max-width:1200px;margin:auto;padding:48px 20px}
+
+  .filter-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:32px;background:var(--light);padding:16px 20px;border-radius:12px;border:1px solid var(--border)}
+  .filter-tabs{display:flex;gap:8px;flex-wrap:wrap}
+  .tab-btn{background:var(--white);border:1px solid var(--border);color:var(--text);padding:8px 16px;border-radius:8px;font-size:.86rem;font-weight:600;cursor:pointer;transition:all .15s}
+  .tab-btn:hover{border-color:var(--orange);color:var(--orange)}
+  .tab-btn.active{background:var(--navy);border-color:var(--navy);color:#fff}
+  .search-box{position:relative;min-width:260px}
+  .search-box input{width:100%;padding:9px 14px 9px 36px;border:1px solid var(--border);border-radius:8px;font-size:.88rem;outline:none;transition:border-color .2s}
+  .search-box input:focus{border-color:var(--orange)}
+  .search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;fill:var(--muted)}
+
+  .reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:24px}
+  
+  /* THEMED REVIEW CARDS */
+  .review-card{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    transition:transform .2s,box-shadow .2s,border-color .2s;
+    box-shadow:0 4px 16px rgba(30,58,95,.04);
+  }
+  .review-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(30,58,95,.12);
+    border-color:var(--brand-color);
+  }
+  .card-top-accent{
+    height:5px;
+    width:100%;
+    background:linear-gradient(90deg, var(--brand-color), var(--brand-bg));
+  }
+  .card-inner{
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    height:100%;
+  }
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+  .card-brand-header{display:flex;align-items:center;gap:14px}
+  .card-icon-box{
+    width:48px;
+    height:48px;
+    border-radius:12px;
+    background:#ffffff;
+    border:1.5px solid var(--border);
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:5px;
+    flex-shrink:0;
+  }
+  .card-icon-img{width:100%;height:100%;object-fit:contain;border-radius:8px}
+  .card-title{font-size:1.2rem;font-weight:800;color:var(--navy);line-height:1.2}
+  .card-cat{font-size:.78rem;color:var(--muted);margin-top:2px}
+  .card-cat span{color:var(--text);font-weight:600}
+  .card-rating{text-align:right;flex-shrink:0}
+  .card-score{display:block;font-size:1.35rem;font-weight:900;color:var(--navy);line-height:1}
+  .card-stars{color:#f5a623;font-size:.85rem}
+  
+  .badge-row{margin-bottom:12px}
+  .card-badge{
+    display:inline-block;
+    background:rgba(244,247,251,0.9);
+    color:var(--text);
+    border:1px solid var(--brand-color);
+    font-size:.72rem;
+    font-weight:700;
+    padding:4px 10px;
+    border-radius:6px;
+  }
+
+  .card-desc{font-size:.88rem;color:var(--muted);margin-bottom:16px;flex-grow:1;line-height:1.5}
+  .card-meta{background:var(--light);border-radius:10px;padding:10px 14px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center}
+  .meta-label{font-size:.7rem;color:var(--muted);display:block;text-transform:uppercase;letter-spacing:.5px}
+  .meta-val{font-size:.85rem;font-weight:800;color:var(--navy)}
+  .meta-tags{display:flex;gap:6px;flex-wrap:wrap}
+  .filter-tag{font-size:.72rem;font-weight:700;padding:3px 8px;border-radius:6px}
+  .cex-tag{background:#e0f2fe;color:#0369a1}
+  .dex-tag{background:#f3e8ff;color:#7e22ce}
+  .us-tag{background:#dcfce7;color:#15803d}
+
+  .card-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .btn-read{
+    background:linear-gradient(135deg, var(--navy), #2a5298);
+    color:#fff;
+    text-align:center;
+    padding:11px;
+    border-radius:8px;
+    font-size:.84rem;
+    font-weight:700;
+    transition:all .15s;
+  }
+  .btn-read:hover{
+    background:var(--brand-color);
+    color:#fff;
+    box-shadow:0 4px 14px rgba(0,0,0,.15);
+  }
+  .btn-visit{
+    background:var(--orange);
+    color:#fff;
+    text-align:center;
+    padding:11px;
+    border-radius:8px;
+    font-size:.84rem;
+    font-weight:700;
+    transition:opacity .15s, transform .15s;
+  }
+  .btn-visit:hover{opacity:.9;transform:translateY(-1px)}
+
+  footer{background:#0f2240;color:rgba(255,255,255,.7);padding:40px 20px 20px;margin-top:64px}
+  .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:28px;max-width:1200px;margin:auto;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .footer-brand .logo{display:block;margin-bottom:8px}
+  .footer-brand p{font-size:.8rem}
+  .footer-col h4{color:#fff;font-size:.82rem;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .footer-col ul a{font-size:.8rem;transition:color .2s}
+  .footer-col ul a:hover{color:#fff}
+  .footer-bottom{max-width:1200px;margin:20px auto 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.75rem}
+  .disclosure{max-width:1200px;margin:14px auto 0;font-size:.74rem;color:rgba(255,255,255,.4);line-height:1.5}
+
+  @media(max-width:768px){
+    .nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--navy);flex-direction:column;padding:20px;gap:12px}
+    .nav-links.open{display:flex}
+    .hamburger{display:flex}
+    .reviews-grid{grid-template-columns:1fr}
+    .filter-bar{flex-direction:column;align-items:stretch}
+    .search-box{width:100%}
+  }
+</style>
 </head>
 <body>
-  <!-- Reviews Index -->
-  <main></main>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="../index.html">HowTo<span>Crypt</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="index.html" class="active">Reviews</a></li>
+      <li><a href="../guides/index.html">Guides</a></li>
+      <li><a href="../exchanges.html">Compare</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../index.html#top-picks" class="nav-cta">Start Trading</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="hub-hero">
+  <h1>Expert Crypto Exchange <span>Reviews 2026</span></h1>
+  <p>Independent, data-backed reviews of 35 centralized and decentralized trading platforms tested on fees, security, liquidity, and customer support.</p>
+  <div class="hero-stats">
+    <span class="hero-stat-badge">📊 35 In-Depth Reviews</span>
+    <span class="hero-stat-badge">🛡️ 100% Independent Analysis</span>
+    <span class="hero-stat-badge">⏱️ 150+ Testing Hours Per Platform</span>
+    <span class="hero-stat-badge">🗓️ Updated August 2026</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="filter-bar">
+    <div class="filter-tabs" id="filterTabs">
+      <button class="tab-btn active" data-filter="all">All Platforms (35)</button>
+      <button class="tab-btn" data-filter="cex">Centralized (CEX)</button>
+      <button class="tab-btn" data-filter="dex">Decentralized (DEX)</button>
+      <button class="tab-btn" data-filter="us">US Supported</button>
+    </div>
+    <div class="search-box">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <input type="text" id="searchInput" placeholder="Search exchange by name...">
+    </div>
+  </div>
+
+  <div class="reviews-grid" id="reviewsGrid">
+    
+        <div class="review-card" data-type="cex" data-us="false" data-name="bybit" style="--brand-color:#f7a600; --brand-bg:#121214; --brand-accent:#ffa000;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/bybit.svg" alt="Bybit icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Bybit</h3>
+                  <p class="card-cat">Derivatives & Copy Trading · <span>British Virgin Islands</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.8</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🏆 #1 Overall Pick</span>
+            </div>
+
+            <p class="card-desc">Top-rated global derivatives exchange with ultra-low futures fees, deep liquidity, and 24/7 support.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.01% / 0.055%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="bybit-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.bybit.com" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="binance" style="--brand-color:#f3ba2f; --brand-bg:#181a20; --brand-accent:#fcd535;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/binance.svg" alt="Binance icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Binance</h3>
+                  <p class="card-cat">Global Liquidity Leader · <span>Cayman Islands</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.6</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🌐 #1 Volume Globally</span>
+            </div>
+
+            <p class="card-desc">The world's largest crypto exchange by volume, offering 600+ coins, $1B SAFU fund, and BNB discounts.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.10% / 0.10%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="binance-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.binance.com/" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="bitget" style="--brand-color:#00f0ff; --brand-bg:#00202b; --brand-accent:#00d2df;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/bitget.svg" alt="Bitget icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Bitget</h3>
+                  <p class="card-cat">Copy Trading Leader · <span>Seychelles</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.6</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🤝 80k+ Copy Traders</span>
+            </div>
+
+            <p class="card-desc">World's largest copy trading network with 80,000+ elite traders and a massive $300M user protection fund.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.02% / 0.06%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="bitget-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.bitget.com/" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="true" data-name="coinbase exchange" style="--brand-color:#0052ff; --brand-bg:#0a1c3e; --brand-accent:#3375ff;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/coinbase.svg" alt="Coinbase Exchange icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Coinbase Exchange</h3>
+                  <p class="card-cat">US Regulated & Beginner · <span>United States</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.7</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🇺🇸 Nasdaq (COIN)</span>
+            </div>
+
+            <p class="card-desc">Publicly traded US exchange offering bank-grade security, FDIC-insured cash balances, and intuitive design.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.40% / 0.60%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="coinbase-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.coinbase.com/" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="true" data-name="kraken" style="--brand-color:#5741d9; --brand-bg:#1e1035; --brand-accent:#7b66ff;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/kraken.svg" alt="Kraken icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Kraken</h3>
+                  <p class="card-cat">Security & US Regulated · <span>United States</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.7</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🔒 Zero Major Hacks</span>
+            </div>
+
+            <p class="card-desc">Founded in 2011 with an immaculate security track record, Kraken Pro low fees, and award-winning support.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.16% / 0.26%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="kraken-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.kraken.com/" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="okx" style="--brand-color:#111111; --brand-bg:#2b2b2b; --brand-accent:#555555;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/okx.svg" alt="OKX icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">OKX</h3>
+                  <p class="card-cat">Web3 & Advanced Trading · <span>Seychelles</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.6</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">⚡ 500+ Pairs & Web3</span>
+            </div>
+
+            <p class="card-desc">Advanced trading powerhouse with institutional liquidity, non-custodial Web3 wallet, and low 0.08% maker fees.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.08% / 0.10%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="okx-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.okx.com" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="gate.io" style="--brand-color:#1351d8; --brand-bg:#0b2050; --brand-accent:#2354e6;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/gate.svg" alt="Gate.io icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Gate.io</h3>
+                  <p class="card-cat">Altcoin Discovery · <span>Panama</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.4</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🎯 1,400+ Altcoins</span>
+            </div>
+
+            <p class="card-desc">Largest altcoin catalog in crypto with early token listings, IEO launchpad, and 100% Proof-of-Reserves.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.20% / 0.20%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="gate-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.gate.com" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="true" data-name="bitstamp" style="--brand-color:#005537; --brand-bg:#002a1b; --brand-accent:#008254;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/bitstamp.svg" alt="Bitstamp icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Bitstamp</h3>
+                  <p class="card-cat">EU Institutional Regulated · <span>Luxembourg</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.3</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🏛️ EU Regulated</span>
+            </div>
+
+            <p class="card-desc">Europe's longest-running exchange licensed by the Luxembourg CSSF with seamless EUR/GBP bank rails.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.30% / 0.40%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="bitstamp-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://bitstamp.net" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="mexc" style="--brand-color:#00b897; --brand-bg:#003d32; --brand-accent:#00e5bc;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/mexc.svg" alt="MEXC icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">MEXC</h3>
+                  <p class="card-cat">Zero-Fee Spot Trading · <span>Seychelles</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.4</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">💸 0% Maker Fee</span>
+            </div>
+
+            <p class="card-desc">Disruptive zero-fee maker structure on spot and futures, with over 2,000+ tokens and rapid listing times.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.00% / 0.10%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="mexc-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.mexc.com/" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="lbank" style="--brand-color:#0055ff; --brand-bg:#001f5c; --brand-accent:#3377ff;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/lbank.svg" alt="LBank icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">LBank</h3>
+                  <p class="card-cat">Global High Volume · <span>British Virgin Islands</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.1</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🪙 800+ Pairs</span>
+            </div>
+
+            <p class="card-desc">Established global exchange with high 24h trading volume, diverse altcoin listings, and flexible staking.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.10% / 0.10%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="lbank-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.lbank.com" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="true" data-name="binance us" style="--brand-color:#e5a910; --brand-bg:#1e2026; --brand-accent:#f5b800;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/binance-us.svg" alt="Binance US icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Binance US</h3>
+                  <p class="card-cat">US Regulated Spot · <span>United States</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.1</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🇺🇸 US Regulated</span>
+            </div>
+
+            <p class="card-desc">FinCEN-registered US spot trading exchange powered by high-speed matching engine technology.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.10% / 0.10%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="binance-us-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.binance.us/" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="true" data-name="crypto.com" style="--brand-color:#061d42; --brand-bg:#002d74; --brand-accent:#1199fa;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/crypto-com.svg" alt="Crypto.com icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Crypto.com</h3>
+                  <p class="card-cat">Crypto Visa Card & App · <span>Malta</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.4</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">💳 Up to 5% Cashback</span>
+            </div>
+
+            <p class="card-desc">Premier consumer crypto ecosystem featuring metal Visa debit cards with cashback, CRO staking, and DeFi app.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.075% / 0.075%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="crypto-com-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://crypto.com/exchange" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="bitso" style="--brand-color:#00a650; --brand-bg:#003b1c; --brand-accent:#00c862;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/bitso.svg" alt="Bitso icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Bitso</h3>
+                  <p class="card-cat">Latin America Leader · <span>Gibraltar</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.1</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🇲🇽 SPEI Instant MXN</span>
+            </div>
+
+            <p class="card-desc">Latin America's leading exchange with instant Mexican SPEI and Brazilian PIX bank transfers.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.10% / 0.65%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="bitso-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://bitso.com" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="bitunix" style="--brand-color:#6366f1; --brand-bg:#1e1b4b; --brand-accent:#818cf8;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/bitunix.svg" alt="Bitunix icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Bitunix</h3>
+                  <p class="card-cat">High-Speed Derivatives · <span>St. Vincent & Grenadines</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.1</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">⚡ 125x Leverage</span>
+            </div>
+
+            <p class="card-desc">Modern crypto derivatives exchange featuring low-latency execution, copy trading, and high leverage.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.02% / 0.06%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="bitunix-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.bitunix.com/" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="luno" style="--brand-color:#1a3b8b; --brand-bg:#091638; --brand-accent:#2d5be3;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/luno.svg" alt="Luno icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Luno</h3>
+                  <p class="card-cat">Africa & Emerging Markets · <span>Singapore</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.2</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🌍 12M+ Customers</span>
+            </div>
+
+            <p class="card-desc">Regulated crypto on-ramp leader in South Africa, Malaysia, Nigeria, and Europe with a simple mobile app.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.10% / 0.10%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="luno-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.luno.com" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="bitkub" style="--brand-color:#00a859; --brand-bg:#003b1f; --brand-accent:#00cc6c;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/bitkub.svg" alt="Bitkub icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Bitkub</h3>
+                  <p class="card-cat">Thailand Market Leader · <span>Thailand</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.3</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🇹🇭 Thai SEC Licensed</span>
+            </div>
+
+            <p class="card-desc">Thailand's #1 exchange licensed by the Thai SEC with instant PromptPay QR Thai Baht bank transfers.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.25% / 0.25%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="bitkub-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.bitkub.com" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="kucoin" style="--brand-color:#24ae8f; --brand-bg:#0b4236; --brand-accent:#2fd4ae;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/kucoin.svg" alt="KuCoin icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">KuCoin</h3>
+                  <p class="card-cat">Altcoins & Trading Bots · <span>Seychelles</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.4</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🤖 Free Grid Bots</span>
+            </div>
+
+            <p class="card-desc">'The People's Exchange' with 700+ coins, free built-in automated grid bots, and KCS revenue dividends.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.10% / 0.10%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="kucoin-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.kucoin.com/" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="bingx" style="--brand-color:#0052ff; --brand-bg:#001a5e; --brand-accent:#3875ff;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/bingx.svg" alt="BingX icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">BingX</h3>
+                  <p class="card-cat">Social & Copy Trading · <span>British Virgin Islands</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.3</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">📊 Social Feed & 150x</span>
+            </div>
+
+            <p class="card-desc">User-friendly crypto social trading platform with verified trader copy options, demo trading, and low fees.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.10% / 0.10%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="bingx-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://bingx.com/" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="bitvavo" style="--brand-color:#0055ff; --brand-bg:#001b52; --brand-accent:#0070f3;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/bitvavo.svg" alt="Bitvavo icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Bitvavo</h3>
+                  <p class="card-cat">Europe & Netherlands · <span>Netherlands</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.5</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🇳🇱 Lowest EU Fees</span>
+            </div>
+
+            <p class="card-desc">Leading European exchange with €100k account guarantee, Dutch Central Bank registration, and instant SEPA.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.03% / 0.15%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="bitvavo-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://bitvavo.com/en" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="hashkey exchange" style="--brand-color:#002855; --brand-bg:#001026; --brand-accent:#00509d;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/hashkey.svg" alt="HashKey Exchange icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">HashKey Exchange</h3>
+                  <p class="card-cat">Hong Kong Licensed · <span>Hong Kong</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.3</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🇭🇰 SFC Licensed</span>
+            </div>
+
+            <p class="card-desc">Hong Kong's premier licensed retail crypto exchange with direct HKD/USD settlement and 98% cold storage.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.10% / 0.15%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="hashkey-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.hashkey.com/" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="bullish" style="--brand-color:#18181b; --brand-bg:#27272a; --brand-accent:#d4af37;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/bullish.svg" alt="Bullish icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Bullish</h3>
+                  <p class="card-cat">Institutional AMM · <span>Gibraltar</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.2</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🏛️ Institutional Depth</span>
+            </div>
+
+            <p class="card-desc">Regulated institutional exchange combining automated liquidity pools with tight spreads and deep order books.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.08% / 0.10%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="bullish-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://bullish.com/" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="whitebit" style="--brand-color:#0d1b2a; --brand-bg:#1b263b; --brand-accent:#415a77;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/whitebit.svg" alt="WhiteBIT icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">WhiteBIT</h3>
+                  <p class="card-cat">European VASP & Security · <span>Lithuania</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.3</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🛡️ Top 3 CER.live</span>
+            </div>
+
+            <p class="card-desc">Lithuanian-registered European exchange holding top AAA security ratings and up to 18% staking APYs.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.10% / 0.10%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="whitebit-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://whitebit.com" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="bitbank" style="--brand-color:#c0392b; --brand-bg:#1c1c1c; --brand-accent:#e74c3c;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/bitbank.svg" alt="Bitbank icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Bitbank</h3>
+                  <p class="card-cat">Japan FSA Licensed · <span>Japan</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.3</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🇯🇵 Negative Maker Fees</span>
+            </div>
+
+            <p class="card-desc">Japan's highest-volume domestic exchange with maker fee rebates, JPY bank integration, and FSA licensing.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">-0.02% / 0.12%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="bitbank-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://bitbank.cc/" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="niza.io" style="--brand-color:#582cd2; --brand-bg:#200d56; --brand-accent:#7b4fe8;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/niza.svg" alt="Niza.io icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Niza.io</h3>
+                  <p class="card-cat">EU CEX & DeFi Hybrid · <span>Lithuania</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.0</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🚀 Modern Interface</span>
+            </div>
+
+            <p class="card-desc">Lithuanian-registered modern exchange combining centralized spot trading with decentralized Web3 access.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.10% / 0.20%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="niza-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://niza.io" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="cex" data-us="false" data-name="upbit" style="--brand-color:#0033a0; --brand-bg:#001547; --brand-accent:#094bd6;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/upbit.svg" alt="Upbit icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Upbit</h3>
+                  <p class="card-cat">South Korea Giant · <span>South Korea</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.3</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🇰🇷 FSC Regulated</span>
+            </div>
+
+            <p class="card-desc">South Korea's dominant crypto exchange with massive KRW liquidity, K-Bank integration, and FSC licensing.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.05% / 0.05%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag cex-tag">Centralized (CEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="upbit-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://upbit.com" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="dex" data-us="true" data-name="jupiter" style="--brand-color:#00be74; --brand-bg:#072b1d; --brand-accent:#19e694;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/jupiter.svg" alt="Jupiter icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Jupiter</h3>
+                  <p class="card-cat">Solana DEX Aggregator · <span>Solana On-Chain</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.9</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🪐 #1 Solana Aggregator</span>
+            </div>
+
+            <p class="card-desc">The primary swap engine on Solana routing across all DEXs for best prices, with DCA, Limit Orders, and Perps.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.00% Added Fee</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag dex-tag">Decentralized (DEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="jupiter-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://jup.ag" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="dex" data-us="true" data-name="uniswap" style="--brand-color:#ff007a; --brand-bg:#4a0023; --brand-accent:#ff3399;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/uniswap.svg" alt="Uniswap icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Uniswap</h3>
+                  <p class="card-cat">Ethereum & Multichain AMM · <span>Ethereum / L2s</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.8</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🦄 $2T+ Total Volume</span>
+            </div>
+
+            <p class="card-desc">The gold standard of decentralized finance with concentrated liquidity, zero KYC, and multichain L2 support.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.05% - 0.30%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag dex-tag">Decentralized (DEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="uniswap-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://uniswap.org" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="dex" data-us="true" data-name="hyperliquid" style="--brand-color:#00f0ff; --brand-bg:#041c24; --brand-accent:#00d0e0;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/hyperliquid.svg" alt="Hyperliquid icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Hyperliquid</h3>
+                  <p class="card-cat">Custom L1 Perps Orderbook · <span>Hyperliquid L1</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.8</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">⚡ Zero Gas Perps</span>
+            </div>
+
+            <p class="card-desc">Sub-second decentralized perpetuals orderbook with zero gas fees, 50x leverage, and CEX-grade execution speed.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.01% / 0.035%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag dex-tag">Decentralized (DEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="hyperliquid-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://hyperliquid.xyz" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="dex" data-us="true" data-name="curve finance" style="--brand-color:#0038a8; --brand-bg:#5a0000; --brand-accent:#ffd700;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/curve.svg" alt="Curve Finance icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Curve Finance</h3>
+                  <p class="card-cat">Stablecoin & Pegged AMM · <span>Ethereum / Multichain</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.7</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">📉 Low Slippage Stables</span>
+            </div>
+
+            <p class="card-desc">The premier decentralized liquidity pool for multi-million dollar stablecoin and liquid staking token swaps.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.04% Baseline</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag dex-tag">Decentralized (DEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="curve-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://curve.fi" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="dex" data-us="true" data-name="aerodrome" style="--brand-color:#0052ff; --brand-bg:#001a5e; --brand-accent:#3875ff;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/aerodrome.svg" alt="Aerodrome icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Aerodrome</h3>
+                  <p class="card-cat">Base L2 Liquidity Hub · <span>Base (Coinbase L2)</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.7</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">✈️ Base #1 DEX</span>
+            </div>
+
+            <p class="card-desc">The dominant liquidity engine of Coinbase's Base network with over $1B+ in TVL and veAERO rewards.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.05% - 0.30%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag dex-tag">Decentralized (DEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="aerodrome-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://aerodrome.finance" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="dex" data-us="true" data-name="pancakeswap" style="--brand-color:#d1884f; --brand-bg:#1fc7d4; --brand-accent:#1fc7d4;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/pancakeswap.svg" alt="PancakeSwap icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">PancakeSwap</h3>
+                  <p class="card-cat">BNB Chain Ecosystem · <span>BNB Chain / Multichain</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.6</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🥞 BNB Chain Giant</span>
+            </div>
+
+            <p class="card-desc">Top DEX on BNB Chain featuring ultra-low gas swaps, CAKE yield farms, lottery, and perpetuals.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.01% - 0.25%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag dex-tag">Decentralized (DEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="pancakeswap-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://pancakeswap.finance" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="dex" data-us="true" data-name="raydium" style="--brand-color:#5c24ff; --brand-bg:#1f0967; --brand-accent:#7f4dff;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/raydium.svg" alt="Raydium icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Raydium</h3>
+                  <p class="card-cat">Solana Native AMM & CLMM · <span>Solana On-Chain</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.6</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">☀️ Solana Liquidity</span>
+            </div>
+
+            <p class="card-desc">The core liquidity backbone for new token launches, concentrated liquidity, and meme trading on Solana.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.25% Flat</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag dex-tag">Decentralized (DEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="raydium-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://raydium.io" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="dex" data-us="false" data-name="dydx" style="--brand-color:#6966ff; --brand-bg:#1b194b; --brand-accent:#8a87ff;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/dydx.svg" alt="dYdX icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">dYdX</h3>
+                  <p class="card-cat">Cosmos AppChain Perps · <span>dYdX Chain</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.6</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">📈 100% Fee Share</span>
+            </div>
+
+            <p class="card-desc">Independent Cosmos AppChain delivering decentralized off-chain matching, zero gas orders, and 100% fee distribution to stakers.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.02% / 0.05%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag dex-tag">Decentralized (DEX)</span>
+                
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="dydx-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://dydx.exchange" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="dex" data-us="true" data-name="orca" style="--brand-color:#ffb800; --brand-bg:#1a3258; --brand-accent:#ffca33;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/orca.svg" alt="Orca icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Orca</h3>
+                  <p class="card-cat">Solana Concentrated AMM · <span>Solana On-Chain</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.6</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">🐋 Whirlpools Yield</span>
+            </div>
+
+            <p class="card-desc">The most user-friendly decentralized exchange on Solana with high-yield Whirlpools concentrated liquidity.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.01% - 0.30%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag dex-tag">Decentralized (DEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="orca-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://www.orca.so" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="review-card" data-type="dex" data-us="true" data-name="meteora" style="--brand-color:#f59e0b; --brand-bg:#5c2803; --brand-accent:#fbbf24;">
+          <div class="card-top-accent"></div>
+          <div class="card-inner">
+            <div class="card-top">
+              <div class="card-brand-header">
+                <div class="card-icon-box">
+                  <img class="card-icon-img" src="../images/meteora.svg" alt="Meteora icon" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="card-title">Meteora</h3>
+                  <p class="card-cat">Dynamic AMM & DLMM · <span>Solana On-Chain</span></p>
+                </div>
+              </div>
+              <div class="card-rating">
+                <span class="card-score">4.6</span>
+                <span class="card-stars">★★★★★</span>
+              </div>
+            </div>
+            
+            <div class="badge-row">
+              <span class="card-badge">☄️ Volatility Fee Surges</span>
+            </div>
+
+            <p class="card-desc">Cutting-edge Solana liquidity protocol featuring Dynamic LMM pools with volatility surges and anti-bot launch vaults.</p>
+            
+            <div class="card-meta">
+              <div class="meta-item">
+                <span class="meta-label">Trading Fees</span>
+                <span class="meta-val">0.05% - 1.00%</span>
+              </div>
+              <div class="meta-tags">
+                <span class="filter-tag dex-tag">Decentralized (DEX)</span>
+                <span class="filter-tag us-tag">🇺🇸 US Allowed</span>
+              </div>
+            </div>
+            
+            <div class="card-actions">
+              <a class="btn-read" href="meteora-review.html">Read Review →</a>
+              <a class="btn-visit" href="https://meteora.ag" target="_blank" rel="noopener noreferrer">Visit Official ↗</a>
+            </div>
+          </div>
+        </div>
+        
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="logo" href="../index.html">HowTo<span>Crypt</span></a>
+      <p>Independent crypto exchange reviews since 2018.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Top Reviews</h4>
+      <ul>
+        <li><a href="bybit-review.html">Bybit Review</a></li>
+        <li><a href="binance-review.html">Binance Review</a></li>
+        <li><a href="bitget-review.html">Bitget Review</a></li>
+        <li><a href="coinbase-review.html">Coinbase Review</a></li>
+        <li><a href="kraken-review.html">Kraken Review</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="../about.html">About Us</a></li>
+        <li><a href="../about.html#methodology">Methodology</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="../affiliate-disclosure.html">Affiliate Disclosure</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 HowToCrypt. All rights reserved.</span>
+    <span>Not financial advice. For educational purposes only.</span>
+  </div>
+  <p class="disclosure">⚠️ Affiliate Disclosure: HowToCrypt may earn commissions from exchange sign-ups. This never influences our ratings. Cryptocurrency trading involves significant risk of loss.</p>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+  const filterTabs = document.querySelectorAll('.tab-btn');
+  const searchInput = document.getElementById('searchInput');
+  const cards = document.querySelectorAll('.review-card');
+
+  let currentFilter = 'all';
+
+  filterTabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterTabs.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  searchInput.addEventListener('input', applyFilters);
+
+  function applyFilters() {
+    const query = searchInput.value.toLowerCase().trim();
+    cards.forEach(card => {
+      const type = card.dataset.type;
+      const isUs = card.dataset.us === 'true';
+      const name = card.dataset.name;
+
+      let matchesFilter = true;
+      if (currentFilter === 'cex') matchesFilter = (type === 'cex');
+      else if (currentFilter === 'dex') matchesFilter = (type === 'dex');
+      else if (currentFilter === 'us') matchesFilter = isUs;
+
+      const matchesSearch = !query || name.includes(query);
+
+      if (matchesFilter && matchesSearch) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
 </body>
 </html>

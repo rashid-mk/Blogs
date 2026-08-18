@@ -66,8 +66,13 @@
   .vol-cell{font-weight:600;color:var(--navy);font-size:.88rem}
   .vol-sub{font-size:.75rem;color:var(--muted);font-weight:400}
   .yr-cell{font-size:.85rem;color:var(--muted)}
+  .action-btns{display:flex;align-items:center;gap:6px}
+  .review-btn{display:inline-block;background:var(--navy);color:#fff;padding:6px 12px;border-radius:6px;font-size:.78rem;font-weight:700;transition:transform .15s,background .15s;white-space:nowrap}
+  .review-btn:hover{background:#132842;transform:translateY(-1px)}
   .visit-btn{display:inline-block;background:var(--orange);color:#fff;padding:6px 14px;border-radius:6px;font-size:.78rem;font-weight:700;transition:transform .15s,box-shadow .15s;white-space:nowrap}
   .visit-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(255,107,53,.35)}
+  .dex-section .review-btn{background:rgba(255,255,255,.15)}
+  .dex-section .review-btn:hover{background:rgba(255,255,255,.25)}
 
   .dex-section{background:linear-gradient(135deg,#0f1f3d,#1e3a5f);padding:56px 20px}
   .dex-section .section-title{color:#fff}
@@ -151,7 +156,7 @@
           <th>Founded</th>
           <th>Trust Score</th>
           <th>24h Volume (BTC)</th>
-          <th>Visit</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody id="cexBody">
@@ -181,7 +186,7 @@
             <th>Chain</th>
             <th>Type</th>
             <th>Market Share</th>
-            <th>Visit</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody id="dexBody"></tbody>
@@ -209,44 +214,44 @@
 
 <script>
 const cexData = [
-  {rank:1,name:"Binance",country:"Cayman Islands",founded:2017,trust:10,vol:81012.94,url:"https://www.binance.com/",img:"https://coin-images.coingecko.com/markets/images/52/small/binance.jpg?1706864274"},
-  {rank:2,name:"Coinbase Exchange",country:"United States",founded:2012,trust:10,vol:13904.82,url:"https://www.coinbase.com/",img:"https://coin-images.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png?1706864258"},
-  {rank:3,name:"Kraken",country:"United States",founded:2011,trust:10,vol:11849.05,url:"https://www.kraken.com/",img:"https://coin-images.coingecko.com/markets/images/29/small/kraken.jpg?1706864265"},
-  {rank:4,name:"OKX",country:"Seychelles",founded:2017,trust:10,vol:13875.19,url:"https://www.okx.com",img:"https://coin-images.coingecko.com/markets/images/96/small/WeChat_Image_20220117220452.png?1706864283"},
-  {rank:5,name:"Bitget",country:"Seychelles",founded:2018,trust:10,vol:6677.79,url:"https://www.bitget.com/",img:"https://coin-images.coingecko.com/markets/images/540/small/2023-07-25_21.47.43.jpg?1706864507"},
-  {rank:6,name:"Gate",country:"Panama",founded:2013,trust:10,vol:12748.43,url:"https://www.gate.com",img:"https://coin-images.coingecko.com/markets/images/60/small/Frame_1.png?1747795534"},
-  {rank:7,name:"Bitstamp",country:"Luxembourg",founded:2011,trust:9,vol:3341.99,url:"https://bitstamp.net",img:"https://coin-images.coingecko.com/markets/images/9/small/bitstamp.jpg?1706864251"},
-  {rank:8,name:"Bybit",country:"British Virgin Islands",founded:2018,trust:9,vol:18207.00,url:"https://www.bybit.com",img:"https://coin-images.coingecko.com/markets/images/698/small/bybit_spot.png?1706864649"},
-  {rank:9,name:"MEXC",country:"Seychelles",founded:2018,trust:9,vol:12262.92,url:"https://www.mexc.com/",img:"https://coin-images.coingecko.com/markets/images/409/small/164286be-32a5-4b58-978c-d072eea00eb9.jpeg?1775619316"},
-  {rank:10,name:"LBank",country:"British Virgin Islands",founded:2015,trust:9,vol:18403.14,url:"https://www.lbank.com",img:"https://coin-images.coingecko.com/markets/images/118/small/LBank_200_200.png?1757347528"},
-  {rank:11,name:"Binance US",country:"United States",founded:2019,trust:9,vol:97.88,url:"https://www.binance.us/",img:"https://coin-images.coingecko.com/markets/images/469/small/Binance.png?1706864454"},
-  {rank:12,name:"Crypto.com",country:"Malta",founded:2019,trust:9,vol:6709.02,url:"https://crypto.com/exchange",img:"https://coin-images.coingecko.com/markets/images/589/small/h2oMjPp6_400x400.jpg?1706864542"},
-  {rank:13,name:"Bitso",country:"Gibraltar",founded:2014,trust:9,vol:130.26,url:"https://bitso.com",img:"https://coin-images.coingecko.com/markets/images/8/small/Bitso-icon-dark.png?1706864249"},
-  {rank:14,name:"Bitunix",country:"St. Vincent & Grenadines",founded:2021,trust:9,vol:2938.01,url:"https://www.bitunix.com/",img:"https://coin-images.coingecko.com/markets/images/1185/small/APP_icon_1024.png?1706865197"},
-  {rank:15,name:"Luno",country:"Singapore",founded:2013,trust:9,vol:76.70,url:"https://www.luno.com",img:"https://coin-images.coingecko.com/markets/images/33/small/RGB_LUNO_SYMBOL_NAVY_BLUE_1.png?1706864266"},
-  {rank:16,name:"Bitkub",country:"Thailand",founded:2018,trust:9,vol:493.90,url:"https://www.bitkub.com",img:"https://coin-images.coingecko.com/markets/images/249/small/bitkub.png?1706864345"},
-  {rank:17,name:"KuCoin",country:"Seychelles",founded:2017,trust:9,vol:10905.36,url:"https://www.kucoin.com/",img:"https://coin-images.coingecko.com/markets/images/61/small/kucoin.png?1706864282"},
-  {rank:18,name:"BingX",country:"British Virgin Islands",founded:2018,trust:9,vol:4433.59,url:"https://bingx.com/",img:"https://coin-images.coingecko.com/markets/images/812/small/YtFwQwJr_400x400.jpg?1706864837"},
-  {rank:19,name:"Bitvavo",country:"Netherlands",founded:2018,trust:8,vol:1416.09,url:"https://bitvavo.com/en",img:"https://coin-images.coingecko.com/markets/images/714/small/bitvavo-mark-square-black.png?1706864670"},
-  {rank:20,name:"HashKey Exchange",country:"Hong Kong",founded:2018,trust:8,vol:491.70,url:"https://www.hashkey.com/",img:"https://coin-images.coingecko.com/markets/images/1206/small/hashkey_2.png?1706869603"},
-  {rank:21,name:"Bullish",country:"Gibraltar",founded:2021,trust:8,vol:7950.38,url:"https://bullish.com/",img:"https://coin-images.coingecko.com/markets/images/905/small/bullish_com.png?1706864904"},
-  {rank:22,name:"WhiteBIT",country:"Lithuania",founded:2018,trust:8,vol:9018.61,url:"https://whitebit.com",img:"https://coin-images.coingecko.com/markets/images/418/small/800_800.jpg?1706864419"},
-  {rank:23,name:"Bitbank",country:"Japan",founded:2016,trust:8,vol:208.81,url:"https://bitbank.cc/",img:"https://coin-images.coingecko.com/markets/images/122/small/bitbank.jpg?1706864298"},
-  {rank:24,name:"Niza.io",country:"Lithuania",founded:2021,trust:8,vol:2683.20,url:"https://niza.io",img:"https://coin-images.coingecko.com/markets/images/1611/small/niza-200x200.png?1716952078"},
-  {rank:25,name:"Upbit",country:"South Korea",founded:2017,trust:8,vol:6778.19,url:"https://upbit.com",img:"https://coin-images.coingecko.com/markets/images/117/small/upbit.png?1706864294"}
+  {rank:1,slug:"binance",name:"Binance",country:"Cayman Islands",founded:2017,trust:10,vol:81012.94,url:"https://www.binance.com/",img:"images/binance.svg"},
+  {rank:2,slug:"coinbase",name:"Coinbase Exchange",country:"United States",founded:2012,trust:10,vol:13904.82,url:"https://www.coinbase.com/",img:"images/coinbase.svg"},
+  {rank:3,slug:"kraken",name:"Kraken",country:"United States",founded:2011,trust:10,vol:11849.05,url:"https://www.kraken.com/",img:"images/kraken.svg"},
+  {rank:4,slug:"okx",name:"OKX",country:"Seychelles",founded:2017,trust:10,vol:13875.19,url:"https://www.okx.com",img:"images/okx.svg"},
+  {rank:5,slug:"bitget",name:"Bitget",country:"Seychelles",founded:2018,trust:10,vol:6677.79,url:"https://www.bitget.com/",img:"images/bitget.svg"},
+  {rank:6,slug:"gate",name:"Gate",country:"Panama",founded:2013,trust:10,vol:12748.43,url:"https://www.gate.com",img:"images/gate.svg"},
+  {rank:7,slug:"bitstamp",name:"Bitstamp",country:"Luxembourg",founded:2011,trust:9,vol:3341.99,url:"https://bitstamp.net",img:"images/bitstamp.svg"},
+  {rank:8,slug:"bybit",name:"Bybit",country:"British Virgin Islands",founded:2018,trust:9,vol:18207.00,url:"https://www.bybit.com",img:"images/bybit.svg"},
+  {rank:9,slug:"mexc",name:"MEXC",country:"Seychelles",founded:2018,trust:9,vol:12262.92,url:"https://www.mexc.com/",img:"images/mexc.svg"},
+  {rank:10,slug:"lbank",name:"LBank",country:"British Virgin Islands",founded:2015,trust:9,vol:18403.14,url:"https://www.lbank.com",img:"images/lbank.svg"},
+  {rank:11,slug:"binance-us",name:"Binance US",country:"United States",founded:2019,trust:9,vol:97.88,url:"https://www.binance.us/",img:"images/binance-us.svg"},
+  {rank:12,slug:"crypto-com",name:"Crypto.com",country:"Malta",founded:2019,trust:9,vol:6709.02,url:"https://crypto.com/exchange",img:"images/crypto-com.svg"},
+  {rank:13,slug:"bitso",name:"Bitso",country:"Gibraltar",founded:2014,trust:9,vol:130.26,url:"https://bitso.com",img:"images/bitso.svg"},
+  {rank:14,slug:"bitunix",name:"Bitunix",country:"St. Vincent & Grenadines",founded:2021,trust:9,vol:2938.01,url:"https://www.bitunix.com/",img:"images/bitunix.svg"},
+  {rank:15,slug:"luno",name:"Luno",country:"Singapore",founded:2013,trust:9,vol:76.70,url:"https://www.luno.com",img:"images/luno.svg"},
+  {rank:16,slug:"bitkub",name:"Bitkub",country:"Thailand",founded:2018,trust:9,vol:493.90,url:"https://www.bitkub.com",img:"images/bitkub.svg"},
+  {rank:17,slug:"kucoin",name:"KuCoin",country:"Seychelles",founded:2017,trust:9,vol:10905.36,url:"https://www.kucoin.com/",img:"images/kucoin.svg"},
+  {rank:18,slug:"bingx",name:"BingX",country:"British Virgin Islands",founded:2018,trust:9,vol:4433.59,url:"https://bingx.com/",img:"images/bingx.svg"},
+  {rank:19,slug:"bitvavo",name:"Bitvavo",country:"Netherlands",founded:2018,trust:8,vol:1416.09,url:"https://bitvavo.com/en",img:"images/bitvavo.svg"},
+  {rank:20,slug:"hashkey",name:"HashKey Exchange",country:"Hong Kong",founded:2018,trust:8,vol:491.70,url:"https://www.hashkey.com/",img:"images/hashkey.svg"},
+  {rank:21,slug:"bullish",name:"Bullish",country:"Gibraltar",founded:2021,trust:8,vol:7950.38,url:"https://bullish.com/",img:"images/bullish.svg"},
+  {rank:22,slug:"whitebit",name:"WhiteBIT",country:"Lithuania",founded:2018,trust:8,vol:9018.61,url:"https://whitebit.com",img:"images/whitebit.svg"},
+  {rank:23,slug:"bitbank",name:"Bitbank",country:"Japan",founded:2016,trust:8,vol:208.81,url:"https://bitbank.cc/",img:"images/bitbank.svg"},
+  {rank:24,slug:"niza",name:"Niza.io",country:"Lithuania",founded:2021,trust:8,vol:2683.20,url:"https://niza.io",img:"images/niza.svg"},
+  {rank:25,slug:"upbit",name:"Upbit",country:"South Korea",founded:2017,trust:8,vol:6778.19,url:"https://upbit.com",img:"images/upbit.svg"}
 ];
 
 const dexData = [
-  {rank:1,name:"Uniswap",chain:"Ethereum + L2s",type:"spot",share:"~40%",url:"https://uniswap.org",emoji:"🦄"},
-  {rank:2,name:"PancakeSwap",chain:"BNB Chain",type:"spot",share:"~12%",url:"https://pancakeswap.finance",emoji:"🥞"},
-  {rank:3,name:"Hyperliquid",chain:"Hyperliquid L1",type:"perp",share:"~15% perps",url:"https://hyperliquid.xyz",emoji:"⚡"},
-  {rank:4,name:"Raydium",chain:"Solana",type:"spot",share:"~10%",url:"https://raydium.io",emoji:"☀️"},
-  {rank:5,name:"dYdX",chain:"dYdX Chain",type:"perp",share:"~8% perps",url:"https://dydx.exchange",emoji:"📈"},
-  {rank:6,name:"Curve Finance",chain:"Ethereum + Multi",type:"spot",share:"Stablecoins #1",url:"https://curve.fi",emoji:"📉"},
-  {rank:7,name:"Aerodrome",chain:"Base",type:"spot",share:"~5%",url:"https://aerodrome.finance",emoji:"✈️"},
-  {rank:8,name:"Orca",chain:"Solana",type:"spot",share:"~4%",url:"https://www.orca.so",emoji:"🐋"},
-  {rank:9,name:"Jupiter",chain:"Solana",type:"agg",share:"Aggregator #1",url:"https://jup.ag",emoji:"🪐"},
-  {rank:10,name:"Meteora",chain:"Solana",type:"spot",share:"~3%",url:"https://meteora.ag",emoji:"☄️"}
+  {rank:1,slug:"uniswap",name:"Uniswap",chain:"Ethereum + L2s",type:"spot",share:"~40%",url:"https://uniswap.org",img:"images/uniswap.svg"},
+  {rank:2,slug:"pancakeswap",name:"PancakeSwap",chain:"BNB Chain",type:"spot",share:"~12%",url:"https://pancakeswap.finance",img:"images/pancakeswap.svg"},
+  {rank:3,slug:"hyperliquid",name:"Hyperliquid",chain:"Hyperliquid L1",type:"perp",share:"~15% perps",url:"https://hyperliquid.xyz",img:"images/hyperliquid.svg"},
+  {rank:4,slug:"raydium",name:"Raydium",chain:"Solana",type:"spot",share:"~10%",url:"https://raydium.io",img:"images/raydium.svg"},
+  {rank:5,slug:"dydx",name:"dYdX",chain:"dYdX Chain",type:"perp",share:"~8% perps",url:"https://dydx.exchange",img:"images/dydx.svg"},
+  {rank:6,slug:"curve",name:"Curve Finance",chain:"Ethereum + Multi",type:"spot",share:"Stablecoins #1",url:"https://curve.fi",img:"images/curve.svg"},
+  {rank:7,slug:"aerodrome",name:"Aerodrome",chain:"Base",type:"spot",share:"~5%",url:"https://aerodrome.finance",img:"images/aerodrome.svg"},
+  {rank:8,slug:"orca",name:"Orca",chain:"Solana",type:"spot",share:"~4%",url:"https://www.orca.so",img:"images/orca.svg"},
+  {rank:9,slug:"jupiter",name:"Jupiter",chain:"Solana",type:"agg",share:"Aggregator #1",url:"https://jup.ag",img:"images/jupiter.svg"},
+  {rank:10,slug:"meteora",name:"Meteora",chain:"Solana",type:"spot",share:"~3%",url:"https://meteora.ag",img:"images/meteora.svg"}
 ];
 
 const typeLabels = {spot:"Spot AMM",perp:"Perpetuals",agg:"Aggregator"};
@@ -264,7 +269,7 @@ cexData.forEach(e => {
   cexBody.innerHTML += `<tr>
     <td class="rank-cell ${rankClass}">${e.rank}</td>
     <td><div class="exch-cell">
-      <img class="exch-icon" src="${e.img}" alt="${e.name}" loading="lazy" onerror="this.style.display='none'">
+      <img class="exch-icon" src="${e.img}" alt="${e.name}" loading="lazy">
       <div><div class="exch-name">${e.name}</div><div class="exch-country">🌐 ${e.country}</div></div>
     </div></td>
     <td class="yr-cell">${e.founded}</td>
@@ -273,7 +278,12 @@ cexData.forEach(e => {
       <span class="trust-num">${e.trust}/10</span>
     </div></td>
     <td class="vol-cell">${fmtVol(e.vol)}<br><span class="vol-sub">≈ $${(e.vol * 58000).toLocaleString('en',{maximumFractionDigits:0})} USD</span></td>
-    <td><a class="visit-btn" href="${e.url}" target="_blank" rel="noopener noreferrer">Visit →</a></td>
+    <td>
+      <div class="action-btns">
+        <a class="review-btn" href="reviews/${e.slug}-review.html">Review</a>
+        <a class="visit-btn" href="${e.url}" target="_blank" rel="noopener noreferrer">Visit →</a>
+      </div>
+    </td>
   </tr>`;
 });
 
@@ -283,13 +293,18 @@ dexData.forEach(e => {
   dexBody.innerHTML += `<tr>
     <td class="rank-cell ${rankClass}">${e.rank}</td>
     <td><div class="exch-cell">
-      <div style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">${e.emoji}</div>
+      <img class="exch-icon" src="${e.img}" alt="${e.name}" loading="lazy">
       <div><div class="exch-name">${e.name}</div><div class="exch-country">Decentralized Protocol</div></div>
     </div></td>
     <td><span class="chain-badge">${e.chain}</span></td>
     <td><span class="type-badge ${typeClass[e.type]}">${typeLabels[e.type]}</span></td>
     <td class="vol-cell">${e.share}</td>
-    <td><a class="visit-btn" href="${e.url}" target="_blank" rel="noopener noreferrer">Visit →</a></td>
+    <td>
+      <div class="action-btns">
+        <a class="review-btn" href="reviews/${e.slug}-review.html">Review</a>
+        <a class="visit-btn" href="${e.url}" target="_blank" rel="noopener noreferrer">Visit →</a>
+      </div>
+    </td>
   </tr>`;
 });
 

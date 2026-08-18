@@ -90,17 +90,18 @@
 
   /* TOP PICKS */
   .picks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:40px}
-  .pick-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:box-shadow .2s,transform .2s}
-  .pick-card:hover{box-shadow:0 8px 32px rgba(30,58,95,.12);transform:translateY(-4px)}
+  .pick-card{border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:box-shadow .2s,transform .2s;background:var(--white);position:relative}
+  .pick-card:hover{box-shadow:0 12px 32px rgba(30,58,95,.12);transform:translateY(-4px)}
+  .pick-card-bybit{border-top:4px solid #f7a600}
+  .pick-card-bitget{border-top:4px solid #00f0ff}
+  .pick-card-binance{border-top:4px solid #f3ba2f}
   .pick-badge{background:var(--navy);color:var(--white);font-size:.72rem;font-weight:700;padding:6px 12px;text-transform:uppercase;letter-spacing:1px}
   .pick-badge.top{background:var(--orange)}
   .pick-body{padding:24px}
   .pick-header{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-  .exchange-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;color:var(--white)}
-  .icon-bybit{background:linear-gradient(135deg,#f7931a,#f4550a)}
-  .icon-bitget{background:linear-gradient(135deg,#1da2b4,#0d6e7a)}
-  .icon-binance{background:linear-gradient(135deg,#f0b90b,#d4a017)}
-  .pick-name{font-size:1.1rem;font-weight:800;color:var(--navy)}
+  .exchange-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:#fff;border:1.5px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.06);padding:6px;flex-shrink:0}
+  .exchange-icon img{width:100%;height:100%;object-fit:contain;border-radius:8px}
+  .pick-name{font-size:1.15rem;font-weight:800;color:var(--navy)}
   .stars{color:#f5a623;font-size:1rem;letter-spacing:1px}
   .stars-text{font-size:.8rem;color:var(--muted);margin-left:4px}
   .pick-tagline{font-size:.88rem;color:var(--muted);margin-bottom:16px}
@@ -226,11 +227,13 @@
     <div class="picks-grid">
 
       <!-- Bybit -->
-      <article class="pick-card">
+      <article class="pick-card pick-card-bybit">
         <div class="pick-badge top">🏆 Best Overall</div>
         <div class="pick-body">
           <div class="pick-header">
-            <div class="exchange-icon icon-bybit">B</div>
+            <div class="exchange-icon">
+              <img src="images/bybit.svg" alt="Bybit logo">
+            </div>
             <div>
               <div class="pick-name">Bybit</div>
               <div><span class="stars">★★★★★</span><span class="stars-text">4.8/5</span></div>
@@ -251,11 +254,13 @@
       </article>
 
       <!-- Bitget -->
-      <article class="pick-card">
+      <article class="pick-card pick-card-bitget">
         <div class="pick-badge">🥈 Best for Copy Trading</div>
         <div class="pick-body">
           <div class="pick-header">
-            <div class="exchange-icon icon-bitget">G</div>
+            <div class="exchange-icon">
+              <img src="images/bitget.svg" alt="Bitget logo">
+            </div>
             <div>
               <div class="pick-name">Bitget</div>
               <div><span class="stars">★★★★★</span><span class="stars-text">4.6/5</span></div>
@@ -276,11 +281,13 @@
       </article>
 
       <!-- Binance -->
-      <article class="pick-card">
+      <article class="pick-card pick-card-binance">
         <div class="pick-badge">🥉 Largest Exchange</div>
         <div class="pick-body">
           <div class="pick-header">
-            <div class="exchange-icon icon-binance">B</div>
+            <div class="exchange-icon">
+              <img src="images/binance.svg" alt="Binance logo">
+            </div>
             <div>
               <div class="pick-name">Binance</div>
               <div><span class="stars">★★★★½</span><span class="stars-text">4.5/5</span></div>
