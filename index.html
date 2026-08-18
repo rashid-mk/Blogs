@@ -24,28 +24,51 @@
 <meta name="twitter:description" content="Independent crypto exchange reviews 2026. Compare Bybit, Bitget & Binance on fees, security & features.">
 <meta name="twitter:image" content="https://howtocrypt.com/og-image.png">
 
-<!-- JSON-LD: WebSite Schema -->
+<!-- JSON-LD: WebSite & Organization Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "HowToCrypt",
-  "url": "https://howtocrypt.com",
-  "description": "Independent, expert crypto exchange reviews. We test and rate the top exchanges on fees, security, and features.",
-  "publisher": {
-    "@type": "Organization",
-    "name": "HowToCrypt",
-    "url": "https://howtocrypt.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://howtocrypt.com/logo.png"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "HowToCrypt",
+      "url": "https://www.howtocrypt.com",
+      "description": "Independent, expert crypto exchange reviews. We test and rate top exchanges on fees, security, and features.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "HowToCrypt",
+        "url": "https://www.howtocrypt.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.howtocrypt.com/logo.png"
+        }
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.howtocrypt.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "name": "HowToCrypt",
+      "url": "https://www.howtocrypt.com",
+      "logo": "https://www.howtocrypt.com/logo.png",
+      "description": "HowToCrypt provides independent, expert crypto exchange reviews tested across 50+ platforms.",
+      "foundingDate": "2018"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.howtocrypt.com/"
+        }
+      ]
     }
-  },
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://howtocrypt.com/?s={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
+  ]
 }
 </script>
 <style>

@@ -1778,7 +1778,7 @@ REVIEW_HTML_TEMPLATE = """<!DOCTYPE html>
   "publisher": {{
     "@type": "Organization",
     "name": "HowToCrypt",
-    "url": "https://howtocrypt.com"
+    "url": "https://www.howtocrypt.com"
   }},
   "itemReviewed": {{
     "@type": "FinancialService",
@@ -1789,6 +1789,76 @@ REVIEW_HTML_TEMPLATE = """<!DOCTYPE html>
     "serviceType": "{service_type}"
   }},
   "url": "https://www.howtocrypt.com/reviews/{slug}-review.html"
+}}
+</script>
+
+<!-- JSON-LD: Breadcrumb Schema -->
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.howtocrypt.com/"
+    }},
+    {{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Reviews",
+      "item": "https://www.howtocrypt.com/reviews/"
+    }},
+    {{
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{name} Review",
+      "item": "https://www.howtocrypt.com/reviews/{slug}-review.html"
+    }}
+  ]
+}}
+</script>
+
+<!-- JSON-LD: FAQPage Schema -->
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{
+      "@type": "Question",
+      "name": "{faq1_q_clean}",
+      "acceptedAnswer": {{
+        "@type": "Answer",
+        "text": "{faq1_a_clean}"
+      }}
+    }},
+    {{
+      "@type": "Question",
+      "name": "{faq2_q_clean}",
+      "acceptedAnswer": {{
+        "@type": "Answer",
+        "text": "{faq2_a_clean}"
+      }}
+    }},
+    {{
+      "@type": "Question",
+      "name": "Is {name} safe and legitimate?",
+      "acceptedAnswer": {{
+        "@type": "Answer",
+        "text": "{sec2_clean}"
+      }}
+    }},
+    {{
+      "@type": "Question",
+      "name": "How do I get started on {name}?",
+      "acceptedAnswer": {{
+        "@type": "Answer",
+        "text": "Visit the official {name} website, create your account, enable Two-Factor Authentication, deposit funds via crypto or supported fiat payment methods, and you can begin trading immediately."
+      }}
+    }}
+  ]
 }}
 </script>
 
@@ -2073,6 +2143,22 @@ REVIEW_HTML_TEMPLATE = """<!DOCTYPE html>
         <p>Specialist in crypto asset security, trading fees, and liquidity architecture with extensive industry testing across 50+ platforms.</p>
       </div>
     </div>
+
+    <h2 class="section-h">Related Reviews &amp; Comparisons</h2>
+    <div class="related-links-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:20px 0;">
+      <a href="{comp1_slug}-review.html" style="padding:16px;background:var(--light);border-radius:10px;border:1px solid var(--border);font-weight:700;color:var(--navy);">
+        📖 Read {comp1} Detailed Review →
+      </a>
+      <a href="{comp2_slug}-review.html" style="padding:16px;background:var(--light);border-radius:10px;border:1px solid var(--border);font-weight:700;color:var(--navy);">
+        📖 Read {comp2} Detailed Review →
+      </a>
+      <a href="../compare/index.html" style="padding:16px;background:var(--light);border-radius:10px;border:1px solid var(--border);font-weight:700;color:var(--navy);">
+        📊 Compare {name} Side-by-Side →
+      </a>
+      <a href="../guides/how-to-complete-kyc.html" style="padding:16px;background:var(--light);border-radius:10px;border:1px solid var(--border);font-weight:700;color:var(--navy);">
+        📚 Fast Identity Verification Guide →
+      </a>
+    </div>
   </main>
 
   <aside id="visit">
@@ -2141,10 +2227,20 @@ REVIEW_HTML_TEMPLATE = """<!DOCTYPE html>
 """
 
 def generate_all():
+    name_to_slug = {ex["name"]: ex["slug"] for ex in exchanges_db}
+    
     # 1. Generate individual review pages
     for item in exchanges_db:
         item["service_type"] = "Cryptocurrency Exchange" if item["type"] == "cex" else "Decentralized Exchange Protocol"
         item["verdict_clean"] = item["verdict"].replace('"', '\\"')
+        item["faq1_q_clean"] = item["faq1_q"].replace('"', '\\"')
+        item["faq1_a_clean"] = item["faq1_a"].replace('"', '\\"')
+        item["faq2_q_clean"] = item["faq2_q"].replace('"', '\\"')
+        item["faq2_a_clean"] = item["faq2_a"].replace('"', '\\"')
+        item["sec2_clean"] = item["sec2"].replace('"', '\\"')
+        item["comp1_slug"] = name_to_slug.get(item["comp1"], "binance")
+        item["comp2_slug"] = name_to_slug.get(item["comp2"], "bitget")
+        
         author_parts = item["author"].split()
         item["author_initials"] = "".join(p[0] for p in author_parts)
         item["feat_pct"] = int(float(item["feat_score"]) * 20)

@@ -1,64 +1,73 @@
 #!/usr/bin/env python3
-import glob
 import os
+import glob
+from datetime import datetime
 
-SITEMAP_PATH = "/home/rashid/Documents/blog/sitemap.xml"
+BASE_DIR = "/home/rashid/Documents/blog"
+SITEMAP_PATH = os.path.join(BASE_DIR, "sitemap.xml")
+DOMAIN = "https://www.howtocrypt.com"
 
-# Root pages
-pages = [
-    "https://www.howtocrypt.com/",
-    "https://www.howtocrypt.com/exchanges.html",
-    "https://www.howtocrypt.com/about.html",
-    "https://www.howtocrypt.com/contact.html",
-    "https://www.howtocrypt.com/affiliate-disclosure.html",
-    "https://www.howtocrypt.com/privacy-policy.html",
-    "https://www.howtocrypt.com/reviews/",
-]
+# Find all .html files
+all_html = glob.glob(os.path.join(BASE_DIR, "**/*.html"), recursive=True)
 
-# Reviews
-review_files = sorted(glob.glob("/home/rashid/Documents/blog/reviews/*-review.html"))
-for rf in review_files:
-    fname = os.path.basename(rf)
-    pages.append(f"https://www.howtocrypt.com/reviews/{fname}")
+urls = []
+for file_path in sorted(all_html):
+    rel_path = os.path.relpath(file_path, BASE_DIR)
+    
+    # Exclude 404 page from sitemap
+    if rel_path == "404.html":
+        continue
+        
+    # Convert index.html to directory URL where appropriate
+    if rel_path == "index.html":
+        url = f"{DOMAIN}/"
+    elif rel_path.endswith("/index.html"):
+        url = f"{DOMAIN}/{rel_path[:-10]}"
+    else:
+        url = f"{DOMAIN}/{rel_path}"
+        
+    # Get lastmod date
+    mtime = os.path.getmtime(file_path)
+    lastmod = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d")
+    
+    # Priority & Changefreq determination
+    if url == f"{DOMAIN}/":
+        priority = "1.0"
+        changefreq = "daily"
+    elif "/reviews/" in url:
+        priority = "0.9"
+        changefreq = "weekly"
+    elif "/compare/" in url or "/best/" in url:
+        priority = "0.8"
+        changefreq = "weekly"
+    elif "/guides/" in url or "/questions/" in url:
+        priority = "0.8"
+        changefreq = "monthly"
+    else:
+        priority = "0.6"
+        changefreq = "monthly"
+        
+    urls.append({
+        "loc": url,
+        "lastmod": lastmod,
+        "changefreq": changefreq,
+        "priority": priority
+    })
 
-# Compare
-pages.extend([
-    "https://www.howtocrypt.com/compare/",
-    "https://www.howtocrypt.com/compare/bybit-vs-bitget.html",
-    "https://www.howtocrypt.com/compare/bybit-vs-binance.html",
-])
+xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 
-# Guides
-pages.extend([
-    "https://www.howtocrypt.com/guides/",
-    "https://www.howtocrypt.com/guides/how-to-sign-up-bybit.html",
-    "https://www.howtocrypt.com/guides/how-to-complete-kyc.html",
-])
+for u in urls:
+    xml += '  <url>\n'
+    xml += f'    <loc>{u["loc"]}</loc>\n'
+    xml += f'    <lastmod>{u["lastmod"]}</lastmod>\n'
+    xml += f'    <changefreq>{u["changefreq"]}</changefreq>\n'
+    xml += f'    <priority>{u["priority"]}</priority>\n'
+    xml += '  </url>\n'
 
-# Questions
-pages.extend([
-    "https://www.howtocrypt.com/questions/",
-    "https://www.howtocrypt.com/questions/trade-futures-without-kyc.html",
-])
-
-# Best
-pages.extend([
-    "https://www.howtocrypt.com/best/",
-    "https://www.howtocrypt.com/best/best-exchange-beginners.html",
-])
-
-# Country
-pages.extend([
-    "https://www.howtocrypt.com/country/",
-    "https://www.howtocrypt.com/country/best-exchange-india.html",
-])
-
-xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-for p in pages:
-    xml += f"  <url><loc>{p}</loc></url>\n"
-xml += "</urlset>\n"
+xml += '</urlset>\n'
 
 with open(SITEMAP_PATH, "w", encoding="utf-8") as f:
     f.write(xml)
 
-print(f"Updated sitemap.xml with {len(pages)} URLs successfully!")
+print(f"Generated sitemap.xml with {len(urls)} URLs successfully!")

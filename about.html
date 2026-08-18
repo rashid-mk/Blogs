@@ -24,43 +24,47 @@
 <meta name="twitter:description" content="Meet the team behind HowToCrypt. 200+ hours of real testing per exchange. No bias, no pay-to-rank.">
 <meta name="twitter:image" content="https://howtocrypt.com/og-image.png">
 
-<!-- JSON-LD: Organization Schema -->
+<!-- JSON-LD: Organization & Breadcrumb Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "HowToCrypt",
-  "url": "https://howtocrypt.com",
-  "logo": "https://howtocrypt.com/logo.png",
-  "description": "HowToCrypt provides independent, expert crypto exchange reviews tested with real money across 50+ platforms since 2018.",
-  "foundingDate": "2018",
-  "sameAs": [],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "Editorial",
-    "email": "editorial@howtocrypt.com",
-    "url": "https://www.howtocrypt.com/about.html#contact"
-  },
-  "member": [
+  "@graph": [
     {
-      "@type": "Person",
-      "name": "James Carter",
-      "jobTitle": "Senior Crypto Exchange Analyst"
+      "@type": "Organization",
+      "name": "HowToCrypt",
+      "url": "https://www.howtocrypt.com",
+      "logo": "https://www.howtocrypt.com/logo.png",
+      "description": "HowToCrypt provides independent, expert crypto exchange reviews tested with real money across 50+ platforms since 2018.",
+      "foundingDate": "2018",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Editorial",
+        "email": "editorial@howtocrypt.com",
+        "url": "https://www.howtocrypt.com/about.html#contact"
+      },
+      "member": [
+        { "@type": "Person", "name": "James Carter", "jobTitle": "Senior Crypto Exchange Analyst" },
+        { "@type": "Person", "name": "Sarah Mitchell", "jobTitle": "Social Trading Specialist" },
+        { "@type": "Person", "name": "Michael Torres", "jobTitle": "Lead Exchange Analyst" },
+        { "@type": "Person", "name": "Priya Lal", "jobTitle": "Security Researcher" }
+      ]
     },
     {
-      "@type": "Person",
-      "name": "Sarah Mitchell",
-      "jobTitle": "Social Trading Specialist"
-    },
-    {
-      "@type": "Person",
-      "name": "Michael Torres",
-      "jobTitle": "Lead Exchange Analyst"
-    },
-    {
-      "@type": "Person",
-      "name": "Priya Lal",
-      "jobTitle": "Security Researcher"
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.howtocrypt.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "About Us",
+          "item": "https://www.howtocrypt.com/about.html"
+        }
+      ]
     }
   ]
 }
