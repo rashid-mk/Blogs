@@ -457,25 +457,15 @@
   let lastIndices = [];
 
   // Seeded pseudo-random based on day so picks change daily
-  function daySeededRandom(seed) {
-    const today = new Date();
-    const daySeed = today.getFullYear() * 10000 + (today.getMonth()+1) * 100 + today.getDate();
-    let x = Math.sin(daySeed + seed) * 10000;
-    return x - Math.floor(x);
-  }
-
-  function pickThree(forceShuffle) {
+  function pickThree() {
     const pool = [...Array(EXCHANGES.length).keys()];
-    // Remove last shown indices to guarantee different picks on shuffle
-    const available = forceShuffle ? pool.filter(i => !lastIndices.includes(i)) : pool;
-    const picked = [];
-    const useSeed = forceShuffle ? null : 0;
-    // Fisher-Yates on available pool
-    const arr = [...available];
+    // Filter out last shown indices so new set doesn't duplicate current screen
+    const available = pool.filter(i => !lastIndices.includes(i));
+    const arr = available.length >= 3 ? [...available] : [...pool];
+    
+    // Fisher-Yates pure random shuffle
     for (let i = arr.length - 1; i > 0; i--) {
-      const j = forceShuffle
-        ? Math.floor(Math.random() * (i + 1))
-        : Math.floor(daySeededRandom(i + shuffleCount * 37) * (i + 1));
+      const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     lastIndices = arr.slice(0, 3);
@@ -487,9 +477,9 @@
     return s.replace('½','<span style="font-size:.7em;vertical-align:middle">½</span>');
   }
 
-  function renderPicks(shuffle) {
-    if (shuffle) shuffleCount++;
-    const three = pickThree(shuffle);
+  function renderPicks() {
+    shuffleCount++;
+    const three = pickThree();
     const badges = BADGE_SETS[shuffleCount % BADGE_SETS.length];
     const grid = document.getElementById('picks-grid');
     if (!grid) return;
@@ -522,10 +512,10 @@
   }
 
   // Initial render on page load
-  renderPicks(false);
+  renderPicks();
 
   // Automatic rotation every 6 seconds (pauses when user hovers over grid)
-  let autoRotateTimer = setInterval(() => renderPicks(true), 6000);
+  let autoRotateTimer = setInterval(() => renderPicks(), 6000);
   const picksGridEl = document.getElementById('picks-grid');
   if (picksGridEl) {
     picksGridEl.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
