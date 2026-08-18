@@ -118,13 +118,10 @@
   .btn-more-reviews:hover{background:var(--navy);color:var(--white);transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,58,95,.18)}
   .btn-more-reviews .arrow{color:var(--orange);font-weight:900;transition:transform .2s}
   .btn-more-reviews:hover .arrow{transform:translateX(4px)}
-  .btn-shuffle{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border:2px solid var(--orange);color:var(--orange);font-weight:700;font-size:1rem;border-radius:10px;background:var(--white);cursor:pointer;transition:all .2s}
-  .btn-shuffle:hover{background:var(--orange);color:var(--white);transform:translateY(-2px)}
-  .pick-card{animation:fadeUp .35s ease both}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-  .picks-grid .pick-card:nth-child(2){animation-delay:.07s}
-  .picks-grid .pick-card:nth-child(3){animation-delay:.14s}
-  .shuffle-note{font-size:.78rem;color:var(--muted);text-align:center;margin-top:10px}
+  .pick-card{animation:fadeUp .4s ease both}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .picks-grid .pick-card:nth-child(2){animation-delay:.08s}
+  .picks-grid .pick-card:nth-child(3){animation-delay:.16s}
 
   /* WHY US */
   .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:40px}
@@ -233,13 +230,11 @@
 <!-- TOP PICKS -->
 <section id="top-picks">
   <div class="container">
-    <p class="section-label" id="picks-label">Featured Exchanges – Today's Selection</p>
+    <p class="section-label" id="picks-label">Featured Exchanges</p>
     <h2 class="section-title">Crypto Exchanges Worth Considering</h2>
-    <p class="section-sub">Showing 3 of 35 reviewed exchanges. Our picks rotate daily — hit shuffle to see different ones.</p>
+    <p class="section-sub">Showing top selection from 35 reviewed platforms — automatically updating every few seconds.</p>
     <div class="picks-grid" id="picks-grid"></div>
-    <p class="shuffle-note" id="shuffle-note"></p>
     <div class="more-reviews-wrap">
-      <button class="btn-shuffle" id="shuffleBtn" onclick="renderPicks(true)">🔀 Shuffle Exchanges</button>
       <a class="btn-more-reviews" href="reviews/index.html">
         <span>Explore All 35 Reviews</span>
         <span class="arrow">→</span>
@@ -496,7 +491,7 @@
     if (shuffle) shuffleCount++;
     const three = pickThree(shuffle);
     const badges = BADGE_SETS[shuffleCount % BADGE_SETS.length];
-    const grid = document.getElementById('picks-grid');
+    // Render picks into grid
     grid.innerHTML = three.map((ex, i) => {
       const isFirst = i === 0;
       return `
@@ -523,16 +518,21 @@
         </div>
       </article>`;
     }).join('');
-
-    // Update subtitle note
-    const note = document.getElementById('shuffle-note');
-    note.textContent = shuffle
-      ? `Shuffled ${shuffleCount} time${shuffleCount>1?'s':''}. Showing ${three.map(e=>e.name).join(', ')}.`
-      : `Today's selection refreshes daily. Showing ${three.map(e=>e.name).join(', ')}.`;
   }
 
-  // Initial render on page load (day-seeded, not shuffled)
+  // Initial render on page load
   renderPicks(false);
+
+  // Automatic rotation every 6 seconds (pauses when user hovers over grid)
+  let autoRotateTimer = setInterval(() => renderPicks(true), 6000);
+  const picksGridEl = document.getElementById('picks-grid');
+  if (picksGridEl) {
+    picksGridEl.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
+    picksGridEl.addEventListener('mouseleave', () => {
+      clearInterval(autoRotateTimer);
+      autoRotateTimer = setInterval(() => renderPicks(true), 6000);
+    });
+  }
 </script>
 </body>
 </html>
