@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <rect x="20" y="20" width="472" height="472" rx="100" fill="#0f2240" stroke="#ff6b35" stroke-width="14"/>
+  <!-- Shield Badge -->
+  <path d="M 256,70 L 436,140 L 406,340 L 256,440 L 106,340 L 76,140 Z" fill="none" stroke="#ffffff" stroke-width="16" stroke-linejoin="round"/>
+  <!-- Candlesticks -->
+  <line x1="150" y1="180" x2="150" y2="340" stroke="#38bdf8" stroke-width="10"/>
+  <rect x="135" y="220" width="30" height="90" rx="6" fill="#38bdf8"/>
+  
+  <line x1="230" y1="120" x2="230" y2="320" stroke="#ffb703" stroke-width="10"/>
+  <rect x="215" y="150" width="30" height="110" rx="6" fill="#ffb703"/>
+
+  <line x1="310" y1="80" x2="310" y2="300" stroke="#ff6b35" stroke-width="12"/>
+  <rect x="295" y="110" width="30" height="130" rx="6" fill="#ff6b35"/>
+  
+  <!-- Upward Trend Arrow -->
+  <path d="M 130,340 L 380,100" fill="none" stroke="#ffffff" stroke-width="24" stroke-linecap="round"/>
+  <polygon points="390,90 320,100 380,160" fill="#ffffff"/>
+</svg>

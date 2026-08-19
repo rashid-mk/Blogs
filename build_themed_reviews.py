@@ -1738,6 +1738,15 @@ REVIEW_HTML_TEMPLATE = """<!DOCTYPE html>
 <link rel="canonical" href="https://www.howtocrypt.com/reviews/{slug}-review.html">
 <meta name="robots" content="index, follow">
 
+<!-- Favicon & Site Icons -->
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="../favicon-512x512.png">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+
 <!-- Open Graph -->
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.howtocrypt.com/reviews/{slug}-review.html">
@@ -2317,6 +2326,15 @@ def generate_all():
 <meta name="description" content="Explore custom-themed, unbiased reviews of the top 35 cryptocurrency exchanges and decentralized protocols in 2026. Compare fees, security ratings, and features.">
 <link rel="canonical" href="https://www.howtocrypt.com/reviews/">
 <meta name="robots" content="index, follow">
+
+<!-- Favicon & Site Icons -->
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="../favicon-512x512.png">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
